@@ -5,6 +5,7 @@
 /** Initializes the builders depending on an integer `seed`.
     Can be called multiple times. Can also do nothing. */
 void init_builders(unsigned int seed){
+    
 }
 
 /** Returns the total number of builders in the game. */

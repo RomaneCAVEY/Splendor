@@ -11,6 +11,7 @@ const char* color_to_short_string(enum color_t c);
 int token_equals(const struct token_t t1, const struct token_t t2){
     for (int i=0; i<NUM_COLORS; ++i){
         if (t1.c[i]!=t2.c[i]){
+            
             return 0;
 
         }

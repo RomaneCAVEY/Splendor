@@ -8,8 +8,7 @@ struct token_t create_simple_token(enum color_t c){
     }
     token.c[c]=1;
     return token;
-
-};
+}
 
 
 struct token_t create_complex_token(unsigned int c[NUM_COLORS]){
@@ -18,8 +17,7 @@ struct token_t create_complex_token(unsigned int c[NUM_COLORS]){
         token.c[i]= c[i];
     }
     
-    return token;
-};
+    return token;}
 
 struct builder{
     char level;
