@@ -28,9 +28,9 @@ void token_display(struct token_t t, const char* prefix){
     printf("%s Token(", prefix);
     for (int i=0; i<NUM_COLORS; ++i){
         if (t.c[i]>0){
-    printf(" %s = %d",color_to_short_string(i), t.c[i]);
+    printf(" %s = %d, ",color_to_short_string(i), t.c[i]);
          }
     }
-    printf(")");
+    printf("),");
 
 }
