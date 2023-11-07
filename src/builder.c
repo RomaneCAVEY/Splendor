@@ -1,5 +1,8 @@
 #include "builder.h"
 #include "color.h"
+#include <stdio.h>
+#include <time.h>
+
 
 struct builder* game_builders[MAX_BUILDERS];
 
@@ -7,7 +10,14 @@ struct builder* game_builders[MAX_BUILDERS];
 /** Initializes the builders depending on an integer `seed`.
     Can be called multiple times. Can also do nothing. */
 void init_builders(unsigned int seed){
+    for( int i=0; i<MAX_BUILDERS;++i){
+        int a= srand(seed ? atoi(seed) : time(NULL));
+        game_builders[i]->levels= a % NUM_LEVELS;
+        game_builders[i]->points=0;
+        game_builders[i]->ressource={.c= a% MAX_COLORS, .n=a};
+        game_builders[i]->production={.c= (a*2)% MAX_COLORS, .n=2*a};
     
+}
 }
 
 /** Returns the total number of builders in the game. */
@@ -53,6 +63,6 @@ struct buildcost_t builder_provides(const struct builder_t* g){
     Example : builder_display(g, "    - ") displays on the screen :
     - Builder(lvl=1,cost=1W,prod=1B)
 */
-void builder_display(const struct builder_t* g, const char* prefix);
-
-#endif // __BUILDER_H__
+void builder_display(const struct builder_t* g, const char* prefix){
+    printf("%s Builder(lvl= %d, cost=%d %s, prod= %d %s";prefix;g->level,g->ressource.n,color_to_short_string(g->ressource.c), g->production.n,color_to_short_string(g->production.c) );
+}

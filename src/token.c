@@ -29,8 +29,8 @@ struct token_t create_complex_token(unsigned int c[NUM_COLORS]){
 struct builder{
     char level;
     int points;
-    struct token_t ressource;
-    struct token_t production;
+    struct buildcost_t ressource;
+    struct buildcost_t production;
 
 
 };
