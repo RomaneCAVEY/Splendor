@@ -1,5 +1,5 @@
-#include "token.h"
-#include "builder.h"
+#include <token.h>
+#include <builder.h>
 
 struct token_t create_simple_token(enum color_t c){
     struct token_t token;
@@ -8,6 +8,10 @@ struct token_t create_simple_token(enum color_t c){
     }
     token.c[c]=1;
     return token;
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 }
 
 
@@ -17,7 +21,12 @@ struct token_t create_complex_token(unsigned int c[NUM_COLORS]){
         token.c[i]= c[i];
     }
     
+<<<<<<< HEAD
     return token;}
+=======
+    return token;
+}
+>>>>>>> master
 
 struct builder{
     char level;
