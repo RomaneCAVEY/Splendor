@@ -17,7 +17,7 @@ struct player{
 
 int has_won(struct player player1, struct player player2){
     if (player1.points> =VICTORY_POINTS || player2.points>= VICTORY_POINTS){
-        return 1
+        return 1;
     }
     return 0;
 }
@@ -43,16 +43,17 @@ void next_player(current_player){
 int main(int argc, char* argv[]){   
 struct builder_t* game_builders[MAX_BUILDERS];
 struct guild guild;
-guilde.nbr_builder=num_builders;
-guilde.builder_in_guilde={0};
+guild.nbr_builder=num_builders;
+guild.builder_in_guilde=; // il faut initialiser les bilders;
 struct market market;
 market.nbr_token=MAX_TOKEN;
-market.token_in_market={0}; //comment initialiser 
+market.token_in_market={0}; 
 
 init_builders(0);   // Use seed 0 at the beginning of a game
 init_tokens(0);     // Same thing
 int nb_turns_not_played=0;
 int nb_turns=0;
+struct token_t m[MAX_TOKEN]={}; /comment initialiser les tokens 
 current_player = get_random_player();
 struct player player1;
 player1.points=0;
@@ -90,10 +91,10 @@ while ((has_won(player1, player2) && nb_turns_not_played<2)&& nb_turns< MAX_TURN
     else:
         int nb=(MAX_TOKEN-current_player.nbr_token)% 3;
         int add=0;
-        while (add<nb)
+        while (add<nb){
             int a =srand() % MAX_TOKEN;
             if (market.available_tokens[a]){
-                current_player.player_token[current_player.nbr_token]=market.available_tokens[a];
+                current_player.player_token[current_player.nbr_token]=m[a];
                 current_player->nbr_token= current_player->nbr_token +1;
                 market.available_tokens[a]=0;
                 add=add+1;
