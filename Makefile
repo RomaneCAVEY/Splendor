@@ -12,7 +12,7 @@ tests: test_token_use test_token
 	echo compiling $< into $@
 	$(CC) $(CFLAGS) -c $< -o $@
 
-project: $(BUILD_DIR)project.o
+project: project.o
 	$(CC) $(CFLAGS) $^ -o project
 
 test_token_use: tst/test_token_use.o src/token.o src/color.o src/manipulation.o
@@ -25,6 +25,9 @@ token: $src/token.o
 	$(CC) $(CFLAGS) token.o -o token
 
 test_token: tst/test_token.o src/manipulation.o src/color.o
+	$(CC) $(CFLAGS) $^ -o $@
+
+test_builder: tst/test_builder.o src/builder.o src/token.o src/color.o
 	$(CC) $(CFLAGS) $^ -o $@
 
 
