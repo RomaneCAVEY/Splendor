@@ -5,6 +5,7 @@
 #include "builder.h"
 
 
+
 struct token_t create_simple_token(enum color_t c){
     struct token_t token;
     for (int i=0; i<NUM_COLORS; ++i){
@@ -26,16 +27,11 @@ struct token_t create_complex_token(unsigned int c[NUM_COLORS]){
     return token;}
 
 
-struct builder{
+struct builder_t{
     char level;
     int points;
-<<<<<<< HEAD:src/structure.c
-    struct token_t ressource;
-    struct token_t production;
-=======
     struct buildcost_t ressource;
     struct buildcost_t production;
->>>>>>> 6cd8787d96181c4fea8c7a252796ab40ccaaad32:src/token.c
 
 
 };
@@ -48,7 +44,7 @@ struct market{
 
 struct guilde{
     int nbr_builder;
-    struct builder builder_in_guilde[MAX_BUILDERS];
+    struct builder_t builder_in_guilde[MAX_BUILDERS];
 
 };
 
