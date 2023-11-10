@@ -10,7 +10,7 @@ struct builder* game_builders[MAX_BUILDERS];
 /** Initializes the builders depending on an integer `seed`.
     Can be called multiple times. Can also do nothing. */
 void init_builders(unsigned int seed){
-    for( int i=0; i<MAX_BUILDERS;++i){
+    for( int i=0; i<MAX_BUILDERS;++i){ 
         int a= srand(seed ? atoi(seed) : time(NULL));
         game_builders[i]->levels= a % NUM_LEVELS;
         game_builders[i]->points=0;

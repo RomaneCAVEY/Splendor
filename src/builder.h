@@ -1,4 +1,4 @@
-ls#ifndef __BUILDER_H__
+#ifndef __BUILDER_H__
 #define __BUILDER_H__
 
 #include "color.h"
