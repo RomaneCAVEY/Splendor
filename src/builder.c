@@ -74,14 +74,11 @@ struct buildcost_t builder_provides(const struct builder_t* g){
     return g->production;
 }
 
+
 /** Displays the builder on the stdout, after a possible prefix.
     Example : builder_display(g, "    - ") displays on the screen :
     - Builder(lvl=1,cost=1W,prod=1B)
 */
 void builder_display(const struct builder_t* g, const char* prefix){
-<<<<<<< HEAD
-    printf("%s Builder(lvl= %d, cost=%d %s, prod= %d %s";prefix;g->level,g->ressource.n,color_to_short_string(g->ressource.c), g->production.n,color_to_short_string(g->production.c) );
-=======
     printf("%s Builder(lvl= %d, cost=%d %s, prod= %d %s \n", prefix ,g->level,g->ressource.n,color_to_short_string(g->ressource.c), g->production.n,color_to_short_string(g->production.c) );
->>>>>>> refs/remotes/origin/master
 }

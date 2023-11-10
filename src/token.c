@@ -13,9 +13,9 @@ struct token_t create_simple_token(enum color_t c){
     }
     token.c[c]=1;
     return token;
-    for (int i=0; i<NUM_COLORS; ++i){
+    /*for (int i=0; i<NUM_COLORS; ++i){
         printf("%d",token.c[i]);
-    }
+    }*/
 }
 
 
@@ -38,13 +38,12 @@ struct builder_t{
 
 struct market{
     int nbr_token;
-    struct token_t token_in_market; /*Le market est du type [0,1,3,...,NUM_COLORS] avec chaque position correspondant à la couleur d'un jeton*/
+    struct token_t available_tokens[MAX_TOKEN]; /*Le market est du type [0,1,3,...,NUM_COLORS] avec chaque position correspondant à la couleur d'un jeton*/
 
 };
 
-struct guilde{
+struct guild{
     int nbr_builder;
-    struct builder_t builder_in_guilde[MAX_BUILDERS];
+    struct builder_t* builder_in_guild                                             [MAX_BUILDERS];
 
 };
-

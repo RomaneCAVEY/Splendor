@@ -50,7 +50,7 @@ int is_complex(struct token_t t)
 
 
  /*return NULL if the player can't pay for a builder or return 1 if the player can pay the exact price or return 0*/
-int token_pay(struct token_t t_player[], struct builder_t* b)
+int possibility_token_pay(struct token_t t_player[], struct builder_t b)
 {
     struct buildcost_t cost= builder_requires(b);
     int count_desired_color=0;
@@ -71,6 +71,39 @@ int token_pay(struct token_t t_player[], struct builder_t* b)
     if (count_desired_color >= cost.n) return 1;
 
     if (count_desired_color < cost.n) return 0;
+}
+
+void remove_token(struct token_t* tab[], struct token_t token){
+    int i=0;
+    while(tab[i]!= token){
+        i++;
+    }
+     while(i<(NUM_TOKENS-2)){
+        tab[i]=tab[i+1];
+        ++i;
+    }
 
 }
 
+void token_pay(struct builder_t b, struct player player)
+{
+    struct buildcost_t cost= builder_requires(b);
+    int count_desired_color=0;
+    for (int i=0; i < NPLAYER; ++i){
+        if(t_player[i][cost.c]){
+            remove_token(player.player_token, player.player_token[i]);
+        }
+    }
+}
+
+void remove_builders_from_guild(struct guild guild, struct builder_t builder){
+    int i=0;
+    while(guild.builder_in_guilde[i]!= builder){
+        i++;
+    }
+     while(i<(MAX_BUILDERS-2)){
+        guild.builder_in_guilde[i]=guild.builder_in_guilde[i+1];
+        ++i;
+    }
+
+}
