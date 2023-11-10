@@ -1,34 +1,38 @@
 #include "builder.h"
-<<<<<<< HEAD
-#include <stdio.h>
-#include <string.h>
-#include <time.h>
-#include <stdlib.h>
-
-struct builder_t* builder_in_game[MAX_BUILDERS];
-
-void init_builders(unsigned int seed){
-=======
 #include "color.h"
 #include <stdio.h>
 #include <time.h>
 
 
-struct builder* game_builders[MAX_BUILDERS];
+struct builder_t{
+    char level;
+    int points;
+    struct buildcost_t ressource;
+    struct buildcost_t production;
+
+
+};
+
+
+    struct builder_t* game_builders[MAX_BUILDERS];
 
 
 /** Initializes the builders depending on an integer `seed`.
-    Can be called multiple times. Can also do nothing. */
+Can be called multiple times. Can also do nothing. */
 void init_builders(unsigned int seed){
-    for( int i=0; i<MAX_BUILDERS;++i){ 
+    struct builder_t* init ;
+     for( int i=0; i<MAX_BUILDERS;++i){ 
+        game_builders[i]= init;
         int a= srand(seed ? atoi(seed) : time(NULL));
-        game_builders[i]->levels= a % NUM_LEVELS;
+        game_builders[i]->level= a % NUM_LEVELS;
         game_builders[i]->points=0;
-        game_builders[i]->ressource={.c= a% MAX_COLORS, .n=a};
-        game_builders[i]->production={.c= (a*2)% MAX_COLORS, .n=2*a};
-    
-}
-}
+        game_builders[i]->ressource.c= a% MAX_COLORS;
+        game_builders[i]->ressource.n=a;
+        game_builders[i]->production.c= (a*2)% MAX_COLORS,
+        game_builders[i]->production.n=2*a;
+                
+            }
+            }
 
 /** Returns the total number of builders in the game. */
 unsigned int num_builders(){
@@ -74,6 +78,5 @@ struct buildcost_t builder_provides(const struct builder_t* g){
     - Builder(lvl=1,cost=1W,prod=1B)
 */
 void builder_display(const struct builder_t* g, const char* prefix){
-    printf("%s Builder(lvl= %d, cost=%d %s, prod= %d %s";prefix;g->level,g->ressource.n,color_to_short_string(g->ressource.c), g->production.n,color_to_short_string(g->production.c) );
->>>>>>> 6cd8787d96181c4fea8c7a252796ab40ccaaad32
+    printf("%s Builder(lvl= %d, cost=%d %s, prod= %d %s \n", prefix ,g->level,g->ressource.n,color_to_short_string(g->ressource.c), g->production.n,color_to_short_string(g->production.c) );
 }

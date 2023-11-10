@@ -26,19 +26,6 @@ struct token_t create_complex_token(unsigned int c[NUM_COLORS]){
     return token;}
 
 
-struct builder{
-    char level;
-    int points;
-<<<<<<< HEAD:src/structure.c
-    struct token_t ressource;
-    struct token_t production;
-=======
-    struct buildcost_t ressource;
-    struct buildcost_t production;
->>>>>>> 6cd8787d96181c4fea8c7a252796ab40ccaaad32:src/token.c
-
-
-};
 
 struct market{
     int nbr_token;
