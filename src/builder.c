@@ -1,5 +1,6 @@
 #include "builder.h"
 #include "color.h"
+#include "token.h"
 #include <stdio.h>
 #include <time.h>
 
@@ -78,5 +79,9 @@ struct buildcost_t builder_provides(const struct builder_t* g){
     - Builder(lvl=1,cost=1W,prod=1B)
 */
 void builder_display(const struct builder_t* g, const char* prefix){
+<<<<<<< HEAD
+    printf("%s Builder(lvl= %d, cost=%d %s, prod= %d %s";prefix;g->level,g->ressource.n,color_to_short_string(g->ressource.c), g->production.n,color_to_short_string(g->production.c) );
+=======
     printf("%s Builder(lvl= %d, cost=%d %s, prod= %d %s \n", prefix ,g->level,g->ressource.n,color_to_short_string(g->ressource.c), g->production.n,color_to_short_string(g->production.c) );
+>>>>>>> refs/remotes/origin/master
 }
