@@ -3,28 +3,29 @@ NUM_LEVELS ?= 2
 NUM_TOKENS ?= 25
 MUNIFICENCE_FLAGS = -DNUM_COLORS=$(NUM_COLORS) -DNUM_LEVELS=$(NUM_LEVELS) -DNUM_TOKENS=$(NUM_TOKENS)
 CFLAGS = -Wall -Wextra -std=c99 -g3 $(MUNIFICENCE_FLAGS) -Isrc -Itst
+BUILD_DIR = ./build
 
 all: project
+tests: test_token_use test_token
 
 %.o: %.c
 	echo compiling $< into $@
-	$(CC) -c $(CFLAGS) $<
+	$(CC) $(CFLAGS) -c $< -o $@
 
-project: project.o
-	$(CC) $(CFLAGS) project.o -o project
+project: $(BUILD_DIR)project.o
+	$(CC) $(CFLAGS) $^ -o project
 
+test_token_use: tst/test_token_use.o src/token.o src/color.o src/manipulation.o
+	$(CC) $(CFLAGS) $^ -o $@
 
-test_manipulation: tst/test_manipulation.o src/token.o src/color.o src/manipulation.o
-	$(CC) $(CFLAGS) test_manipulation.o -o test_manipulation
-
-test_project: test_project.o
+test_project:tst /test_project.o
 	$(CC) $(CFLAGS) test.o -o test_project
 
-token: token.o
+token: $src/token.o
 	$(CC) $(CFLAGS) token.o -o token
 
-test_token: tst/test_token.o src/manipulation.o
-	$(CC) $(CFLAGS) test_token.o -o test_token
+test_token: tst/test_token.o src/manipulation.o src/color.o
+	$(CC) $(CFLAGS) $^ -o $@
 
 
 clean:
