@@ -6,7 +6,7 @@
 int main(int argc, char* argv[]){
   
 
-    struct builder_t *t = make_builder(atoi(argv[1]));
+   // struct builder_t *t = make_builder(atoi(argv[1]));
     //init_builders(12);
 
     printf("This is the number of builder in the game: %d \n", num_builders());

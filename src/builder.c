@@ -31,9 +31,9 @@ void init_builders(unsigned int seed){
         game_builders[i].level= rand() % NUM_LEVELS;
         game_builders[i].points=rand() % (VICTORY_POINTS);
         game_builders[i].ressource.c= rand()% MAX_COLORS;
-        game_builders[i].ressource.n=rand();
+        game_builders[i].ressource.n=rand()%2 +1;
         game_builders[i].production.c= (rand()*2)% MAX_COLORS,
-        game_builders[i].production.n=2*rand()+1 ;
+        game_builders[i].production.n=2*rand() % 2 +1;
             }
             }
 
