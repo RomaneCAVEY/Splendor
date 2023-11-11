@@ -25,7 +25,7 @@ token: $src/token.o
 	$(CC) $(CFLAGS) token.o -o token
 
 test_token: tst/test_token.o src/manipulation.o src/color.o
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@ | cp  $@ (BUILD_DIR)
 
 test_builder: tst/test_builder.o src/builder.o src/token.o src/color.o
 	$(CC) $(CFLAGS) $^ -o $@
