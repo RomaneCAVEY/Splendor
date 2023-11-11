@@ -32,7 +32,7 @@ void init_builders(unsigned int seed);
 unsigned int num_builders();
 
 /** Returns the `index`-th builder and NULL if it does not exist. */
-struct builder_t* (unsigned int index);
+struct builder_t* make_builder(unsigned int index);
 
 /** Returns the level of the builder. */
 unsigned int builder_level(const struct builder_t* g);

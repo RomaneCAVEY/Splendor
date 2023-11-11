@@ -27,23 +27,4 @@ struct token_t create_complex_token(unsigned int c[NUM_COLORS]){
     return token;}
 
 
-struct builder_t{
-    char level;
-    int points;
-    struct buildcost_t ressource;
-    struct buildcost_t production;
 
-
-};
-
-struct market{
-    int nbr_token;
-    struct token_t available_tokens[MAX_TOKEN]; /*Le market est du type [0,1,3,...,NUM_COLORS] avec chaque position correspondant à la couleur d'un jeton*/
-
-};
-
-struct guild{
-    int nbr_builder;
-    struct builder_t* builder_in_guild[MAX_BUILDERS];
-
-};

@@ -2,8 +2,9 @@
 #include "color.h"
 #include "token.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
-
+#define VICTORY_POINTS 20
 
 struct builder_t{
     char level;
@@ -15,23 +16,24 @@ struct builder_t{
 };
 
 
-struct builder_t* game_builders[MAX_BUILDERS];
+struct builder_t game_builders[MAX_BUILDERS];
+int nb_builders; 
 
 
 /** Initializes the builders depending on an integer `seed`.
 Can be called multiple times. Can also do nothing. */
 void init_builders(unsigned int seed){
-    struct builder_t* init ;
-     for( int i=0; i<MAX_BUILDERS;++i){ 
+    srand(seed);
+    struct builder_t init ; //situé ds le .h
+   nb_builders= (rand()% MAX_BUILDERS);
+     for( int i=0; i< nb_builders;++i){ 
         game_builders[i]= init;
-        int a= srand(seed ? atoi(seed) : time(NULL));
-        game_builders[i]->level= a % NUM_LEVELS;
-        game_builders[i]->points=0;
-        game_builders[i]->ressource.c= a% MAX_COLORS;
-        game_builders[i]->ressource.n=a;
-        game_builders[i]->production.c= (a*2)% MAX_COLORS,
-        game_builders[i]->production.n=2*a;
-                
+        game_builders[i].level= rand() % NUM_LEVELS;
+        game_builders[i].points=rand() % (VICTORY_POINTS);
+        game_builders[i].ressource.c= rand()% MAX_COLORS;
+        game_builders[i].ressource.n=rand();
+        game_builders[i].production.c= (rand()*2)% MAX_COLORS,
+        game_builders[i].production.n=2*rand()+1 ;
             }
             }
 
@@ -39,7 +41,7 @@ void init_builders(unsigned int seed){
 unsigned int num_builders(){
     unsigned int count=0;
     for(int i=0; i<MAX_BUILDERS;++i){
-        if (game_builders[i]){
+        if (game_builders[i].ressource.c > MAX_COLORS){
             count+=1;
         }
     }
@@ -48,8 +50,8 @@ unsigned int num_builders(){
 
 /** Returns the `index`-th builder and NULL if it does not exist. */
 struct builder_t* make_builder(unsigned int index){
-    if (game_builders[index]){
-        return game_builders[index];
+    if (index < nb_builders){
+        return &game_builders[index];
     }
     return NULL;
 }
@@ -74,6 +76,25 @@ struct buildcost_t builder_provides(const struct builder_t* g){
     return g->production;
 }
 
+
+int builder_t_equals(const struct builder_t builder1,  struct builder_t builder2){
+    for (int i=0; i<MAX_BUILDERS; ++i){
+        if (builder1.level != builder2.level){
+            return 0;
+        }
+        if (builder1.points != builder2.points){
+            return 0;
+        }
+        if ((builder1.ressource.c != builder2.ressource.c)||(builder1.ressource.n!= builder2.ressource.n)){
+            return 0;
+        }
+        if ((builder1.production.c != builder2.production.c)||(builder1.production.n!= builder2.production.n)){
+            return 0;
+        }
+
+        }
+    return 1;
+}
 
 /** Displays the builder on the stdout, after a possible prefix.
     Example : builder_display(g, "    - ") displays on the screen :
