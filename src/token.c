@@ -44,6 +44,6 @@ struct market{
 
 struct guild{
     int nbr_builder;
-    struct builder_t* builder_in_guild                                             [MAX_BUILDERS];
+    struct builder_t* builder_in_guild[MAX_BUILDERS];
 
 };

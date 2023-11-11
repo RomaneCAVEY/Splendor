@@ -15,7 +15,7 @@ struct builder_t{
 };
 
 
-    struct builder_t* game_builders[MAX_BUILDERS];
+struct builder_t* game_builders[MAX_BUILDERS];
 
 
 /** Initializes the builders depending on an integer `seed`.
