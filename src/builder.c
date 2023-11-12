@@ -25,7 +25,7 @@ Can be called multiple times. Can also do nothing. */
 void init_builders(unsigned int seed){
     srand(seed);
     struct builder_t init ; //situé ds le .h
-   nb_builders= (rand()% MAX_BUILDERS);
+    nb_builders= (rand()% MAX_BUILDERS);
      for( int i=0; i< nb_builders;++i){ 
         game_builders[i]= init;
         game_builders[i].level= rand() % NUM_LEVELS;
@@ -34,18 +34,12 @@ void init_builders(unsigned int seed){
         game_builders[i].ressource.n=rand()%2 +1;
         game_builders[i].production.c= (rand()*2)% MAX_COLORS,
         game_builders[i].production.n=2*rand() % 2 +1;
-            }
-            }
+    }
+}
 
 /** Returns the total number of builders in the game. */
 unsigned int num_builders(){
-    unsigned int count=0;
-    for(int i=0; i<MAX_BUILDERS;++i){
-        if (game_builders[i].ressource.c > MAX_COLORS){
-            count+=1;
-        }
-    }
-    return count;
+    return nb_builders;
 }
 
 /** Returns the `index`-th builder and NULL if it does not exist. */
@@ -76,8 +70,8 @@ struct buildcost_t builder_provides(const struct builder_t* g){
     return g->production;
 }
 
-
-int builder_t_equals(const struct builder_t builder1,  struct builder_t builder2){
+// ADD THE NUMBER OF POINTS THAT WE CAN GET WITH THIS BUILDER
+int builder_t_equals( struct builder_t builder1,  struct builder_t builder2){
     for (int i=0; i<MAX_BUILDERS; ++i){
         if (builder1.level != builder2.level){
             return 0;
@@ -92,8 +86,8 @@ int builder_t_equals(const struct builder_t builder1,  struct builder_t builder2
             return 0;
         }
 
-        }
-    return 1;
+    }
+    return builder1.points;
 }
 
 /** Displays the builder on the stdout, after a possible prefix.

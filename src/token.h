@@ -8,6 +8,13 @@
   #define NUM_TOKENS 25
 #endif
 
+/** The maximum number of builders */
+#ifndef SEED
+  #define SEED 0
+#endif
+
+
+
 /** A type describing a token, that is to say a set of different
     colors. */
 struct token_t {
