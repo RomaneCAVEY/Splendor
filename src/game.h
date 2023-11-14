@@ -46,6 +46,8 @@ int market_nbr_token();
 
 void remove_builders_from_guild( struct builder_t* );
 
+void remove_token_from_market(struct token_t* token);
+
 struct token_t* adress_token_from_builders(int i);
 
 int is_guild_builder_in_guild(int i);
@@ -53,6 +55,7 @@ int is_guild_builder_in_guild(int i);
 struct builder_t* guild_builder_in_guild(int index);
 
 
-
+struct token_t* token_in_market_is_available(int i);
+void add_token_to_market(struct token_t* token); 
 void remove_token(struct token_t* tab[], const struct token_t token);
 #endif

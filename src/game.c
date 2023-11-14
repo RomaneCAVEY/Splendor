@@ -82,7 +82,7 @@ void token_pay(struct builder_t *b,struct player* player)
     int i=0;
     while (i < (NUM_TOKENS+MAX_BUILDERS)){
         if(player->player_token[i]->c[cost.c]){
-            market.available_tokens[market.nbr_token]=NULL;
+             add_token_to_market(player->player_token[i]);
             market.nbr_token= market.nbr_token +1;
             count= count+ player->player_token[i]->c[cost.c]; 
             if (i< NUM_TOKENS){

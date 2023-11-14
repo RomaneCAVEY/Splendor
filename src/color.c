@@ -15,7 +15,8 @@ const char* color_string[]={
 "CHESTNUT"};
 
 
-const char* color_short_string[]={"K",
+const char* color_short_string[]={
+    "K",
 "B",
 "G",
 "R",
@@ -27,12 +28,17 @@ const char* color_short_string[]={"K",
 "C"};
 
 const char* color_to_string(enum color_t c){
+    if (c > MAX_COLORS){
+        return "??????????????";
+        }
 
     return color_string[c];   
 
 }
 
 const char* color_to_short_string(enum color_t c){
-
+    if (c > MAX_COLORS){
+        return "?";
+        }
     return color_short_string[c];
 }

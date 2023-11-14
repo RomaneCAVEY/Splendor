@@ -17,20 +17,20 @@ struct builder_t{
 
 
 struct builder_t game_builders[MAX_BUILDERS];
-int nb_builders; 
+unsigned int nb_builders;
 
 
 /** Initializes the builders depending on an integer `seed`.
 Can be called multiple times. Can also do nothing. */
 void init_builders(unsigned int seed){
     srand(seed);
-    nb_builders= (rand()% MAX_BUILDERS);
-     for( int i=0; i< nb_builders;++i){ 
+    nb_builders= 1+(rand() % (MAX_BUILDERS-1));
+    for( int i=0; i< nb_builders;++i){ 
         game_builders[i].level= rand() % NUM_LEVELS;
         game_builders[i].points=rand() % (VICTORY_POINTS);
         game_builders[i].ressource.c= rand()% MAX_COLORS;
         game_builders[i].ressource.n=rand()%2 +1;
-        game_builders[i].production.c= (rand()*2)% MAX_COLORS,
+        game_builders[i].production.c= rand()% MAX_COLORS,
         game_builders[i].production.n=2*rand() % 2 +1;
     }
 }
@@ -93,7 +93,14 @@ int builder_t_equals( struct builder_t *builder1,  struct builder_t *builder2){
     - Builder(lvl=1,cost=1W,prod=1B)
 */
 void builder_display(const struct builder_t* g, const char* prefix){
+    if (g){
+        //printf("%d \n", g->ressource.c);
+        //printf("%d \n", g->production.c);
     printf("%s Builder(lvl= %d, cost=%d %s, prod= %d %s \n", prefix ,g->level,g->ressource.n,color_to_short_string(g->ressource.c), g->production.n,color_to_short_string(g->production.c) );
+}
+else {
+    printf("NULL");
+}
 }
 
 /** Add the builder bought in the guild to the player_builder
