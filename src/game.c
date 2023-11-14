@@ -108,6 +108,3 @@ struct builder_t* guild_builder_in_guild(int index){
     return guild.builder_in_guild[index];
 }
 
-void add_in_guild(int index, struct player* current_player){
-    current_player->player_builder[current_player->nbr_builder]= guild.builder_in_guild[index];
-}

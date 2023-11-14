@@ -1,6 +1,7 @@
 #include "builder.h"
 #include "color.h"
 #include "token.h"
+#include "player.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -96,4 +97,9 @@ int builder_t_equals( struct builder_t *builder1,  struct builder_t *builder2){
 */
 void builder_display(const struct builder_t* g, const char* prefix){
     printf("%s Builder(lvl= %d, cost=%d %s, prod= %d %s \n", prefix ,g->level,g->ressource.n,color_to_short_string(g->ressource.c), g->production.n,color_to_short_string(g->production.c) );
+}
+
+
+void add_from_guild(int index, struct player* current_player){
+    current_player->player_builder[current_player->nbr_builder]= &game_builders[index];
 }

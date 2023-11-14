@@ -5,6 +5,7 @@
 #include "player.h"
 #include "game.h"
 #include "second_token.h"
+#include "second_builder.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -14,7 +15,7 @@
 #define NB_MIN_PARAM 1
 #define NB_PLAYERS 2
 
-struct player* players[NB_PLAYERS];
+struct player players[NB_PLAYERS];
 
 int main(int argc, char* argv[]){   
     srand(SEED);
@@ -27,9 +28,9 @@ int main(int argc, char* argv[]){
   
     for (int i=0;i< NB_PLAYERS;i++){
         players[i]=init_player();
-        players[i]->index=i;
+        players[i].index=i;
     }
-      struct player* current_player = get_random_player();
+      struct player* current_player = get_random_player( NB_PLAYERS ,players);
 
     //Init market and guild    
     init_builders(0);   // Use seed 0 at the beginning of a game   // Same thing
@@ -42,7 +43,7 @@ int main(int argc, char* argv[]){
 
     int possibility=0;
 
-    while ((!(has_won(players[0]), players[1]) && nb_turns_not_played<2)&& nb_turns< MAX_TURN){
+    while ((!(has_won(players[0], players[1])) && nb_turns_not_played<2)&& nb_turns< MAX_TURN){
         int index;
         for (int i=0; i<guild_nbr_builder(); i++){
             if(is_guild_builder_in_guild(i)){
@@ -59,8 +60,8 @@ int main(int argc, char* argv[]){
         current_player->player_token[index+ NUM_TOKENS]= adress_token_from_builders(index);
 
         // put in the market the tokens which were useful to pay the builder, except if they are builders
-        token_pay(*(current_player), guild_builder_in_guild(index));
-        add_in_guild(index,current_player);
+        token_pay( guild_builder_in_guild(index),current_player);
+        add_from_guild(index,current_player);
         remove_builders_from_guild(guild_builder_in_guild(index));
 
         //Add the ressource linked to the builder that we have added

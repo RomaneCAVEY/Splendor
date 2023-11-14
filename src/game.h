@@ -6,6 +6,7 @@
 #include "builder.h"
 #include "token.h"
 #include "color.h"
+#include "second_builder.h"
 #include "manipulation.h"
 #include "player.h"
 #include <stdio.h>
@@ -53,7 +54,6 @@ int is_guild_builder_in_guild(int i);
 
 struct builder_t* guild_builder_in_guild(int index);
 
-void add_in_guild(int index, struct player *current_player);
 
 
 void remove_token(struct token_t* tab[], const struct token_t token);
