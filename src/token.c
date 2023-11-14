@@ -3,6 +3,7 @@
 #include <string.h>
 #include "token.h"
 #include "builder.h"
+#include "second_token.h"
 
 
 
@@ -45,6 +46,11 @@ int token_equals(const struct token_t t1, const struct token_t t2){
 }
 
 
+struct token_t* token_get_adress(int i){
+    return &all_tockens[i];
+
+}
+
 /** Display the token on the stdout, after a possible prefix.
     Example : token_display(g, "    - ") displays on the screen :
     - Token(B=1,W=5)
@@ -58,15 +64,6 @@ void token_display(struct token_t t, const char* prefix){
     }
     printf("),");
 
-}
-
-
-void remove_token(struct token_t* tab[], const struct token_t token){
-    int i=0;
-    while(token_equals(token,*tab[i])){
-        i++;
-    }
-     tab[i]=NULL;
 }
 
 

@@ -53,5 +53,5 @@ struct buildcost_t builder_provides(const struct builder_t* g);
 void builder_display(const struct builder_t* g, const char* prefix);
 
 //return 1 si builders are equal else 0
-int builder_t_equals( struct builder_t ,  struct builder_t );
+int builder_t_equals( struct builder_t *,  struct builder_t* );
 #endif // __BUILDER_H__

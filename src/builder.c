@@ -71,23 +71,23 @@ struct buildcost_t builder_provides(const struct builder_t* g){
 }
 
 // ADD THE NUMBER OF POINTS THAT WE CAN GET WITH THIS BUILDER
-int builder_t_equals( struct builder_t builder1,  struct builder_t builder2){
+int builder_t_equals( struct builder_t *builder1,  struct builder_t *builder2){
     for (int i=0; i<MAX_BUILDERS; ++i){
-        if (builder1.level != builder2.level){
+        if (builder1->level != builder2->level){
             return 0;
         }
-        if (builder1.points != builder2.points){
+        if (builder1->points != builder2->points){
             return 0;
         }
-        if ((builder1.ressource.c != builder2.ressource.c)||(builder1.ressource.n!= builder2.ressource.n)){
+        if ((builder1->ressource.c != builder2->ressource.c)||(builder1->ressource.n!= builder2->ressource.n)){
             return 0;
         }
-        if ((builder1.production.c != builder2.production.c)||(builder1.production.n!= builder2.production.n)){
+        if ((builder1->production.c != builder2->production.c)||(builder1->production.n!= builder2->production.n)){
             return 0;
         }
 
     }
-    return builder1.points;
+    return builder1->points;
 }
 
 /** Displays the builder on the stdout, after a possible prefix.

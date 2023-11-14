@@ -1,26 +1,19 @@
-/** The number of tokens in play. */
-#ifndef NUM_TOKENS
-  #define NUM_TOKENS 25
-#endif
-
-/** The maximum level for a builder */
-#ifndef NUM_LEVELS
-  #define NUM_LEVELS 2
-#endif
-
-/** The maximum number of builders */
-#ifndef MAX_BUILDERS
-  #define MAX_BUILDERS 10
-#endif
+#ifndef __PLAYER_H__
+#define __PLAYER_H__
 
 
-/** The maximum number of builders */
-#ifndef VICTORY_POINTS
-  #define VICTORY_POINTS 20
-#endif
+#define VICTORY_POINTS 40
 
+#include "builder.h"
+#include "token.h"
+#include "color.h"
+#include "manipulation.h"
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+#include <string.h>
 
-
+//Declaration of some variables
 
 struct player{
     struct token_t* player_token[NUM_TOKENS+MAX_BUILDERS];
@@ -28,16 +21,18 @@ struct player{
     int points;
     int nbr_token;
     int nbr_builder;
+    int index;
 
 };
 
-
+struct player init_player();
 
 int has_won(struct player, struct player);
 
 
 
-struct player* get_random_player();
+struct player* get_random_player(int size,struct player players[] );
 
-void next_player(struct player* );
+struct player* next_player(int size, struct player players[], struct player* current );
 
+#endif

@@ -4,20 +4,17 @@
 #include "manipulation.h"
 #include "player.h"
 #include "game.h"
+#include "second_token.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 #include <string.h>
 #define SEED 0
 #define MAX_TURN 40
-#define VICTORY_POINTS 40
-#define EXIT_FAILURE 7
-#define NB_MIN_PARAM 3
+#define NB_MIN_PARAM 1
+#define NB_PLAYERS 2
 
-
-
-//struct builder_t* game_builders[MAX_BUILDERS];
-
-
+struct player* players[NB_PLAYERS];
 
 int main(int argc, char* argv[]){   
     srand(SEED);
@@ -27,12 +24,15 @@ int main(int argc, char* argv[]){
     }
 
     //Init player
-    struct player* current_player = get_random_player();
-
+  
+    for (int i=0;i< NB_PLAYERS;i++){
+        players[i]=init_player();
+        players[i]->index=i;
+    }
+      struct player* current_player = get_random_player();
 
     //Init market and guild    
-    init_builders(0);   // Use seed 0 at the beginning of a game
-    init_tokens(0);     // Same thing
+    init_builders(0);   // Use seed 0 at the beginning of a game   // Same thing
     init_guild(); // il faut initialiser les guild;
     init_market();
     int nb_turns_not_played=0;
@@ -40,48 +40,44 @@ int main(int argc, char* argv[]){
     init_all_tokens(); //comment initialiser les tokens
     init_tokens_from_builers();
 
-    
-
     int possibility=0;
 
-    while ((!has_won(player1, player2) && nb_turns_not_played<2)&& nb_turns< MAX_TURN){
+    while ((!(has_won(players[0]), players[1]) && nb_turns_not_played<2)&& nb_turns< MAX_TURN){
         int index;
-        for (int i=0; i<guild.nbr_builder; i++){
-            if(guild.builder_in_guild[i]){
-                if (possibility_token_pay(current_player->player_token, game_builders[i])){
+        for (int i=0; i<guild_nbr_builder(); i++){
+            if(is_guild_builder_in_guild(i)){
+                if (possibility_token_pay(current_player->player_token, make_builder(i))){
                     possibility=1;
-                    index=i;
+                   index=i;
 
         }
         }
     }
+    //If we can build a builder then we do it
     if (possibility){
         //penser à implementer le fait que les tokens utilisés doivent être remis sur le marché
-        current_player->player_token[index+ NUM_TOKENS-1]= &tokens_from_builders[index];
+        current_player->player_token[index+ NUM_TOKENS]= adress_token_from_builders(index);
 
         // put in the market the tokens which were useful to pay the builder, except if they are builders
-        token_pay(current_player->player_token, *guild.builder_in_guild[index], market);
-        current_player->player_builder[current_player->nbr_builder]= guild.builder_in_guild[index];
-        remove_builders_from_guild(guild, *guild.builder_in_guild[index]);
+        token_pay(*(current_player), guild_builder_in_guild(index));
+        add_in_guild(index,current_player);
+        remove_builders_from_guild(guild_builder_in_guild(index));
 
         //Add the ressource linked to the builder that we have added
         current_player->nbr_builder +=1;
         current_player->points= builder_points(current_player->player_builder[current_player->nbr_builder]) +current_player->points;
     }
+    //Else we take some tokens if it's possible;
     else{
         if(NUM_TOKENS - current_player->nbr_token){
             int nb=(NUM_TOKENS-current_player->nbr_token) % 3;
             int add=0;
             while (add<nb){
-                int a =srand() % market.nbr_token;    if(NUM_TOKENS - current_player->nbr_token){
-            int nb=(NUM_TOKENS-current_player->nbr_token) % 3;
-            int add=0;
-            while (add<nb){
-                int a =srand() % market.nbr_token;
-                if (market.available_tokens[a]){
-                    current_player->player_token[current_player->nbr_token]=&all_tockens[a];
+                int a =rand() % market_nbr_token();    
+                if (is_market_available_tokens(a)){
+                    current_player->player_token[current_player->nbr_token]=token_get_adress(a);
                     current_player->nbr_token= current_player->nbr_token +1;
-                    market.available_tokens[a]=0;
+                   change_market_available_tokens(a,0);
                     add=add+1;
                 }
             }
@@ -89,28 +85,17 @@ int main(int argc, char* argv[]){
         else {
                 nb_turns_not_played= nb_turns_not_played+1;
             }
-                if (market.available_tokens[a]){
-                    current_player->player_token[current_player->nbr_token]=&all_tockens[a];
-                    current_player->nbr_token= current_player->nbr_token +1;
-                    market.available_tokens[a]=0;
-                    add=add+1;
-                }
-            }
-        }
-        else {
-                nb_turns_not_played= nb_turns_not_played+1;
-            }
-        }
+    }
     next_player(current_player);
 }
-    if(player1.points >= VICTORY_POINTS){
-        printf("Victoire du joueur 1 avec %d points", player1.points);
+    if(players[0].points >= VICTORY_POINTS){
+        printf("Victoire du joueur 1 avec %d points", players[0].points);
     }
     if(nb_turns_not_played >= 2){
         printf("both loose");
     }
     else {
-         printf("Victoire du joueur 2 avec %d points", player2.points);
+         printf("Victoire du joueur 2 avec %d points", players[1].points);
     }
     return 0;
 }
