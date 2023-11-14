@@ -87,7 +87,8 @@ int main(int argc, char* argv[]){
                 nb_turns_not_played= nb_turns_not_played+1;
             }
     }
-    next_player(current_player);
+    next_player(NB_PLAYERS, players, current_player);
+    nb_turns+=1;
 }
     if(players[0].points >= VICTORY_POINTS){
         printf("Victoire du joueur 1 avec %d points", players[0].points);

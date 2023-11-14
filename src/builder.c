@@ -5,7 +5,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#define VICTORY_POINTS 20
 
 struct builder_t{
     char level;
