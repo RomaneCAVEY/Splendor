@@ -98,7 +98,8 @@ void builder_display(const struct builder_t* g, const char* prefix){
     printf("%s Builder(lvl= %d, cost=%d %s, prod= %d %s \n", prefix ,g->level,g->ressource.n,color_to_short_string(g->ressource.c), g->production.n,color_to_short_string(g->production.c) );
 }
 
-
+/** Add the builder bought in the guild to the player_builder
+*/
 void add_from_guild(int index, struct player* current_player){
     current_player->player_builder[current_player->nbr_builder]= &game_builders[index];
 }

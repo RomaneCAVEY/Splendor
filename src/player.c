@@ -24,7 +24,9 @@ struct player* get_random_player(int size,struct player players[] ){
     
 }
 
-
+/**
+Give the next player for the next play
+*/
 struct player* next_player(int size, struct player players[], struct player* current ){
     return &players[((current->index)+1)%size];
 }

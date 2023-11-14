@@ -18,7 +18,7 @@ project: src/project.o src/color.o src/manipulation.o src/token.o
 test_token_use: tst/test_token_use.o src/token.o src/color.o src/manipulation.o
 	$(CC) $(CFLAGS) $^ -o $@
 
-test_project:tst /test_project.o
+test_project:tst /test_project.o src/color.o src/manipulation.o src/token.o src/game.o src/player.o src/builder.o
 	$(CC) $(CFLAGS) test.o -o test_project
 
 token: $src/token.o
