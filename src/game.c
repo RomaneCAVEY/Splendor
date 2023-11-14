@@ -1,34 +1,35 @@
 #include "game.h"
+#include "second_token.h"
+#include "token.h"
 
 struct guild guild;
 struct market market; 
 struct token_t tokens_from_builders[MAX_BUILDERS];
 
-struct guild init_guild(){
-    struct guild guild;
+/**
+Init the guild with random value for builders
+*/
+void init_guild(){
     guild.nbr_builder= num_builders();
-    struct builder_t* builder_in_guild[MAX_BUILDERS];
-    for (int i=0; i< guild.nbr_builder;++i){
+    for (unsigned int i=0; i< guild.nbr_builder;++i){
 
         guild.builder_in_guild[i]=make_builder(i);
     }
 }
-struct market init_market(){
-    struct market market;
+
+
+void init_market(){
     market.nbr_token=NUM_TOKENS;
-    memset(market.available_tokens, 0, NUM_TOKENS); /*Initialiser à 0, 
-    car tous les jetons appartiennet à la pioche au début du jeu*/
+    for (unsigned int i=0; i< NUM_TOKENS;++i){
+
+        market.available_tokens[i]=make_token(i);
+}
 }
 
 
-int is_market_available_tokens(int a ){
-    return market.available_tokens[a];
-}
-
-void change_market_available_tokens(int a,int b){
-    market.available_tokens[a]=b;
-}
-
+/**
+Return 1 if the builder is available in the guile, else 0
+*/
 int is_guild_builder_in_guild(int i){
     if (guild.builder_in_guild[i]){
         return 1;
@@ -38,6 +39,9 @@ int is_guild_builder_in_guild(int i){
 
 }
 
+/**
+Transform the ressources of builder in token 
+*/
 void init_tokens_from_builers(){
     for (int i=0; i< guild.nbr_builder; ++i){
         /*
@@ -50,12 +54,16 @@ void init_tokens_from_builers(){
 
 
 
-
+/**
+Return the adress of the token created by a builder
+*/
 struct token_t* adress_token_from_builders(int i){
     return &tokens_from_builders[i];
 }
 
-
+/**
+Remove 
+*/
 void remove_token(struct token_t* tab[], const struct token_t token){
     int i=0;
     while(token_equals(token,*tab[i])){
@@ -65,7 +73,8 @@ void remove_token(struct token_t* tab[], const struct token_t token){
 }
 
 
-//Pay the builder with the tokens of the player
+
+//Pay the builder with the tokens of the player, remove the token used to pay and put the token ont the market
 void token_pay(struct builder_t *b,struct player* player)
 {
     struct buildcost_t cost= builder_requires(b);
@@ -73,7 +82,7 @@ void token_pay(struct builder_t *b,struct player* player)
     int i=0;
     while (i < (NUM_TOKENS+MAX_BUILDERS)){
         if(player->player_token[i]->c[cost.c]){
-            market.available_tokens[market.nbr_token]=0;
+            market.available_tokens[market.nbr_token]=NULL;
             market.nbr_token= market.nbr_token +1;
             count= count+ player->player_token[i]->c[cost.c]; 
             if (i< NUM_TOKENS){
@@ -94,9 +103,6 @@ int market_nbr_token(){
 
 
 
-
-
-
 void remove_builders_from_guild(struct builder_t* builder){
     unsigned int i=0;
     while(!builder_t_equals(make_builder(i), builder)){
@@ -104,7 +110,30 @@ void remove_builders_from_guild(struct builder_t* builder){
     }
     guild.builder_in_guild[i]=NULL;
 }
+
+
 struct builder_t* guild_builder_in_guild(int index){
     return guild.builder_in_guild[index];
 }
 
+
+void remove_token_from_market(struct token_t* token){
+    unsigned int i=0;
+    while(!token_equals(*make_token(i),*token)){
+        i++;
+    }
+    market.available_tokens[i]=NULL;
+}
+
+void add_token_to_market(struct token_t* token){
+    unsigned int i=0;
+    while(market.available_tokens[i]){
+        i++;
+    }
+    market.available_tokens[i]=token; 
+
+}
+
+struct token_t* token_in_market_is_available(int i){
+    return market.available_tokens[i];
+}

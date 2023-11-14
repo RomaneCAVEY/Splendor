@@ -89,3 +89,11 @@ struct token_t* init_all_tokens(){
     }
     return all_tockens;
 }
+
+/** Returns the `index`the token and NULL if it does not exist. */
+struct token_t* make_token(unsigned int index){
+    if (index < NUM_TOKENS){
+        return &all_tockens[index];
+    }
+    return NULL;
+}

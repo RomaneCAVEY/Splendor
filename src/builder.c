@@ -24,10 +24,8 @@ int nb_builders;
 Can be called multiple times. Can also do nothing. */
 void init_builders(unsigned int seed){
     srand(seed);
-    struct builder_t init ; //situé ds le .h
     nb_builders= (rand()% MAX_BUILDERS);
      for( int i=0; i< nb_builders;++i){ 
-        game_builders[i]= init;
         game_builders[i].level= rand() % NUM_LEVELS;
         game_builders[i].points=rand() % (VICTORY_POINTS);
         game_builders[i].ressource.c= rand()% MAX_COLORS;

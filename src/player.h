@@ -25,14 +25,26 @@ struct player{
 
 };
 
+/**
+Init the player and all his parameter
+*/
 struct player init_player();
 
+/**
+Return 1 si one of the player reach the VICTORY_POINTS, else 0
+*/
 int has_won(struct player, struct player);
 
 
 
+/**
+Give the first player 
+*/
 struct player* get_random_player(int size,struct player players[] );
 
+/**
+Give the next player for the next round
+*/
 struct player* next_player(int size, struct player players[], struct player* current );
 
 #endif

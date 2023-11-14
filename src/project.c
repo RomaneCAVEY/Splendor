@@ -75,10 +75,10 @@ int main(int argc, char* argv[]){
             int add=0;
             while (add<nb){
                 int a =rand() % market_nbr_token();    
-                if (is_market_available_tokens(a)){
+                if (market.available_tokens[a]){
                     current_player->player_token[current_player->nbr_token]=token_get_adress(a);
                     current_player->nbr_token= current_player->nbr_token +1;
-                   change_market_available_tokens(a,0);
+                    add_token_to_market(token);
                     add=add+1;
                 }
             }
