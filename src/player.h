@@ -3,6 +3,9 @@
 
 
 #define VICTORY_POINTS 40
+#ifndef NB_PLAYERS
+#define NB_PLAYERS 2
+#endif
 
 #include "builder.h"
 #include "token.h"
@@ -33,24 +36,22 @@ struct player init_player();
 /**
 Return 1 si one of the player reach the VICTORY_POINTS, else 0
 */
-int has_won(struct player, struct player);
-
-
+int has_won(struct player players[NB_PLAYERS]);
 
 /**
 Give the first player 
 */
-struct player* get_random_player(int size,struct player players[] );
+int get_random_player(int size );
 
 /**
 Give the next player for the next round
 */
-struct player* next_player(int size, struct player players[], struct player* current );
+int next_player(int size, int current);
 
 
 /**
 Display the builders and tokens of the player
 */
-
 void player_display(struct player player);
+
 #endif

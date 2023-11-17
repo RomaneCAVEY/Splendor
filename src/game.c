@@ -69,12 +69,12 @@ struct token_t * adress_token_from_builders(int i) {
 /**
 Remove 
 */
-void remove_token(struct player* player , struct token_t *token) {
+void remove_token(struct player players[NB_PLAYERS] , struct token_t *token) {
     for (int i = 0; i < NUM_TOKENS; ++i)
     {
-        if(player->player_token[i] == token)
+        if(players[i].player_token[i] == token)
         {
-            player->player_token[i] = NULL;
+            players[i].player_token[i] = NULL;
         }
 
     }
@@ -113,20 +113,22 @@ int possibility_token_pay(struct player player, struct builder_t * b) {
 
 
 //Pay the builder with the tokens of the player, remove the token used to pay and put the token on the market
-void token_pay(struct builder_t * b, struct player * player) {
+void token_pay(struct builder_t * b, struct player players[NB_PLAYERS], int current_player) {
     if (b){
     struct buildcost_t cost = builder_requires(b);
-    int count = 0;
+    unsigned int count = 0;
     int i = 0;
     while (i < (NUM_TOKENS + MAX_BUILDERS)) {
-        if(player -> player_token[i]){
-            if (player -> player_token[i] -> c[cost.c]) {
-                add_token_to_market(player -> player_token[i]);
-                count = count + player -> player_token[i] -> c[cost.c];
+        if(players[current_player].player_token[i]){
+            printf("adress of the token: %p", players[current_player].player_token[i]);
+            token_display(*players[current_player].player_token[i], " \n Token to pay : ");
+            //if (players[i].player_token[i]->c[cost.c] >0) {
+                add_token_to_market(players[i].player_token[i]);
+                count = count + players[current_player].player_token[i] -> c[cost.c];
                 if (i < NUM_TOKENS) {
-                    remove_token(player, player->player_token[i]);
+                    remove_token(players, players[current_player].player_token[i]);
                 }
-            }
+            //}
         }
         if (count == cost.n){
             i=NUM_TOKENS + MAX_BUILDERS; 
@@ -174,7 +176,8 @@ void add_token_to_market(struct token_t * token) {
 
 }
 
-
+/* Display the market
+*/
 void market_display() {
     unsigned int i = 0;
     for (i=0; i< NUM_TOKENS; i++){
@@ -185,13 +188,28 @@ void market_display() {
     }
 }
 
-
+/* Return the adress of the token in the market at the place i
+*/
 struct token_t * token_in_market_is_available(int i) {
     return market.available_tokens[i];
 }
 
-void pay(struct player *current_player, int index){
-    token_pay(guild_builder_in_guild(index), current_player);
-    add_from_guild(index, current_player);
+
+/* Pay the builder game_builder[index] with the tokens of the players current_player
+*/
+void pay(struct player players[NB_PLAYERS], int index, int current){
+    token_pay(guild_builder_in_guild(index), players, current);
+    add_from_guild(index, players, current);
     remove_builders_from_guild(guild_builder_in_guild(index));
 }
+
+/* Pick a token in the market, add in the player's token list, and remove it from the market
+*/
+void pick_a_token(int current_player, struct player players[NB_PLAYERS], int a){
+    players[current_player].player_token[players[current_player].nbr_token] = token_get_adress(a);
+    players[current_player].nbr_token = players[current_player].nbr_token + 1;
+    remove_token_from_market(token_in_market_is_available(a));
+
+}
+
+                           

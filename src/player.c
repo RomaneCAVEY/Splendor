@@ -3,6 +3,7 @@
 #include "token.h"
 #include <stdio.h>
 
+
 /**
 Init the player and all his parameter
 */
@@ -15,41 +16,38 @@ struct player init_player() {
 /**
 Return 1 si one of the player reach the VICTORY_POINTS, else 0
 */
-int has_won(struct player player1, struct player player2) {
-    if (player1.points >= VICTORY_POINTS || player2.points >= VICTORY_POINTS) {
-        return 1;
+int has_won(struct player players[NB_PLAYERS]) {
+    for (int i=0; i<NB_PLAYERS; ++i){
+        if (players[i].points >= VICTORY_POINTS) {
+            return 1;
+        }
     }
     return 0;
 }
 
 /**
-Give the first player 
+Give the index of the player in players
 */
-struct player * get_random_player(int size, struct player players[]) {
+int get_random_player(int size) {
     srand(time(NULL));
     int random = rand() % size;
-    return & players[random];
+    return random;
 
 }
 
 /**
-Give the next player for the next round
+Give the index of the next player for the next round
 */
-struct player *next_player(int size, struct player players[], struct player *current) {
-    return &players[((current -> index) + 1) % size];
+int next_player(int size, int current) {
+    return (current + 1) % size;
 }
 
 
 void player_display(struct player player){
-
-    printf("Player's tokens : \n");
-    for (int i=0; i< (NUM_TOKENS+MAX_BUILDERS); ++i){
-        if (player.player_token[i]){
+    for (int i=0; i< player.nbr_token; ++i){
         token_display(*player.player_token[i], "-");
-        }
     }
-    printf("Player's builder : \n");
-    for (int i=0; i< (player.nbr_builder-1); ++i){
+    for (int i=0; i< player.nbr_builder; ++i){
         builder_display(player.player_builder[i], "-");
     }
 }

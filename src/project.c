@@ -18,6 +18,7 @@
 
 #include <stdlib.h>
 
+#include <threads.h>
 #include <time.h>
 
 #include <string.h>
@@ -42,7 +43,7 @@ int main(int argc, char * argv[]) {
         players[i] = init_player();
         players[i].index = i;
     }
-    struct player * current_player = get_random_player(NB_PLAYERS, players);
+    int current_player = (get_random_player(NB_PLAYERS));
     //Init market and guild    
     init_all_tokens(); //comment initialiser les tokens
     init_tokens_from_builers();
@@ -51,70 +52,64 @@ int main(int argc, char * argv[]) {
     init_market();
     int nb_turns_not_played = 0;
     int nb_turns = 0;
-  
 
-    
-
-    while ((!(has_won(players[0], players[1])) && (nb_turns_not_played < 2)) && nb_turns < MAX_TURN) {
+    while (!(has_won(players) && (nb_turns_not_played < 2)) && nb_turns < MAX_TURN) {
         int index;
-        int possibility = 0;
+        int possibility_to_pay=0;
         for (int i = 0; i < guild_nbr_builder(); i++) {
+         //printf("n \n This the market at turn %d \n", nb_turns);
             if (is_guild_builder_in_guild(i)) {
-                if (possibility_token_pay( * current_player, make_builder(i))) {
-                    possibility = 1;
+                if (possibility_token_pay(players[current_player], make_builder(i))) {
+                    possibility_to_pay = possibility_token_pay(players[current_player], make_builder(i));
                     index = i;
 
                 }
             }
         }
+        printf("===============================: \n");
+        printf("Market display: \n");
         market_display();
-        printf("this is the possibility %d\n", possibility);
+        printf("===============================: \n");
+        printf("this is the possibility %d\n", possibility_to_pay);
 
         //If we can build a builder then we do it
-        if (possibility) {
-            // put in the market the tokens which were useful to pay the builder, except if they are builders
-            pay(current_player,index);
-            printf("%d\n", current_player->points);
+        if (possibility_to_pay) {
+            //put in the market the tokens which were useful to pay the builder, except if they are builders
+            pay(players,index, current_player);
+            printf("%d\n", players[current_player].points);
              }
-        //Else we take some tokens if it's possible;
+             
+        //Else we pick some tokens if it's possible;
         else {
                 int nb = rand() % 4;
+                int add=0;
                 if (nb < market_nbr_token()){
-                    int add = 0;
                     //printf(" Voici %d \n", nb-add);
                     while (add < nb) {
-                        int a = rand() % NUM_TOKENS;
+                        int random = rand() % NUM_TOKENS;
                         //printf("%d est aléatoire \n", a);
-                        if (token_in_market_is_available(a)) {
-                            current_player -> player_token[current_player -> nbr_token] = token_get_adress(a);
-                            current_player -> nbr_token = current_player -> nbr_token + 1;
-                            remove_token_from_market(token_in_market_is_available(a));
-                            add = add + 1;
+                        if (token_in_market_is_available(random)) {
+                            pick_a_token(current_player, players,random);
+                            add+=1;
                         }
                     }
-
+                    player_display(players[current_player]);
+                    printf("\n");
                 }
-
                 else {
-                    nb_turns_not_played = nb_turns_not_played + 1;
-                }
+                nb_turns_not_played = nb_turns_not_played + 1;
+                 }
         }
-        printf(" \n turn: %d \n", nb_turns);
-        printf("Inventory from player id.%p\n", current_player);
-        player_display(*current_player);
-      
-   
-        next_player(NB_PLAYERS, players, current_player);
+        current_player=next_player(NB_PLAYERS, current_player);
         nb_turns += 1;
     }
-    for (int i = 0; i < NB_PLAYERS; i++) {
-        if (players[i].points >= VICTORY_POINTS){
-             printf("Victoire du joueur %d avec %d points \n", i, players[i].points);
-             return 0;
-        }
+    if (players[0].points >= VICTORY_POINTS) {
+        printf("Victoire du joueur 1 avec %d points", players[0].points);
     }
-    if (nb_turns_not_played >1) {
+    if (nb_turns_not_played >= 2) {
         printf("both loose");
-   }
+    } else {
+        printf("Victoire du joueur 2 avec %d points", players[1].points);
+    }
     return 0;
 }

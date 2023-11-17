@@ -44,7 +44,7 @@ int possibility_token_pay(struct player player, struct builder_t* );
 /**
     Pay the builder with the tokens of the player
 */
-void token_pay(struct builder_t *b,struct player* player);
+void token_pay(struct builder_t * b, struct player players[NB_PLAYERS], int current_player);
 int market_nbr_token();
 
 
@@ -62,8 +62,20 @@ struct builder_t* guild_builder_in_guild(int index);
 
 
 struct token_t* token_in_market_is_available(int i);
+
+/* Add token in the market, at the first place where it's free (a cse which points on NULL)
+*/
 void add_token_to_market(struct token_t* token); 
-void remove_token(struct player* player , struct token_t *token);
-void pay(struct player *current_player, int index);
+
+
+void remove_token(struct player players[NB_PLAYERS] , struct token_t *token);
+/* Pay the builder game_builder[index] with the tokens of the players current_player
+*/
+void pay(struct player players[NB_PLAYERS], int index, int current);
+
+
+/* Pick a token in the market, add in the player's token list, and remove it from the market
+*/
+void pick_a_token(int current_player, struct player players[NB_PLAYERS], int a);
 
 #endif

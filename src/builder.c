@@ -13,11 +13,14 @@
 
 #include <time.h>
 
-struct builder_t {
+#include "second_builder.h"
+
+struct builder_t{
     char level;
     int points;
     struct buildcost_t ressource;
     struct buildcost_t production;
+
 };
 
 struct builder_t game_builders[MAX_BUILDERS];
@@ -83,8 +86,8 @@ int builder_t_equals(struct builder_t * builder1, struct builder_t * builder2) {
     Example : builder_display(g, "    - ") displays on the screen :
     - Builder(lvl=1,cost=1W,prod=1B)
 */
-void builder_display(const struct builder_t * g,
-    const char * prefix) {
+
+void builder_display(const struct builder_t * g, const char * prefix) {
     if (g) {
         printf("%s Builder(lvl= %d, cost=%d %s, prod= %d %s, points = %d) \n \n", prefix, g -> level, g -> ressource.n, color_to_short_string(g -> ressource.c), g -> production.n, color_to_short_string(g -> production.c), g->points);
     } else {
@@ -94,9 +97,10 @@ void builder_display(const struct builder_t * g,
 
 /** Add the builder bought in the guild to the player_builder
  */
-void add_from_guild(int index, struct player * current_player) {
-    current_player -> player_builder[current_player->nbr_builder] = &game_builders[index];
-    current_player->points += builder_points(make_builder(index));
-    current_player -> nbr_builder += 1;
-    current_player ->player_token[NUM_TOKENS + index] = adress_token_from_builders(index);
+void add_from_guild(int index, struct player players[NB_PLAYERS] , int current_player) {
+    players[current_player].player_builder[players[current_player].nbr_builder] = &game_builders[index];
+    players[current_player].points += builder_points(make_builder(index));
+    players[current_player].nbr_builder += 1;
+    players[current_player].player_token[NUM_TOKENS + index] = adress_token_from_builders(index);
+    players[current_player].player_builder[ players[current_player].nbr_builder] = &game_builders[index];
 }
