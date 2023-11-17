@@ -4,9 +4,13 @@ NUM_TOKENS ?= 25
 MUNIFICENCE_FLAGS = -DNUM_COLORS=$(NUM_COLORS) -DNUM_LEVELS=$(NUM_LEVELS) -DNUM_TOKENS=$(NUM_TOKENS)
 CFLAGS = -Wall -Wextra -std=c99 -g3 $(MUNIFICENCE_FLAGS) -Isrc -Itst
 BUILD_DIR = ./build
+SRC_DIR = ./src
+
 
 all: project
 tests: test_token_use test_token
+	./test_token
+	./test_token_use
 
 %.o: %.c
 	echo compiling $< into $@
@@ -19,11 +23,11 @@ test_token_use: tst/test_token_use.o src/token.o src/color.o src/manipulation.o
 	$(CC) $(CFLAGS) $^ -o $@
 
 test_project:tst /test_project.o src/color.o src/manipulation.o src/token.o src/game.o src/player.o src/builder.o
-	$(CC) $(CFLAGS) test.o -o test_project
+	$(CC) $(CFLAGS) test.o -o $@
 
 
 test_display: tst/test_display.o src/color.o src/manipulation.o src/token.o src/game.o src/player.o src/builder.o
-	$(CC) $(CFLAGS) $^ -o test_display
+	$(CC) $(CFLAGS) $^ -o $@
 
 
 token: $src/token.o
@@ -38,3 +42,5 @@ test_builder: tst/test_builder.o src/builder.o src/token.o src/color.o
 
 clean:
 	rm -f project test_project *.o *~
+	rm -f src/*.o *~
+	rm -f tst/*.o *~
