@@ -1,9 +1,9 @@
-#include "../src/token.h"
-#include "../src/color.h"
-#include "../src/manipulation.h"
-#include "../src/builder.h"
-#include "../src/game.h"
-#include "../src/player.h"
+#include "token.h"
+#include "color.h"
+#include "manipulation.h"
+#include "builder.h"
+#include "game.h"
+#include "player.h"
 #include <stdio.h>
 
 int main(int argc, char* argv[]){

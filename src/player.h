@@ -47,4 +47,10 @@ Give the next player for the next round
 */
 struct player* next_player(int size, struct player players[], struct player* current );
 
+
+/**
+Display the builders and tokens of the player
+*/
+
+void player_display(struct player player);
 #endif
