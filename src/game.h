@@ -64,4 +64,6 @@ struct builder_t* guild_builder_in_guild(int index);
 struct token_t* token_in_market_is_available(int i);
 void add_token_to_market(struct token_t* token); 
 void remove_token(struct player* player , struct token_t *token);
+void pay(struct player *current_player, int index);
+
 #endif

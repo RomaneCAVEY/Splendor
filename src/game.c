@@ -190,3 +190,8 @@ struct token_t * token_in_market_is_available(int i) {
     return market.available_tokens[i];
 }
 
+void pay(struct player *current_player, int index){
+    token_pay(guild_builder_in_guild(index), current_player);
+    add_from_guild(index, current_player);
+    remove_builders_from_guild(guild_builder_in_guild(index));
+}

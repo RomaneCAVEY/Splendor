@@ -35,8 +35,8 @@ struct player * get_random_player(int size, struct player players[]) {
 /**
 Give the next player for the next round
 */
-struct player * next_player(int size, struct player players[], struct player * current) {
-    return & players[((current -> index) + 1) % size];
+struct player *next_player(int size, struct player players[], struct player *current) {
+    return &players[((current -> index) + 1) % size];
 }
 
 

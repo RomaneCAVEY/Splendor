@@ -59,7 +59,6 @@ int main(int argc, char * argv[]) {
         int index;
         int possibility = 0;
         for (int i = 0; i < guild_nbr_builder(); i++) {
-         //printf("n \n This the market at turn %d \n", nb_turns);
             if (is_guild_builder_in_guild(i)) {
                 if (possibility_token_pay( * current_player, make_builder(i))) {
                     possibility = 1;
@@ -70,15 +69,11 @@ int main(int argc, char * argv[]) {
         }
         market_display();
         printf("this is the possibility %d\n", possibility);
+
         //If we can build a builder then we do it
         if (possibility) {
-            
-            
-
             // put in the market the tokens which were useful to pay the builder, except if they are builders
-            token_pay(guild_builder_in_guild(index), current_player);
-            add_from_guild(index, current_player);
-            remove_builders_from_guild(guild_builder_in_guild(index));
+            pay(current_player,index);
             printf("%d\n", current_player->points);
              }
         //Else we take some tokens if it's possible;
