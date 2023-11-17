@@ -11,6 +11,7 @@
 #include <stdlib.h>
 
 #include <time.h>
+<<<<<<< HEAD
 
 struct builder_t {
     char level;
@@ -19,6 +20,9 @@ struct builder_t {
     struct buildcost_t production;
 
 };
+=======
+#include "second_builder.h"
+>>>>>>> refs/remotes/origin/master
 
 struct builder_t game_builders[MAX_BUILDERS];
 unsigned int nb_builders;
@@ -95,6 +99,7 @@ int builder_t_equals(struct builder_t * builder1, struct builder_t * builder2) {
     Example : builder_display(g, "    - ") displays on the screen :
     - Builder(lvl=1,cost=1W,prod=1B)
 */
+<<<<<<< HEAD
 void builder_display(const struct builder_t * g,
     const char * prefix) {
     if (g) {
@@ -104,6 +109,10 @@ void builder_display(const struct builder_t * g,
     } else {
         printf("NULL");
     }
+=======
+void builder_display(const struct builder_t* g, const char* prefix){
+    printf("%s Builder(lvl= %d, cost=%d %s, prod= %d %s)\n", prefix ,g->level,g->ressource.n,color_to_short_string(g->ressource.c), g->production.n,color_to_short_string(g->production.c) );
+>>>>>>> refs/remotes/origin/master
 }
 
 /** Add the builder bought in the guild to the player_builder
