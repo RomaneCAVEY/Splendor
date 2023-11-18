@@ -31,6 +31,7 @@
 struct player players[NB_PLAYERS];
 
 int main(int argc, char * argv[]) {
+    int max_turn= atoi(argv[1]);
     srand(SEED);
     if (argc < NB_MIN_PARAM) {
         printf("there is a mistake, too few arguments");
@@ -53,7 +54,7 @@ int main(int argc, char * argv[]) {
     int nb_turns_not_played = 0;
     int nb_turns = 0;
 
-    while (!(has_won(players) && (nb_turns_not_played < 2)) && nb_turns < MAX_TURN) {
+    while (!(has_won(players) && (nb_turns_not_played < 2)) && nb_turns < max_turn) {
         int index;
         int possibility_to_pay=0;
         for (int i = 0; i < guild_nbr_builder(); i++) {
