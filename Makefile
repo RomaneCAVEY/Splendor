@@ -39,6 +39,8 @@ test_token: tst/test_token.o src/color.o
 test_builder: tst/test_builder.o src/builder.o src/token.o src/color.o
 	$(CC) $(CFLAGS) $^ -o $@
 
+test_init: tst/test_init.o src/color.o src/token.o src/game.o src/player.o src/builder.o
+	$(CC) $(CFLAGS) $^ -o $@
 
 clean:
 	rm -f project test_project *.o *~
