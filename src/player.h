@@ -2,7 +2,7 @@
 #define __PLAYER_H__
 
 
-#define VICTORY_POINTS 40
+#define VICTORY_POINTS 15
 #ifndef NB_PLAYERS
 #define NB_PLAYERS 2
 #endif
@@ -10,7 +10,6 @@
 #include "builder.h"
 #include "token.h"
 #include "color.h"
-#include "manipulation.h"
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
@@ -19,7 +18,7 @@
 //Declaration of some variables
 
 struct player{
-    struct token_t* player_token[NUM_TOKENS+MAX_BUILDERS];
+    struct token_t* player_token[NUM_TOKENS];
     struct builder_t* player_builder[MAX_BUILDERS];
     int points;
     int nbr_token;

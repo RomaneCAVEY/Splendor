@@ -16,13 +16,15 @@
 #define NB_MIN_PARAM 1
 #define NB_PLAYERS 2
 
-struct player players[NB_PLAYERS];
 
-int main(int argc, char* argv[]){   
-    
-    struct player * player= get_random_player(2, players);
-    printf(" adress of player 1: %p", player);
-    player=next_player(2, players, player);
-    printf(" adress of player 2: %p", player);
-    
-    }
+struct player players[NB_PLAYERS]; 
+
+int test_player(){ 
+    struct player * player;
+    int rang=get_random_player(NB_PLAYERS, players);
+    player=players[rang];
+    printf(" adress of player 1: %p", &player);
+    player= [next_player(NB_PLAYERS, players, rang)]
+    printf(" adress of player 2: %p", &player);
+    return 1;    
+}

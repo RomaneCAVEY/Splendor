@@ -4,8 +4,6 @@
 
 #include "color.h"
 
-#include "manipulation.h"
-
 #include "player.h"
 
 #include "game.h"
@@ -47,7 +45,6 @@ int main(int argc, char * argv[]) {
     int current_player = (get_random_player(NB_PLAYERS));
     //Init market and guild    
     init_all_tokens(); //comment initialiser les tokens
-    init_tokens_from_builers();
     init_builders(0); // Use seed 0 at the beginning of a game   // Same thing
     init_guild(); // il faut initialiser les guild;
     init_market();
@@ -55,6 +52,7 @@ int main(int argc, char * argv[]) {
     int nb_turns = 0;
 
     while (!(has_won(players) && (nb_turns_not_played < 2)) && nb_turns < max_turn) {
+        printf("This is the turn %d \n", nb_turns);
         int index;
         int possibility_to_pay=0;
         for (int i = 0; i < guild_nbr_builder(); i++) {
@@ -77,23 +75,28 @@ int main(int argc, char * argv[]) {
         if (possibility_to_pay) {
             //put in the market the tokens which were useful to pay the builder, except if they are builders
             pay(players,index, current_player);
-            printf("%d\n", players[current_player].points);
+            printf("this is the points %d of player %d\n", current_player, players[current_player].points);
              }
              
         //Else we pick some tokens if it's possible;
         else {
-                int nb = rand() % 4;
+                //nb = number between 1 and 3 of tokens the player will pick from the market
+                int nb = rand() % 3 +1;
+                ///add = number of tokens we have already picked from the market amoung the nb tokens
                 int add=0;
-                if (nb < market_nbr_token()){
-                    //printf(" Voici %d \n", nb-add);
+                if (nb <= market_nbr_token()){
                     while (add < nb) {
+                        
+                        //printf("result: %d", nb>add);
                         int random = rand() % NUM_TOKENS;
-                        //printf("%d est aléatoire \n", a);
+                       // printf("%d est aléatoire \n", nb);
+                        printf("there are %d tokens in the market \n",market_nbr_token());
                         if (token_in_market_is_available(random)) {
                             pick_a_token(current_player, players,random);
                             add+=1;
                         }
                     }
+                    printf("Player display of player %d", current_player);
                     player_display(players[current_player]);
                     printf("\n");
                 }
@@ -106,11 +109,13 @@ int main(int argc, char * argv[]) {
     }
     if (players[0].points >= VICTORY_POINTS) {
         printf("Victoire du joueur 1 avec %d points", players[0].points);
+        return 1;
     }
-    if (nb_turns_not_played >= 2) {
+    if (nb_turns_not_played >= 2 || (nb_turns==max_turn && players[0].points==players[1].points )) {
         printf("both loose");
-    } else {
-        printf("Victoire du joueur 2 avec %d points", players[1].points);
+        return 1;
     }
+    
+    printf("Victoire du joueur 2 avec %d points", players[1].points);
     return 0;
 }

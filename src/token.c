@@ -46,8 +46,8 @@ int token_equals(const struct token_t t1, const struct token_t t2) {
     return 1;
 }
 
-struct token_t * token_get_adress(int i) {
-    return & all_tockens[i];
+struct token_t* token_get_adress(int i) {
+    return &all_tockens[i];
 
 }
 
@@ -56,17 +56,18 @@ struct token_t * token_get_adress(int i) {
     - Token(B=1,W=5)
 */
 void token_display(struct token_t t, const char * prefix) {
-    printf("%s Token(", prefix);
+    printf("%s Token (", prefix);
     for (int i = 0; i < NUM_COLORS; ++i) {
             if (t.c[i]) {
                 printf(" ( %s = %d) , ", color_to_short_string(i), t.c[i]);
+                //printf(" with the following address: %p", &t);
             }
     }
     printf(")\n");
 }
 
 // Initialiser les tokens
-struct token_t * init_all_tokens() {
+void init_all_tokens() {
     srand(SEED);
     for (int i = 0; i < NUM_TOKENS; ++i) {
         if (rand() % 2 == 0) {
@@ -84,7 +85,6 @@ struct token_t * init_all_tokens() {
         }
 
     }
-    return all_tockens;
 }
 
 /** Returns the `index`the token and NULL if it does not exist. */
@@ -93,4 +93,15 @@ struct token_t * make_token(unsigned int index) {
         return &all_tockens[index];
     }
     return NULL;
+}
+
+
+int is_complex(struct token_t * t) {
+    int count = 0;
+    for (int i = 0; i < NUM_COLORS; ++i) {
+        count = count + t -> c[i];
+        if (count > 1) return 1;
+    }
+    return 0;
+
 }

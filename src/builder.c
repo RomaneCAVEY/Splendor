@@ -101,6 +101,4 @@ void add_from_guild(int index, struct player players[NB_PLAYERS] , int current_p
     players[current_player].player_builder[players[current_player].nbr_builder] = &game_builders[index];
     players[current_player].points += builder_points(make_builder(index));
     players[current_player].nbr_builder += 1;
-    players[current_player].player_token[NUM_TOKENS + index] = adress_token_from_builders(index);
-    players[current_player].player_builder[ players[current_player].nbr_builder] = &game_builders[index];
 }

@@ -5,8 +5,13 @@ const char* color_to_string(enum color_t c);
 
 int main(int argc, char* argv[])
 {
-    enum color_t c=GREEN;
-    printf("%s",color_to_string(c));
+    test_token();
+    test_builder();
+    test_market();
+    test_game();
+    test_display();
+    test_player();
+    printf("all test passed!!!!!!!!!!!!!!!!!");
     return 0;
 
 }

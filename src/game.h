@@ -7,7 +7,6 @@
 #include "token.h"
 #include "color.h"
 #include "second_builder.h"
-#include "manipulation.h"
 #include "player.h"
 #include <stdio.h>
 #include <time.h>
@@ -44,7 +43,7 @@ int possibility_token_pay(struct player player, struct builder_t* );
 /**
     Pay the builder with the tokens of the player
 */
-void token_pay(struct builder_t * b, struct player players[NB_PLAYERS], int current_player);
+int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int current_player);
 int market_nbr_token();
 
 

@@ -8,7 +8,7 @@ SRC_DIR = ./src
 
 
 all: project
-tests: test_token_use test_token
+test: test_token_use test_token
 	./test_token
 	./test_token_use
 
@@ -16,24 +16,24 @@ tests: test_token_use test_token
 	echo compiling $< into $@
 	$(CC) $(CFLAGS) -c $< -o $@
 
-project: src/project.o  src/color.o src/manipulation.o src/token.o src/game.o src/player.o src/builder.o
+project: src/project.o  src/color.o  src/token.o src/game.o src/player.o src/builder.o
 	$(CC) $(CFLAGS) $^ -o project
 
-test_token_use: tst/test_token_use.o src/token.o src/color.o src/manipulation.o
+test_token_use: tst/test_token_use.o src/token.o src/color.o
 	$(CC) $(CFLAGS) $^ -o $@
 
-test_project:tst /test_project.o src/color.o src/manipulation.o src/token.o src/game.o src/player.o src/builder.o
+test_project:tst /test_project.o src/color.o src/token.o src/game.o src/player.o src/builder.o
 	$(CC) $(CFLAGS) test.o -o $@
 
 
-test_display: tst/test_display.o src/color.o src/manipulation.o src/token.o src/game.o src/player.o src/builder.o
+test_display: tst/test_display.o src/color.o src/token.o src/game.o src/player.o src/builder.o
 	$(CC) $(CFLAGS) $^ -o $@
 
 
 token: $src/token.o
 	$(CC) $(CFLAGS) token.o -o token
 
-test_token: tst/test_token.o src/manipulation.o src/color.o
+test_token: tst/test_token.o src/color.o
 	$(CC) $(CFLAGS) $^ -o $@
 
 test_builder: tst/test_builder.o src/builder.o src/token.o src/color.o

@@ -6,17 +6,17 @@
 #include "builder.h"  
 #include <stdio.h>
 
-int main(int argc, char* argv[]){
+int test_display(){
   printf("====================================\n");
     
   init_builders(1047);
   printf("%d \n",num_builders());
   for (unsigned int i=0; i< num_builders() ;++i ){
       printf("====================================\n");
-      builder_display(make_builder(i), "Voici ");
-
-    }
-  //  printf("This is the builder of the index %d \n", (make_builder(atoi(argv[1])))->level);
+      printf("This is the builder of the index %d \n", i);
+      builder_display(make_builder(i), "- "Voici);
+  }
+      
     return 0;
 
 }
