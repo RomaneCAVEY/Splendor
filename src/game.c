@@ -1,15 +1,15 @@
-#include "game.h"
-
-#include "player.h"
-
 #include "builder.h"
-
-#include "second_token.h"
-
 #include "token.h"
-
+#include "color.h"
+#include "player.h"
+#include "game.h"
+#include "player.h"
+#include "second_token.h"
+#include "second_builder.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+#include <string.h>
 
 struct guild guild;
 struct market market;

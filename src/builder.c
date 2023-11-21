@@ -74,13 +74,7 @@ struct buildcost_t builder_provides(const struct builder_t * g) {
     return g -> production;
 }
 
-// Option: ADD THE NUMBER OF POINTS THAT WE CAN GET WITH THIS BUILDER
-int builder_t_equals(struct builder_t * builder1, struct builder_t * builder2) {
-    if (builder1==builder2){
-        return 1;
-    }
-    return 0;
-}
+
 
 /** Displays the builder on the stdout, after a possible prefix.
     Example : builder_display(g, "    - ") displays on the screen :
@@ -95,10 +89,3 @@ void builder_display(const struct builder_t * g, const char * prefix) {
     }
 }
 
-/** Add the builder bought in the guild to the player_builder
- */
-void add_from_guild(int index, struct player players[NB_PLAYERS] , int current_player) {
-    players[current_player].player_builder[players[current_player].nbr_builder] = &game_builders[index];
-    players[current_player].points += builder_points(make_builder(index));
-    players[current_player].nbr_builder += 1;
-}

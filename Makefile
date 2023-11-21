@@ -16,31 +16,28 @@ test: test_token_use test_display
 	echo compiling $< into $@
 	$(CC) $(CFLAGS) -c $< -o $@
 
-project: src/project.o  src/color.o  src/token.o src/game.o src/player.o src/builder.o
+project: src/project.o  src/color.o  src/token.o src/game.o src/player.o src/builder.o src/second_builder.o src/second_token.o
 	$(CC) $(CFLAGS) $^ -o project
-
-test_token_use: tst/test_token_use.o src/token.o src/color.o
-	$(CC) $(CFLAGS) $^ -o $@
-
-test_project:tst /test_project.o src/color.o src/token.o src/game.o src/player.o src/builder.o
-	$(CC) $(CFLAGS) test.o -o $@
-
-
-test_display: tst/test_display.o src/color.o src/token.o src/game.o src/player.o src/builder.o
-	$(CC) $(CFLAGS) $^ -o $@
 
 
 token: $src/token.o
 	$(CC) $(CFLAGS) token.o -o token
 
+<<<<<<< HEAD
 test: tst/test_token.o src/color.o
 	$(CC) $(CFLAGS) $^ -o $@
 
 test_builder: tst/test_builder.o src/builder.o src/token.o src/color.o
 	$(CC) $(CFLAGS) $^ -o $@
+=======
+test:tst/test.o tst/test_main.o src/color.o  src/token.o src/game.o src/player.o src/builder.o src/second_builder.o src/second_token.o
+	$(CC) $(CFLAGS) $^ -o test
+
+>>>>>>> master
 
 
 clean:
 	rm -f project test_project *.o *~
 	rm -f src/*.o *~
 	rm -f tst/*.o *~
+	rm -f test*
