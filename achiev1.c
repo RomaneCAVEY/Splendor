@@ -3,6 +3,8 @@
 #include "player.h"
 
 #include "builder.h"
+#include "second_builder.h"
+
 
 #include "second_token.h"
 
@@ -12,12 +14,13 @@
 #include <stdlib.h>
 
 
-//Implementation of stack
-
-struct Stack* builders_stack;
-
-//
-
 //connex tokens:for (unsigned int=0;)
 
 struct token* playing_board;
+
+void init_playing_board(){}
+
+if (token_are_connex)
+
+
+                           

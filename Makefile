@@ -23,17 +23,9 @@ project: src/project.o  src/color.o  src/token.o src/game.o src/player.o src/bui
 token: $src/token.o
 	$(CC) $(CFLAGS) token.o -o token
 
-<<<<<<< HEAD
-test: tst/test_token.o src/color.o
-	$(CC) $(CFLAGS) $^ -o $@
-
-test_builder: tst/test_builder.o src/builder.o src/token.o src/color.o
-	$(CC) $(CFLAGS) $^ -o $@
-=======
 test:tst/test.o tst/test_main.o src/color.o  src/token.o src/game.o src/player.o src/builder.o src/second_builder.o src/second_token.o
 	$(CC) $(CFLAGS) $^ -o test
 
->>>>>>> master
 
 
 clean:
