@@ -45,9 +45,9 @@ int next_player(int size, int current) {
 
 void player_display(struct player player){
     for (int i=0; i< player.nbr_token; ++i){
-        token_display(*player.player_token[i], "-");
+        token_display(*player.player_token[i], "\n -");
     }
     for (int i=0; i< player.nbr_builder; ++i){
-        builder_display(player.player_builder[i], "-");
+        builder_display(player.player_builder[i], "\n -");
     }
 }
