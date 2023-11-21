@@ -34,9 +34,9 @@ void init_builders(unsigned int seed) {
     for (unsigned int i = 0; i < nb_builders; ++i) {
         game_builders[i].level = rand() % NUM_LEVELS;
         game_builders[i].points = rand() % (VICTORY_POINTS);
-        game_builders[i].ressource.c = rand() % MAX_COLORS;
+        game_builders[i].ressource.c = rand() % NUM_COLORS;
         game_builders[i].ressource.n = rand() % 2 + 1;
-        game_builders[i].production.c = rand() % MAX_COLORS;
+        game_builders[i].production.c = rand() % NUM_COLORS;
         game_builders[i].production.n = rand() % 2 + 2;
     }
 }

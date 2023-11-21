@@ -2,7 +2,6 @@
 #include "second_builder.h"
 #include "token.h"
 #include "color.h"
-#include "manipulation.h"
 #include "builder.h"  
 #include <stdio.h>
 
