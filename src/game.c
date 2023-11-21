@@ -50,26 +50,12 @@ int is_guild_builder_in_guild(int i) {
 /**
 Remove token
 */
-<<<<<<< HEAD
 void remove_token(struct player players[NB_PLAYERS] , struct token_t *token, int current_player) {
     int i=0;
     while(token_equals(*players[current_player].player_token[i], *token)){
         i++;
     }
     players[current_player].player_token[i] = NULL;
-=======
-void remove_token(struct player players[MAX_BUILDERS], struct token_t *token) {
-    for (int j = 0; j < NB_PLAYERS; ++j)
-        for (int i = 0; i < NUM_TOKENS; ++i)
-        {
-            if(players[j].player_token[i] == token)
-            {
-                players[j].player_token[i] = NULL;
-            }
-        
-        }
-    
->>>>>>> refs/remotes/origin/master
 }
 
 /*return NULL if the player can't pay for a builder or return 1 if the player can pay the exact price or return 2*/
