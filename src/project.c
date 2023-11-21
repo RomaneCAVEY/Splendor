@@ -106,7 +106,7 @@ int main(int argc, char *argv[]){
         if (possibility_to_pay) {
             //put in the market the tokens which were useful to pay the builder, except if they are builders
             pay(players,index, current_player);
-            printf("this is the points %d of player %d\n", players[current_player].points,current_player);
+            printf("this is the points  %d of player %d\n", players[current_player].points,current_player);
              }
              
         //Else we pick some tokens if it's possible;
