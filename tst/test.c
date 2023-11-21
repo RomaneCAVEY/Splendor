@@ -12,11 +12,16 @@
 #include <string.h>
 #include "test.h"
 #define SEED 0
-const char* color_to_string(enum color_t c);
 
 int main(int argc, char* argv[])
-{
-    
+{   
+    if (argc< 1){
+        printf("too few arguments");
+    }
+    else {
+    printf("arguments took: %s", argv[1]);
+    }
+    printf("Voici les tests: \n \n");
     if(token_use()){
         printf("\n \n ==========================================");
         printf("test passed");
