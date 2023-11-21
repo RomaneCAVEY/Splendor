@@ -33,7 +33,6 @@ int main(int argc, char *argv[]){
            int seed_builder;
            int opt;
 
-//Mistake in this part: 
            max_turn = 0;
            seed = 0;
            seed_builder = 0;

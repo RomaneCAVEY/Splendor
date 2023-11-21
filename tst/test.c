@@ -1,70 +1,76 @@
 #include "builder.h"
+
 #include "token.h"
+
 #include "color.h"
+
 #include "player.h"
+
 #include "game.h"
-#include "player.h"
+
 #include "second_token.h"
+
 #include "second_builder.h"
+
 #include <stdio.h>
+
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
-#include "test.h"
-#define SEED 0
-const char* color_to_string(enum color_t c);
+
+
+
 
 int main(int argc, char* argv[])
-{
+{   
+    if (argc< 1){
+        printf("too few arguments");
+    }
+    else {
+    printf("arguments took: %s", argv[1]);
+    }
+    printf("Voici les tests: \n \n ******************** \n");
+    if(!test_builder()){
+        printf("\n \n ==========================================");
+        printf("test builder : ");
+        printf("test passed");
+    }
+    else {printf("test failed");
+    }
+    printf("\n \n ========================================== \n \n");
+    if(!test_main()){
+        printf("test main: \n");
+        printf("test passed");
+    }
+    else {printf("test failed");
+    }
+    printf("\n \n ========================================== \n \n");
     
-    if(token_use()){
-        printf("\n \n ==========================================");
+    if(!test_init()){
+        printf("test init() \n");
+        
         printf("test passed");
-        printf("\n \n ==========================================");
-    }
-    else {printf("test failed");
-    }
-    if(test_init()){
-        printf("\n \n ==========================================");
-        printf("test passed");
-        printf("\n \n ==========================================");
         }
     else {printf("test failed");
     }
-
-    if(test_builder()){
-        printf("\n \n ==========================================");
+    printf("\n \n ========================================== \n \n");
+    if(!test_display()){
+        printf("test display \n");
         printf("test passed");
-        printf("\n \n ==========================================");
         }
     else {printf("test failed");
     }
-    if(test_main()){
-        printf("\n \n ==========================================");
+    printf("\n \n ========================================== \n \n");
+    if(!token_use()){
+        printf("test token use \n");
         printf("test passed");
-        printf("\n \n ==========================================");
         }
     else {printf("test failed");
     }
-    if(test_init()){
-        printf("\n \n ==========================================");
+    printf("\n \n ========================================== \n \n");
+    if(!test_token_use()){
+        printf("test_token_use \n");
         printf("test passed");
-        printf("\n \n ==========================================");
-        }
-    else {printf("test failed");
-    }
-    if(test_display()){
-        printf("\n \n ==========================================");
-        printf("test passed");
-        printf("\n \n ==========================================");
-        }
-    else {printf("test failed");
-    }
-
-    if(token_use()){
-        printf("\n \n ==========================================");
-        printf("test passed");
-        printf("\n \n ==========================================");
         }
     else {printf("test failed");
     }

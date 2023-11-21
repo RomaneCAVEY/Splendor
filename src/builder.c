@@ -30,7 +30,7 @@ unsigned int nb_builders;
 Can be called multiple times. Can also do nothing. */
 void init_builders(unsigned int seed) {
     srand(seed);
-    nb_builders = 1 + (rand() % (MAX_BUILDERS - 1));
+    nb_builders = 5 + (rand() % (MAX_BUILDERS - 1));
     for (unsigned int i = 0; i < nb_builders; ++i) {
         game_builders[i].level = rand() % NUM_LEVELS;
         game_builders[i].points = rand() % (VICTORY_POINTS);

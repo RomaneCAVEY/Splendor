@@ -13,6 +13,11 @@
   #define MAX_BUILDERS 10
 #endif
 
+#ifndef MAX_BUILDERS_AVAILABLE_PER_LVL
+  #define MAX_BUILDERS_AVAILABLE_PER_LVL 3
+#endif
+
+
 /** A pair representing a number of tokens of the same color that is
     required to buy a builder or that is produced by a builder. */
 struct buildcost_t {
