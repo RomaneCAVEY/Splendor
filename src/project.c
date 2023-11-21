@@ -140,11 +140,11 @@ int main(int argc, char *argv[]){
     }
     if (players[0].points >= VICTORY_POINTS) {
         printf("Victoire du joueur 0 avec %d points", players[0].points);
-        return 1;
+        return 0;
     }
     if (nb_turns_not_played >= 2 || (nb_turns==max_turn && players[0].points==players[1].points )) {
         printf("both loose");
-        return 1;
+        return 0;
     }
     
     printf("Victoire du joueur 1 avec %d points", players[1].points);
