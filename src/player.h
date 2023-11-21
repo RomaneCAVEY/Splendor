@@ -2,7 +2,7 @@
 #define __PLAYER_H__
 
 
-#define VICTORY_POINTS 15
+#define VICTORY_POINTS 20
 #ifndef NB_PLAYERS
 #define NB_PLAYERS 2
 #endif

@@ -221,7 +221,6 @@ void pay(struct player players[NB_PLAYERS], int index, int current){
     //printf(const char *restrict format, ...)
     token_pay(guild_builder_in_guild(index), players, current);
     //printf(" \n payed \n ");
-    players[current].points+= builder_points(guild_builder_in_guild(index));
     add_from_guild(index, players, current);
     remove_builders_from_guild(guild_builder_in_guild(index));
 }
