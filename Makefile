@@ -8,11 +8,7 @@ SRC_DIR = ./src
 
 
 all: project
-test: test_builder test_token_use test_display test_main
-	./test_builder
-	./test_token_use
-	./test_display
-	./test_main
+test: test
 
 %.o: %.c
 	echo compiling $< into $@
@@ -21,23 +17,12 @@ test: test_builder test_token_use test_display test_main
 project: src/project.o  src/color.o  src/token.o src/game.o src/player.o src/builder.o src/second_builder.o src/second_token.o
 	$(CC) $(CFLAGS) $^ -o project
 
-test_token_use: tst/test_token_use.o src/token.o src/color.o src/second_token
-	$(CC) $(CFLAGS) $^ -o $@
-
-test_main: tst/test_main.o src/token.o src/color.o  src/game.o src/player.o src/builder.o src/second_builder.o src/second_token
-	$(CC) $(CFLAGS) $^ -o $@
-
-test_display: tst/test_display.o src/color.o src/token.o src/game.o src/player.o src/builder.o src/second_builder.o src/second_token
-	$(CC) $(CFLAGS) $^ -o $@
 
 token: $src/token.o
 	$(CC) $(CFLAGS) token.o -o token
 
-test_builder: tst/test_builder.o src/builder.o src/token.o src/color.o src/second_builder.o src/second_token
-	$(CC) $(CFLAGS) $^ -o $@
-
-test_init: tst/test_init.o src/color.o src/token.o src/game.o src/player.o src/builder.o src/second_builder.o src/second_token
-	$(CC) $(CFLAGS) $^ -o $@
+test:tst/test.o tst/test_main.o src/color.o  src/token.o src/game.o src/player.o src/builder.o src/second_builder.o src/second_token.o
+	$(CC) $(CFLAGS) $^ -o test
 
 
 

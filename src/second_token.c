@@ -12,7 +12,7 @@
 struct token_t all_tockens[NUM_TOKENS];
 
 struct token_t* token_get_adress(int i) {
-    return &all_tockens[i];
+   return &all_tockens[i];
 
 }
 
