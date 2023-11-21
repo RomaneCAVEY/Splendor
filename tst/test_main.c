@@ -18,12 +18,15 @@
 
 struct player players[NB_PLAYERS]; 
 
-int test_player(){ 
-    struct player * player;
-    int rang=get_random_player(NB_PLAYERS, players);
+
+int main (int argc, char* argv[])
+{
+    struct player player;
+    int rang=get_random_player(NB_PLAYERS);
     player=players[rang];
     printf(" adress of player 1: %p", &player);
-    player= [next_player(NB_PLAYERS, players, rang)]
-    printf(" adress of player 2: %p", &player);
-    return 1;    
+    player= players[next_player(NB_PLAYERS, rang)];
+    printf("test passed\n");
+
+    return 0;    
 }

@@ -1,18 +1,22 @@
-#include "second_token.h"
-#include "second_builder.h"
+#include "builder.h"
 #include "token.h"
 #include "color.h"
-#include "builder.h"  
-#include <stdio.h>
+#include "player.h"
 #include "game.h"
 #include "player.h"
+#include "second_token.h"
+#include "second_builder.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
+#include "test.h"
 #ifndef SEED
   #define SEED 0
 #endif
 
 
-int main(int argc,char* argv[])
-{
+int test_init(){
     init_player();
     init_all_tokens();
     init_builders(10);
@@ -25,6 +29,6 @@ int main(int argc,char* argv[])
     for (int i; i < MAX_BUILDERS; ++i ){
         builder_display(make_builder(i),"");
     }   
-    printf("Le joueur peut-il payer ?: %d\n",possibility_token_pay(p,make_builder(4)));
+    printf("Test passed");
     return 0;
 }

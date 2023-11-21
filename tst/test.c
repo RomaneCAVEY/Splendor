@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "color.h"
+#include "test.h"
 
 const char* color_to_string(enum color_t c);
 

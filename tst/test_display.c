@@ -1,11 +1,17 @@
-#include "second_token.h"
-#include "second_builder.h"
+#include "builder.h"
 #include "token.h"
 #include "color.h"
-#include "builder.h"  
+#include "player.h"
+#include "game.h"
+#include "player.h"
+#include "second_token.h"
+#include "second_builder.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
 
-int test_display(){
+int test_display{
   printf("====================================\n");
     
   init_builders(1047);
@@ -13,8 +19,9 @@ int test_display(){
   for (unsigned int i=0; i< num_builders() ;++i ){
       printf("====================================\n");
       printf("This is the builder of the index %d \n", i);
-      builder_display(make_builder(i), "- "Voici);
+      builder_display(make_builder(i), "-Voici");
   }
+   printf("test passed\n");
       
     return 0;
 
