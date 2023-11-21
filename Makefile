@@ -8,7 +8,9 @@ SRC_DIR = ./src
 
 
 all: project
+	./project
 test: test
+	./test
 
 %.o: %.c
 	echo compiling $< into $@

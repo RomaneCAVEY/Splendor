@@ -67,7 +67,8 @@ struct token_t* token_in_market_is_available(int i);
 void add_token_to_market(struct token_t* token); 
 
 
-void remove_token(struct player players[NB_PLAYERS] , struct token_t *token);
+
+void remove_token(struct player players[NB_PLAYERS] , struct token_t *token, int current_player);
 /* Pay the builder game_builder[index] with the tokens of the players current_player
 */
 void pay(struct player players[NB_PLAYERS], int index, int current);

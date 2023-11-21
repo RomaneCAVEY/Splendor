@@ -45,17 +45,14 @@ int is_guild_builder_in_guild(int i) {
 }
 
 /**
-Remove 
+Remove token
 */
-void remove_token(struct player players[NB_PLAYERS] , struct token_t *token) {
-    for (int i = 0; i < NUM_TOKENS; ++i)
-    {
-        if(players[i].player_token[i] == token)
-        {
-            players[i].player_token[i] = NULL;
-        }
-
+void remove_token(struct player players[NB_PLAYERS] , struct token_t *token, int current_player) {
+    int i=0;
+    while(token_equals(*players[current_player].player_token[i], *token)){
+        i++;
     }
+    players[current_player].player_token[i] = NULL;
 }
 
 /*return NULL if the player can't pay for a builder or return 1 if the player can pay the exact price or return 2*/
@@ -147,7 +144,7 @@ int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int
                 if (token-> c[cost.c]){
                     count+= token->c[cost.c];
                     add_token_to_market(players[current_player].player_token[i]);
-                    remove_token(players, players[current_player].player_token[i]);
+                    remove_token(players, players[current_player].player_token[i], current_player);
                 }
             }
         
