@@ -17,17 +17,21 @@ struct market{
     struct token_t* available_tokens[NUM_TOKENS];
 };
 
-struct guild{
-    int nbr_builder;
-    struct builder_t* builder_in_guild[MAX_BUILDERS];
+ struct builder_stack{
+    struct builder_t* stack[MAX_BUILDERS];
+    int nbr_stack;
 
 };
-    
+
+
+struct guild{
+    int nbr_builder;
+    struct builder_stack builder_in_guild[NUM_LEVELS];
+};
+
 
 void init_guild();
 void init_market();
-
-
 int guild_nbr_builder();
 
 
@@ -57,7 +61,7 @@ struct token_t* adress_token_from_builders(int i);
 
 int is_guild_builder_in_guild(int i);
 
-struct builder_t* guild_builder_in_guild(int index);
+struct builder_t* guild_builder_in_guild(unsigned int index, int level);
 
 
 struct token_t* token_in_market_is_available(int i);

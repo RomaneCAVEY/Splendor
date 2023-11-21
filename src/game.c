@@ -11,6 +11,7 @@
 #include <time.h>
 #include <string.h>
 
+
 struct guild guild;
 struct market market;
 
@@ -20,8 +21,8 @@ Init the guild with random value for builders
 void init_guild() {
     guild.nbr_builder = num_builders();
     for (int i = 0; i < guild.nbr_builder; ++i) {
-
-        guild.builder_in_guild[i] = make_builder(i);
+        int place= guild.builder_in_guild[builder_level(make_builder(i))].nbr_stack;
+        guild.builder_in_guild[builder_level(make_builder(i))-1].stack[place]=make_builder(i);  
     }
 }
 
@@ -32,6 +33,8 @@ void init_market() {
         market.available_tokens[i] = make_token(i);
     }
 }
+
+
 
 /**
 Return 1 if the builder is available in the guile, else 0
@@ -47,15 +50,17 @@ int is_guild_builder_in_guild(int i) {
 /**
 Remove 
 */
-void remove_token(struct player players[NB_PLAYERS] , struct token_t *token) {
-    for (int i = 0; i < NUM_TOKENS; ++i)
-    {
-        if(players[i].player_token[i] == token)
+void remove_token(struct player players[MAX_BUILDERS], struct token_t *token) {
+    for (int j = 0; j < NB_PLAYERS; ++j)
+        for (int i = 0; i < NUM_TOKENS; ++i)
         {
-            players[i].player_token[i] = NULL;
+            if(players[j].player_token[i] == token)
+            {
+                players[j].player_token[i] = NULL;
+            }
+        
         }
-
-    }
+    
 }
 
 /*return NULL if the player can't pay for a builder or return 1 if the player can pay the exact price or return 2*/
@@ -166,15 +171,18 @@ int market_nbr_token() {
 
 void remove_builders_from_guild(struct builder_t * builder) {
     unsigned int i = 0;
-    while (!builder_t_equals(make_builder(i), builder) && i<MAX_BUILDERS) {
+    int level=builder_level(builder); 
+    while (!builder_t_equals(guild.builder_in_guild[level-1].stack[i], builder) && i<MAX_BUILDERS) {
         i++;
     }
-    guild.builder_in_guild[i] = NULL;
+    guild.builder_in_guild[level-1].stack[i] = NULL;
     guild.nbr_builder -=1;
+    guild.builder_in_guild[level-1].nbr_stack-=1;
 }
 
-struct builder_t * guild_builder_in_guild(int index) {
-    return guild.builder_in_guild[index];
+
+struct builder_t * guild_builder_in_guild(unsigned index, int level) {
+    return guild.builder_in_guild[level].stack[index];
 }
 
 void remove_token_from_market(struct token_t * token){
