@@ -21,9 +21,8 @@ struct player players[NB_PLAYERS];
 
 int test_builder()
 {
-  srand(NULL);
-  init_builders(rand());
-  for(unsigned int i =0; i<MAX_BUILDERS; ++i){
+  init_builders(SEED);
+  for(unsigned int  i =0; i<MAX_BUILDERS; ++i){
     if (make_builder(i)){
      builder_display(make_builder(i), " \n Builder: ");
     }
