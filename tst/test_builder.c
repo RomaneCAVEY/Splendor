@@ -1,7 +1,6 @@
 
 #include "token.h"
 #include "color.h"
-#include "manipulation.h"
 #include "builder.h"
 #include "game.h"
 #include "player.h"
