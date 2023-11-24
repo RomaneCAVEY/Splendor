@@ -1,4 +1,4 @@
-#include <market.h>
+#include "market.h"
 #include "token.h"
 #include "builder.h"
 #include "token.h"
@@ -6,6 +6,7 @@
 #include "second_builder.h"
 #include "second_token.h"
 #include "player.h"
+#include <math.h>
 #include <stdio.h>
 #include <time.h>
 #include <string.h>
@@ -16,7 +17,6 @@ struct market market;
 void init_market() {
     market.nbr_token = NUM_TOKENS;
     /*init the playing_board*/
-    market.playing_board={};
     srand(SEED);
     int tokens_available[NUM_TOKENS]={};
     for (unsigned int i=0; i< NUM_TOKENS; i++){
@@ -24,11 +24,10 @@ void init_market() {
         while (!tokens_available[a]){
             a= rand() % NUM_TOKENS;
         }
-        market.playing_board[i]= &all_tockens[a];
+        market.playing_board[i]= token_get_adress(a);
         tokens_available[a]=1;
     }
     /*permutation is a permutation of the cases , we have to fill it in that order when we push a token in the market*/
-     market.permutation={};
      for (unsigned int i=0; i< NUM_TOKENS; i++){
         int a= rand() % NUM_TOKENS;
         while (!market.permutation[i]){
@@ -48,8 +47,8 @@ int market_nbr_token() {
 
 void remove_token_from_market(struct token_t * token){
     for (int i=0; i<NUM_TOKENS; i++){
-        if (token== market.available_tokens[i]){
-            market.available_tokens[i] = NULL;
+        if (token== market.playing_board[i]){
+            market.playing_board[i] = NULL;
             market.nbr_token-=1;
         }
     }
@@ -57,10 +56,10 @@ void remove_token_from_market(struct token_t * token){
 
 void add_token_to_market(struct token_t * token) {
     int i = 0;
-     while (market.available_tokens[i] && i< NUM_TOKENS) {
+     while (market.playing_board[i] && i< NUM_TOKENS) {
         i++;
     }
-    market.available_tokens[i] = token;
+    market.playing_board[i] = token;
     market.nbr_token = market.nbr_token + 1;
 
 }
@@ -70,9 +69,9 @@ void add_token_to_market(struct token_t * token) {
 void market_display() {
     unsigned int i = 0;
     for (i=0; i< NUM_TOKENS; i++){
-        if ( market.available_tokens[i])
+        if ( market.playing_board[i])
         {
-            token_display( *market.available_tokens[i], " \n voici le token suivant");
+            token_display( *market.playing_board[i], " \n voici le token suivant");
         }
     }
 }
@@ -80,7 +79,7 @@ void market_display() {
 /* Return the adress of the token in the market at the place i
 */
 struct token_t * token_in_market_is_available(int i) {
-    return market.available_tokens[i];
+    return market.playing_board[i];
 }
 
 
@@ -90,18 +89,18 @@ int tokens_neighbour(int index){
     double square= sqrt(NUM_TOKENS);
     int s=square;
     int count=1;
-    if (index<(NUM_TOKENS-s) && playing_board[index+s]){
+    if (index<(NUM_TOKENS-s) && market.playing_board[index+s]){
         count+=1;
     }
-    if ((index>square) && playing_board[index-s]){
+    if ((index>square) && market.playing_board[index-s]){
         count+=1;
     }
    
-    if ((index % s != 4) && (playing_board[index+1])){
+    if ((index % s != 4) && (market.playing_board[index+1])){
         count+=1;
      }
     
-    if ((index % s != 0) && (playing_board[index-1])){
+    if ((index % s != 0) && (market.playing_board[index-1])){
         count+=1;
      }
 
