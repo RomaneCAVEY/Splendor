@@ -216,7 +216,7 @@ struct token_t * token_in_market_is_available(int i) {
 */
 void pay(struct player players[NB_PLAYERS], int index, int current){
     //printf(const char *restrict format, ...)
-    token_pay(guild_builder_in_guild(index), players, current);
+    token_pay(guild_builder_in_guild(index, mak), players, current);
     //printf(" \n payed \n ");
     add_from_guild(index, players, current);
     remove_builders_from_guild(guild_builder_in_guild(index));
