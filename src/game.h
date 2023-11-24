@@ -12,37 +12,10 @@
 #include <time.h>
 #include <string.h>
 
-#ifndef MAX_BUILDERS_AVAILABLE_PER_LVL
-    #define MAX_BUILDERS_AVAILABLE_PER_LVL 3
-#endif
 
-struct market{
-    int nbr_token;
-    struct token_t* available_tokens[NUM_TOKENS];
-};
-
- struct builder_stack{
-    struct builder_t* stack[MAX_BUILDERS];
-    int nbr_stack;
-};
+ 
 
 
-struct guild{
-    int nbr_builder;
-    struct builder_stack builder_in_guild[NUM_LEVELS];
-};
-
-
-void init_guild();
-void init_market();
-int guild_nbr_builder();
-
-
-
-/*
-Init NUM_TOKENS tokens
-*/
-void init_tokens_from_builers();
 
  /*return NULL if the player can't pay for a builder or return 1 if the player can pay the exact price or return 2*/
 int possibility_token_pay(struct player player, struct builder_t* );
@@ -51,29 +24,8 @@ int possibility_token_pay(struct player player, struct builder_t* );
     Pay the builder with the tokens of the player
 */
 int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int current_player);
-int market_nbr_token();
 
 
-
-void market_display() ;
-void remove_builders_from_guild( struct builder_t*);
-
-void remove_token_from_market(struct token_t* token);
-
-struct token_t* adress_token_from_builders(int i);
-
-int is_guild_builder_in_guild(int i);
-
-struct builder_t* guild_builder_in_guild(unsigned int index, int level);
-
-
-struct token_t* token_in_market_is_available(int i);
-
-/* Add token in the market, at the first place where it's free (a cse which points on NULL)
-*/
-void add_token_to_market(struct token_t* token); 
-
-int reorder(int level_of_builder, int variator);
 
 void remove_token(struct player players[NB_PLAYERS] , struct token_t *token, int current_player);
 /* Pay the builder game_builder[index] with the tokens of the players current_player

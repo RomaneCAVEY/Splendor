@@ -57,28 +57,3 @@ int is_complex(struct token_t * t) {
     return 0;
 
 }
-
-
-/*Return the number of token connex to the token (himself counts for one)*/
-int tokens_neighbour(int index){
-    double square= sqrt(NUM_TOKENS);
-    int s=square;
-    int count=1;
-    if (index<(NUM_TOKENS-s) && playing_board[index+s]){
-        count+=1;
-    }
-    if ((index>square) && playing_board[index-s]){
-        count+=1;
-    }
-   
-    if ((index % s != 4) && (playing_board[index+1])){
-        count+=1;
-     }
-    
-    if ((index % s != 0) && (playing_board[index-1])){
-        count+=1;
-     }
-
-    return 0;
-
-}
