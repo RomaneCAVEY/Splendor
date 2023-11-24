@@ -13,12 +13,7 @@
 #include <string.h>
 
 
- struct builder_stack{
-    struct builder_t first;
-    struct builder_t* next;
-    int nbr_in_stack;
-};
-
+ 
 
 
 
