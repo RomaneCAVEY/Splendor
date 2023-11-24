@@ -1,6 +1,6 @@
-#include"guild.h"
+#include "guild.h"
 #include "game.h"
-#include<market.h>
+#include "market.h"
 #include "token.h"
 #include "builder.h"
 #include "token.h"
@@ -11,12 +11,13 @@
 #include <stdio.h>
 #include <time.h>
 #include <string.h>
+
 struct guild guild;
 /**
 Init the guild with random value for builders
 */
 void init_guild() {
-    guild.nbr_builder = num_builders();
+    guild.nbr_in_stack = num_builders();
     for (int i = 0; i < guild.nbr_builder; ++i) {
         int place= guild.builder_in_guild[builder_level(make_builder(i))].nbr_stack;
         guild.builder_in_guild[builder_level(make_builder(i))-1].stack[place]=make_builder(i);  

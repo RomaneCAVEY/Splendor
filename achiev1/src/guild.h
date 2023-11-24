@@ -1,9 +1,7 @@
 #include"market.h"
-#include"guild.h"
 #include "token.h"
 #include "builder.h"
 #include "token.h"
-#include "game.h"
 #include "color.h"
 #include "second_builder.h"
 #include "player.h"
@@ -12,10 +10,12 @@
 #include <string.h>
 
 
-struct guild{
-    int nbr_builder;
-    struct builder_stack stack;
+struct builder_stack{
+    struct builder_t first;
+    struct builder_t* next;
+    int nbr_in_stack;
 };
+
 void init_guild();
 
 struct guild guild;
