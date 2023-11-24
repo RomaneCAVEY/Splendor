@@ -13,13 +13,9 @@
 #include <string.h>
 
 #ifndef MAX_BUILDERS_AVAILABLE_PER_LVL
-    #define MAX_BUILDERS_AVAILABLE_PER_LVL 3
+#define MAX_BUILDERS_AVAILABLE_PER_LVL 3
 #endif
 
-struct market{
-    int nbr_token;
-    struct token_t* available_tokens[NUM_TOKENS];
-};
 
  struct builder_stack{
     struct builder_t* stack[MAX_BUILDERS];
