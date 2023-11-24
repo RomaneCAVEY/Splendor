@@ -179,7 +179,6 @@ int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int
         
         }
         return 1;
-
 }
 
 int guild_nbr_builder() {
@@ -229,7 +228,6 @@ void add_token_to_market(struct token_t * token) {
     }
     market.available_tokens[i] = token;
     market.nbr_token = market.nbr_token + 1;
-
 }
 
 /* Display the market
@@ -262,6 +260,7 @@ void pay(struct player players[NB_PLAYERS], int index, int current){
     remove_builders_from_guild(guild_builder_in_guild(index,level));
 }
 
+
 /* Pick a token in the market, add in the player's token list, and remove it from the market
 */
 void pick_a_token(int current_player, struct player players[NB_PLAYERS], int a){
@@ -271,5 +270,7 @@ void pick_a_token(int current_player, struct player players[NB_PLAYERS], int a){
     remove_token_from_market(token_in_market_is_available(a));
 
 }
+
+
 
                            
