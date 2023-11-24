@@ -12,6 +12,10 @@
 #include <time.h>
 #include <string.h>
 
+#ifndef MAX_BUILDERS_AVAILABLE_PER_LVL
+    #define MAX_BUILDERS_AVAILABLE_PER_LVL 3
+#endif
+
 struct market{
     int nbr_token;
     struct token_t* available_tokens[NUM_TOKENS];
@@ -20,7 +24,6 @@ struct market{
  struct builder_stack{
     struct builder_t* stack[MAX_BUILDERS];
     int nbr_stack;
-
 };
 
 
@@ -53,7 +56,7 @@ int market_nbr_token();
 
 
 void market_display() ;
-void remove_builders_from_guild( struct builder_t* );
+void remove_builders_from_guild( struct builder_t*);
 
 void remove_token_from_market(struct token_t* token);
 
@@ -70,7 +73,7 @@ struct token_t* token_in_market_is_available(int i);
 */
 void add_token_to_market(struct token_t* token); 
 
-
+int reorder(int level_of_builder, int variator);
 
 void remove_token(struct player players[NB_PLAYERS] , struct token_t *token, int current_player);
 /* Pay the builder game_builder[index] with the tokens of the players current_player
