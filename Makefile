@@ -8,15 +8,9 @@ SRC_DIR = ./src
 
 
 all: project
-<<<<<<< HEAD
-test: test_token_use test_display
-	./test_token_use
-	./test_display
-=======
 	./project
 test: test
 	./test
->>>>>>> master
 
 %.o: %.c
 	echo compiling $< into $@

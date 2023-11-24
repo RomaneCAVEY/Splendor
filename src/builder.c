@@ -37,7 +37,7 @@ void init_builders(unsigned int seed) {
         game_builders[i].ressource.c = rand() % NUM_COLORS;
         game_builders[i].ressource.n = rand() % 2 + 1;
         game_builders[i].production.c = rand() % NUM_COLORS;
-        game_builders[i].production.n = rand() % 2 + 2;
+        game_builders[i].production.n = rand() % 2 + 1;
     }
 }
 

@@ -1,11 +1,5 @@
-#include "builder.h"
-#include "token.h"
-#include "color.h"
-#include "player.h"
 #include "game.h"
-#include "player.h"
 #include "second_token.h"
-#include "second_builder.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
