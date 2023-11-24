@@ -10,15 +10,16 @@
 #include <string.h>
 
 
-struct builder_stack{
-    struct builder_t first;
+struct guild{
+    int nb_builder;
+    struct builder_t* builders[MAX_BUILDERS];
+    struct builder_t* 
+    struct stack 
     struct builder_t* next;
-    int nbr_in_stack;
 };
 
 void init_guild();
 
-struct guild guild;
 /**
 Init the guild with random value for builders
 */
