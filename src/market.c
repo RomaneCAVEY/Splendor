@@ -11,7 +11,7 @@
 #include <time.h>
 #include <string.h>
 
-struct market market;
+struct market market={};
 
 
 void init_market() {
@@ -86,25 +86,23 @@ struct token_t * token_in_market_is_available(int i) {
 
 /*Return the number of token connex to the token (himself counts for one)*/
 int tokens_neighbour(int index){
-    double square= sqrt(NUM_TOKENS);
-    int s=square;
-    int count=1;
-    if (index<(NUM_TOKENS-s) && market.playing_board[index+s]){
-        count+=1;
+    int square = sqrt(NUM_TOKENS);
+    int count = 1;
+    if (index<(NUM_TOKENS-square) && market.playing_board[index+square]){
+        count += 1;
     }
-    if ((index>square) && market.playing_board[index-s]){
-        count+=1;
+    if ((index>square) && market.playing_board[index-square]){
+        count += 1;
     }
    
-    if ((index % s != 4) && (market.playing_board[index+1])){
-        count+=1;
+    if ((index % square != 4) && (market.playing_board[index+1])){
+        count += 1;
      }
     
-    if ((index % s != 0) && (market.playing_board[index-1])){
-        count+=1;
+    if ((index % square != 0) && (market.playing_board[index-1])){
+        count += 1;
      }
 
     return 0;
-
 }
 

@@ -1,3 +1,7 @@
+#ifndef __MARKET_H__
+#define __MARKET_H__
+
+
 #include "token.h"
 #include "builder.h"
 #include "token.h"
@@ -14,8 +18,6 @@ struct market{
     int permutation[NUM_TOKENS];
 };
 
-
-struct market market;
 void init_market();
 
 int market_nbr_token();
@@ -39,3 +41,5 @@ int tokens_connex(int index, int nbr_token,int current_player);
 
 /*return the number of available tokens*/
 int tokens_neighbour(int index);
+
+#endif

@@ -13,12 +13,9 @@
 #include <string.h>
 
 
- 
-
-
 
  /*return NULL if the player can't pay for a builder or return 1 if the player can pay the exact price or return 2*/
-int possibility_token_pay(struct player player, struct builder_t* );
+int possibility_token_pay(struct player player, struct builder_t* builder );
 
 /**
     Pay the builder with the tokens of the player

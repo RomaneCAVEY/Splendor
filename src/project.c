@@ -1,7 +1,9 @@
 #include "builder.h"
 
+#include "guild.h"
 #include "token.h"
 
+#include "market.h"
 #include "color.h"
 
 #include "player.h"
@@ -84,9 +86,9 @@ int main(int argc, char *argv[]){
         printf("this is the points %d of the current player, player %d\n", players[current_player].points,current_player);
         int index;
         int possibility_to_pay=0;
-        for (int i = 0; i < guild_nbr_builder(); i++) {
+        for ( int i = guild_nbr_builder(); i>0 ; i--) {
          //printf("n \n This the market at turn %d \n", nb_turns);
-            if (is_guild_builder_in_guild(i)) {
+            if (guild_available_builder(i)) {
                 if (possibility_token_pay(players[current_player], make_builder(i))) {
                     possibility_to_pay = possibility_token_pay(players[current_player], make_builder(i));
                     index = i;
@@ -96,7 +98,7 @@ int main(int argc, char *argv[]){
         }
         printf("===============================: \n");
         printf("Market display: \n");
-        market_display();
+       // market_display();
         printf("===============================: \n");
         printf("this is the possibility %d\n", possibility_to_pay);
 
