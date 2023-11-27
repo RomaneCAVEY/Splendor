@@ -19,7 +19,7 @@ struct guild{
     int nb_builder;
     struct builder_t* builders[MAX_BUILDERS]; //All the builder of the beginning
     struct builder_t* builder_available[MAX_BUILDERS];// The MAX_BUILDER_PER_LEVEL we can pick each turn
-    struct stack_t stack[MAX_BUILDERS];
+    struct stack_t stack[NUM_LEVELS];
 };
 
 void init_guild();
@@ -38,4 +38,6 @@ int guild_nbr_builder();
 void remove_builders_from_guild(struct builder_t * builder);
 
 struct builder_t * guild_builder_in_guild(unsigned index);
+
+void guild_display();
 #endif

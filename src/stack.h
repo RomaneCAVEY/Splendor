@@ -17,13 +17,16 @@
 
 struct stack_t{
     int nb;
-    int first;
+    int head;
     void* values[MAX_BUILDERS];
 };
 
-void* pop( struct stack_t stack);
+
+struct stack_t stack_empty();
+
+void* pop( struct stack_t *stack);
 
 
-void push(struct stack_t stack, void* elem);
+void push(struct stack_t *stack, void* elem);
 
 #endif

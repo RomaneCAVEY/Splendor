@@ -20,17 +20,20 @@ Init the guild with random value for builders
 void init_guild() {
     guild.nb_builder = num_builders();
     for (unsigned int i = 0; i < guild.nb_builder; ++i) {
-         guild.builders[i]= make_builder(i);
+        if(make_builder(i)){
+            guild.builders[i]= make_builder(i);
+        }
     }
     for (int i = 0; i < NUM_LEVELS; ++i) {
         for (int j = 0; j < guild.nb_builder; ++j) {
-            if (builder_level(guild.builders[j])==i){
-                push(guild.stack[i], guild.builders[j]);
-        }  
+            if (builder_level(guild.builders[j])==i && guild.builders[j]){
+                push(&guild.stack[i], guild.builders[j]);
+        }
+    guild.stack[i].head=0;
     }
     for (int level = 0; level <NUM_LEVELS; ++level) {
         for (int k = 0; k < MAX_BUILDERS_AVAILABLE_PER_LVL; ++k) {
-            guild.builder_available[level*MAX_BUILDERS_AVAILABLE_PER_LVL+k]=pop(guild.stack[level]);
+            guild.builder_available[level*MAX_BUILDERS_AVAILABLE_PER_LVL+k]=pop(&guild.stack[level]);
 
          }
     }
@@ -53,11 +56,11 @@ void remove_builders_from_guild(struct builder_t * builder) {
         i++;
     }
     int next=0;
-    while (!pop(guild.stack[level]) && next< MAX_BUILDERS){
-        guild.builder_available[level*MAX_BUILDERS_AVAILABLE_PER_LVL] = pop(guild.stack[(level + next)%NUM_LEVELS]);
+    while (!pop(&guild.stack[level]) && next< MAX_BUILDERS){
+        guild.builder_available[level*MAX_BUILDERS_AVAILABLE_PER_LVL] = pop(&guild.stack[(level + next)%NUM_LEVELS]);
         next++;
     }
-    guild.builder_available[level*MAX_BUILDERS_AVAILABLE_PER_LVL] = pop(guild.stack[level]);
+    guild.builder_available[level*MAX_BUILDERS_AVAILABLE_PER_LVL] = pop(&guild.stack[level]);
     guild.nb_builder -=1;
 }
 
@@ -66,4 +69,12 @@ void remove_builders_from_guild(struct builder_t * builder) {
 
 struct builder_t * guild_builder_in_guild(unsigned index) {
     return guild.builder_available[index];
+}
+
+
+void guild_display(){
+    for (unsigned int i=0; i< guild.nb_builder; i++)
+        if(guild.builder_available[i]){
+            builder_display(guild.builder_available[i], "this builder belongs to the market");
+        }
 }

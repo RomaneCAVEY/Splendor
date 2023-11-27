@@ -1,19 +1,32 @@
 #include "stack.h"
-void* pop( struct stack_t stack)
+#include "builder.h"
+#include <stdio.h>
+
+struct stack_t stack_empty(){
+    struct stack_t stack={};
+    return stack;
+}
+
+void* pop( struct stack_t *stack)
 {
-    if (stack.nb == 0)
+    if (stack->nb == 0)
     {
         return NULL;
     }
-    return stack.values[stack.first];
+    stack->nb--;
+    void* out= stack->values[stack->head];
+    stack->head--;
+    return out;
 }
 
 
-void push(struct stack_t stack, void* elem)
+void push(struct stack_t *stack, void* elem)
 {
-   int i=0;
-   while (stack.values[i]!= NULL){
-    i++;
-   }
-   stack.values[i]=elem;
+    if (stack->nb < (MAX_BUILDERS-1)){
+        stack->head++;
+        stack->values[stack->head]=elem;
+    }
+    else {
+        printf("stack mistake in push function");
+    }
 }

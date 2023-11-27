@@ -1,21 +1,13 @@
 #include "builder.h"
-
 #include "guild.h"
 #include "token.h"
-
 #include "market.h"
 #include "color.h"
-
 #include "player.h"
-
 #include "game.h"
-
 #include "second_token.h"
-
 #include "second_builder.h"
-
 #include <stdio.h>
-
 #include <stdlib.h>
 #include <threads.h>
 #include <time.h>
@@ -29,63 +21,66 @@
 struct player players[NB_PLAYERS];
 
 int main(int argc, char *argv[]){
-           int max_turn;
-           int seed;
-           int seed_builder;
-           int opt;
 
-           max_turn = 0;
-           seed = 0;
-           seed_builder = 0;
-           while ((opt= getopt(argc, argv, "s:m:c:"))!=(-1)) {
-               switch (opt) {
-               case 's':
-                   seed= atoi(optarg);
-                   break;
-               case 'm':
-                   max_turn = atoi(optarg);
-                   break;
-                case 'c':
-                   seed_builder = atoi(optarg);
-                   break;
-                   
-               default: /* '?' */
-                   fprintf(stderr, "Usage: %s [-s seed] [-m max_turn]  [-c seed_builder] \n",
-                           argv[0]);
-                   exit(EXIT_FAILURE);
-               }
-           }
+    int max_turn;
+    int seed;
+    int seed_builder;
+    int opt;
 
-           printf("max_turn=%d; seed=%d; seed_builder=%d \n",
-                  max_turn, seed, seed_builder );
-
-           if (optind < argc) {
-               fprintf(stderr, "Expected argument after options \n");
-               exit(EXIT_FAILURE);
-           }
-
-    srand(seed);
-
+    max_turn = 0;
+    seed = 0;
+    seed_builder = 0;
+    while ((opt= getopt(argc, argv, "s:m:c:"))!=(-1)) {
+        switch (opt) {
+            case 's':
+                seed= atoi(optarg);
+                break;
+            case 'm':
+                max_turn = atoi(optarg);
+                break;
+            case 'c':
+                seed_builder = atoi(optarg);
+                break;
+                
+            default: /* '?' */
+                fprintf(stderr, "Usage: %s [-s seed] [-m max_turn]  [-c seed_builder] \n",
+                        argv[0]);
+                exit(EXIT_FAILURE);
+        }
+    }
+    if (optind >= argc) {
+        fprintf(stderr, "Expected argument after options\n");
+        exit(EXIT_FAILURE);
+    }
+    printf("max_turn=%d; seed=%d; seed_builder=%d \n", max_turn, seed, seed_builder );
+    printf("here");
+   // srand(seed);
     //Init player
     for (int i = 0; i < NB_PLAYERS; i++) {
         players[i] = init_player();
         players[i].index = i;
     }
     int current_player = (get_random_player(NB_PLAYERS));
-    
     //Init market and guild    
-    init_all_tokens(); //comment initialiser les tokens
-    init_builders(seed_builder); // Use seed 0 at the beginning of a game   // Same thing
-    init_guild(); // il faut initialiser les guild;
-    init_market();
+    int permutation[NUM_TOKENS]={};
+    for (unsigned int i=0; i< NUM_TOKENS; i++){
+        permutation[i]=(i+4)%NUM_TOKENS;
+    }
+    init_all_tokens(); // Init all_tokens
+    init_builders(seed_builder); // Use seed 0 at the beginning of a game  
+    init_guild(); // init the guild
+    init_market(permutation);
     int nb_turns_not_played = 0;
     int nb_turns = 0;
-
+    printf("initialisation over");
     while (!(has_won(players) && (nb_turns_not_played < 2)) && nb_turns < max_turn) {
         printf("This is the turn %d \n", nb_turns);
         printf("this is the points %d of the current player, player %d\n", players[current_player].points,current_player);
         int index;
         int possibility_to_pay=0;
+        printf("guild_nbr_builder %d", guild_nbr_builder());
+        printf("guild display \n \n");
+        guild_display();
         for ( int i = guild_nbr_builder(); i>0 ; i--) {
          //printf("n \n This the market at turn %d \n", nb_turns);
             if (guild_available_builder(i)) {
@@ -127,7 +122,7 @@ int main(int argc, char *argv[]){
                             add+=1;
                         }
                     }
-                    printf("Player display of player %d", current_player);
+                    printf("Player display of player %d \n", current_player);
                     player_display(players[current_player]);
                     printf("\n");
                 }

@@ -14,26 +14,14 @@
 struct market market={};
 
 
-void init_market() {
+void init_market(int permutation[NUM_TOKENS]) {
     market.nbr_token = NUM_TOKENS;
     /*init the playing_board*/
-    srand(SEED);
-    int tokens_available[NUM_TOKENS]={};
     for (unsigned int i=0; i< NUM_TOKENS; i++){
-        int a= rand() % NUM_TOKENS;
-        while (!tokens_available[a]){
-            a= rand() % NUM_TOKENS;
-        }
-        market.playing_board[i]= token_get_adress(a);
-        tokens_available[a]=1;
+        market.permutation[i]= permutation[i];
     }
-    /*permutation is a permutation of the cases , we have to fill it in that order when we push a token in the market*/
-     for (unsigned int i=0; i< NUM_TOKENS; i++){
-        int a= rand() % NUM_TOKENS;
-        while (!market.permutation[i]){
-            a= rand() % (NUM_TOKENS-1)+1;
-        }
-
+    for (unsigned int i=0; i< NUM_TOKENS; i++){
+        market.playing_board[i]= token_get_adress(permutation[i]);
     }
 }
 

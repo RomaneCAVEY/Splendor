@@ -18,8 +18,7 @@ struct market{
     int permutation[NUM_TOKENS];
 };
 
-void init_market();
-
+void init_market(int permutation[NUM_TOKENS]);
 int market_nbr_token();
 
 void remove_token_from_market(struct token_t * token);
