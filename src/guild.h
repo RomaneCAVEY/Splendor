@@ -23,7 +23,9 @@ struct guild{
 };
 
 void init_guild();
-
+/** Add the builder bought in the guild to the player_builder
+ */
+void add_from_guild(int index, struct player players[NB_PLAYERS] , int current_player);
 /**
 Init the guild with random value for builders
 */
@@ -35,9 +37,19 @@ Return 1 if the builder is available in the guile, else 0
 struct builder_t* guild_available_builder(int i);
 int guild_nbr_builder();
 
+/**
+Remove the buider we bought from the guild, pick another one to complete the guild, with a builder
+of the same level if it's possible
+*/
 void remove_builders_from_guild(struct builder_t * builder);
 
 struct builder_t * guild_builder_in_guild(unsigned index);
-
+/**
+Display the available builders of the guild
+*/
 void guild_display();
+
+/** Add the builder bought in the guild to the player_builder
+ */
+void add_from_guild(int index, struct player players[NB_PLAYERS] , int current_player);
 #endif

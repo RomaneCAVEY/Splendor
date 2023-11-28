@@ -59,7 +59,7 @@ void market_display() {
     for (i=0; i< NUM_TOKENS; i++){
         if ( market.playing_board[i])
         {
-            token_display( *market.playing_board[i], " \n voici le token suivant");
+            token_display( *market.playing_board[i], " this token belongs to the market \n");
         }
     }
 }

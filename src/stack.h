@@ -18,15 +18,17 @@
 struct stack_t{
     int nb;
     int head;
-    void* values[MAX_BUILDERS];
+    struct builder_t* values[MAX_BUILDERS];
 };
 
 
 struct stack_t stack_empty();
 
-void* pop( struct stack_t *stack);
+struct builder_t* stack_pop( struct stack_t *stack);
 
 
-void push(struct stack_t *stack, void* elem);
+void stack_push(struct stack_t *stack, void* elem);
+
+void stack_display(struct stack_t stack);
 
 #endif
