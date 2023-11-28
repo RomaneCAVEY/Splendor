@@ -2,7 +2,6 @@
 #define __GAME_H__
 
 
-#include "token.h"
 #include "builder.h"
 #include "token.h"
 #include "color.h"
@@ -12,7 +11,6 @@
 #include <time.h>
 #include <string.h>
 
-<<<<<<< HEAD
 #ifndef MAX_BUILDERS_AVAILABLE_PER_LVL
 #define MAX_BUILDERS_AVAILABLE_PER_LVL 3
 #endif
@@ -22,27 +20,6 @@
     struct builder_t* stack[MAX_BUILDERS];
     int nbr_stack;
 };
-
-
-struct guild{
-    int nbr_builder;
-    struct builder_stack builder_in_guild[NUM_LEVELS];
-};
-
-
-void init_guild();
-void init_market();
-int guild_nbr_builder();
-
-
-
-/*
-Init NUM_TOKENS tokens
-*/
-void init_tokens_from_builers();
-=======
-
->>>>>>> achiev1
 
  /*return NULL if the player can't pay for a builder or return 1 if the player can pay the exact price or return 2*/
 int possibility_token_pay(struct player player, struct builder_t* builder );

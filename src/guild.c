@@ -1,17 +1,4 @@
 #include "guild.h"
-#include "game.h"
-#include "market.h"
-#include "stack.h"
-#include "token.h"
-#include "builder.h"
-#include "token.h"
-#include "color.h"
-#include "second_builder.h"
-#include "second_token.h"
-#include "player.h"
-#include <stdio.h>
-#include <time.h>
-#include <string.h>
 
 struct guild guild={};
 /**

@@ -1,7 +1,8 @@
 #include "game.h"
 #include "market.h"
-#include "guild.h"
 #include "second_token.h"
+#include "set.h"
+#include "token.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -13,23 +14,29 @@ Remove token
 */
 void remove_token(struct player players[NB_PLAYERS] , struct token_t *token, int current_player) {
     int i=0;
-    while(token_equals(*players[current_player].player_token[i], *token)){
+    while(token_equals(*players[current_player].player_token[i], *token) && i<NUM_TOKENS){
         i++;
     }
-    players[current_player].player_token[i] = NULL;
+    if (i<NUM_TOKENS){
+        players[current_player].player_token[i] = NULL;
+    }
+    else{
+        printf("the token wasnt' found");
+    }
 }
+    
 
 /*return NULL if the player can't pay for a builder or return 1 if the player can pay the exact price or return 2*/
 int possibility_token_pay(struct player player, struct builder_t * b) {
     if(b){
 
-        struct buildcost_t cost = builder_requires(b);
+        struct set_t cost= builder_requires(b);
         unsigned int count_desired_color = 0;
         unsigned int count_just_desired_color = 0;
 
         //tmp variable used in the loop
         struct token_t * token ;
-        struct buildcost_t buildcost;
+        struct set_t buildcost;
 
 
         // Try to pay with the builders of the player

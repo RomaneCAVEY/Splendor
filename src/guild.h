@@ -8,6 +8,7 @@
 #include "token.h"
 #include "color.h"
 #include "stack.h"
+#include "game.h"
 #include "second_builder.h"
 #include "player.h"
 #include <stdio.h>
