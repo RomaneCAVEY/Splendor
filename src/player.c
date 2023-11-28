@@ -27,7 +27,6 @@ int has_won(struct player players[NB_PLAYERS]) {
 Give the index of the player in players
 */
 int get_random_player(int size) {
-    srand(time(NULL));
     int random = rand() % size;
     return random;
 
@@ -42,10 +41,34 @@ int next_player(int size, int current) {
 
 
 void player_display(struct player player){
+    printf("This is what the player owns \n");
+    printf("=======================================\n");
     for (int i=0; i< player.nbr_token; ++i){
         token_display(*player.player_token[i], "\n -");
     }
     for (int i=0; i< player.nbr_builder; ++i){
         builder_display(player.player_builder[i], "\n -");
+    }
+    printf("=======================================\n");
+}
+
+int winner(struct player players[NB_PLAYERS]){
+    if (players[0].points >= VICTORY_POINTS) {
+        printf("Victory of player 0 with %d points \n", players[0].points);
+        return 0;
+    }
+    if (players[1].points >= VICTORY_POINTS) {
+        printf("Victory of player 1 with %d points \n", players[1].points);
+        return 0;
+    }
+    else{
+        if (players[1].points>players[0].points){
+            printf("Victory of player 1 with %d points \n", players[1].points);
+            return 0;
+        }
+        else{
+            printf("Victory of player 0 with %d points \n", players[0].points);
+            return 0;
+        }
     }
 }
