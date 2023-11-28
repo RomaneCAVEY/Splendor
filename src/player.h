@@ -53,4 +53,9 @@ Display the builders and tokens of the player
 */
 void player_display(struct player player);
 
+/**
+Give the winner of the game if he exists
+*/
+int winner(struct player players[NB_PLAYERS]);
+
 #endif
