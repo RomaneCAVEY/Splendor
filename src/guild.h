@@ -3,17 +3,15 @@
 
 
 #include"market.h"
-#include "token.h"
-#include "builder.h"
-#include "token.h"
-#include "color.h"
 #include "stack.h"
-#include "game.h"
-#include "second_builder.h"
 #include "player.h"
 #include <stdio.h>
 #include <time.h>
 #include <string.h>
+
+#ifndef MAX_BUILDERS_AVAILABLE_PER_LVL
+#define MAX_BUILDERS_AVAILABLE_PER_LVL 3
+#endif
 
 
 struct guild{

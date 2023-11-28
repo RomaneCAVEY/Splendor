@@ -2,10 +2,7 @@
 #define __GAME_H__
 
 
-#include "builder.h"
-#include "token.h"
-#include "color.h"
-#include "second_builder.h"
+#include "guild.h"
 #include "player.h"
 #include <stdio.h>
 #include <time.h>
