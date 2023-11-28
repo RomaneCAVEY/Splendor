@@ -1,6 +1,8 @@
 #include "market.h"
+#include "token.h"
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 #include <string.h>
 
@@ -19,12 +21,21 @@ void init_market() {
 }
 
 
+struct token_t* make_market(int index){
+    return market.playing_board[index];
+}
 
 int market_nbr_token() {
     return market.nbr_token;
 }
-
-
+/**
+Replace the token j to i, token at place i is free
+*/
+void market_moove_i_to_j(int i, int j){
+    market.playing_board[i]=market.playing_board[j];
+    remove_token_from_market(market.playing_board[j]);
+    market.nbr_token+=1;
+}
 
 void remove_token_from_market(struct token_t * token){
     for (int i=0; i<NUM_TOKENS; i++){
@@ -44,6 +55,15 @@ void add_token_to_market(struct token_t * token) {
     market.nbr_token = market.nbr_token + 1;
 
 }
+
+
+int market_token_is_available(int i){
+    if(market.playing_board[i]){
+        return 1;
+    }
+    return 0;
+}
+
 
 /* Display the market
 */

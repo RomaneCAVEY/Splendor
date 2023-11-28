@@ -40,7 +40,7 @@ int possibility_token_pay(struct player player, struct builder_t * b) {
             
             if(player.player_builder[i]){
                 buildcost=builder_provides(player.player_builder[i]);
-                if (buildcost.c== cost.c){
+                if (player.player_builder[]){
                     count_desired_color += cost.c;
                     count_just_desired_color+= cost.c;
 

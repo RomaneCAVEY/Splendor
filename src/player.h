@@ -9,8 +9,6 @@
 
 #include "builder.h"
 #include "token.h"
-#include "second_builder.h"
-#include "second_token.h"
 #include "color.h"
 #include <stdio.h>
 #include <time.h>
@@ -55,9 +53,10 @@ Display the builders and tokens of the player
 */
 void player_display(struct player player);
 
-/**
+/** 
 Give the winner of the game if he exists
 */
 int winner(struct player players[NB_PLAYERS]);
+
 
 #endif

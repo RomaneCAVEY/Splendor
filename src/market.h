@@ -3,6 +3,8 @@
 
 #include "permutation.h"
 #include "player.h"
+#include "second_token.h"
+#include "token.h"
 #include <stdio.h>
 #include <time.h>
 #include <string.h>
@@ -14,6 +16,7 @@ struct market{
 };
 
 void init_market();
+
 int market_nbr_token();
 
 void remove_token_from_market(struct token_t * token);
@@ -35,5 +38,12 @@ int tokens_connex(int index, int nbr_token,int current_player);
 
 /*return the number of available tokens*/
 int tokens_neighbour(int index);
+
+
+
+struct token_t* make_market(int index);
+
+void market_replace(int i, int j);
+
 
 #endif

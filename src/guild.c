@@ -1,4 +1,8 @@
 #include "guild.h"
+#include "builder.h"
+#include "player.h"
+#include "second_builder.h"
+#include "token.h"
 
 struct guild guild={};
 /**
@@ -60,8 +64,6 @@ void remove_builders_from_guild(struct builder_t * builder) {
 }
 
 
-
-
 struct builder_t * guild_builder_in_guild(unsigned index) {
     return guild.builder_available[index];
 }
@@ -91,3 +93,6 @@ void add_from_guild(int index, struct player players[NB_PLAYERS] , int current_p
     players[current_player].points += builder_points(guild.builder_available[index]);
     players[current_player].nbr_builder += 1;
 }
+
+
+
