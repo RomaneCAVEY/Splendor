@@ -14,14 +14,14 @@
 struct market market={};
 
 
-void init_market(int permutation[NUM_TOKENS]) {
+void init_market() {
     market.nbr_token = NUM_TOKENS;
     /*init the playing_board*/
     for (unsigned int i=0; i< NUM_TOKENS; i++){
-        market.permutation[i]= permutation[i];
+        market.permutation[i]= make_permutation(i);
     }
     for (unsigned int i=0; i< NUM_TOKENS; i++){
-        market.playing_board[i]= token_get_adress(permutation[i]);
+        market.playing_board[i]= token_get_adress(make_permutation(i));
     }
 }
 
