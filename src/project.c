@@ -5,6 +5,7 @@
 #include "color.h"
 #include "player.h"
 #include "game.h"
+#include "permutation.h"
 #include "second_token.h"
 #include "second_builder.h"
 #include <stdio.h>
@@ -60,14 +61,11 @@ int main(int argc, char *argv[]){
     }
     int current_player = (get_random_player(NB_PLAYERS));
     //Init market and guild    
-    int permutation[NUM_TOKENS]={};
-    for (unsigned int i=0; i< NUM_TOKENS; i++){
-        permutation[i]=(i+4)%NUM_TOKENS;
-    }
+    init_permutation();
     init_all_tokens(); // Init all_tokens
     init_builders(seed_builder); // Use seed 0 at the beginning of a game  
     init_guild(); // init the guild
-    init_market(permutation);
+    init_market();
     int nb_turns_not_played = 0;
     int nb_turns = 0;
     printf("initialisation over \n");

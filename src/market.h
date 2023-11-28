@@ -1,7 +1,7 @@
 #ifndef __MARKET_H__
 #define __MARKET_H__
 
-
+#include "permutation.h"
 #include "player.h"
 #include <stdio.h>
 #include <time.h>
@@ -13,7 +13,7 @@ struct market{
     int permutation[NUM_TOKENS];
 };
 
-void init_market(int permutation[NUM_TOKENS]);
+void init_market();
 int market_nbr_token();
 
 void remove_token_from_market(struct token_t * token);
