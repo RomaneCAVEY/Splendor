@@ -1,8 +1,4 @@
 #include "game.h"
-#include "market.h"
-#include "second_token.h"
-#include "set.h"
-#include "token.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
