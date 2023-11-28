@@ -5,7 +5,7 @@
 
 /** The maximum level for a builder */
 #ifndef NUM_LEVELS
-  #define NUM_LEVELS 2
+  #define NUM_LEVELS 2    
 #endif
 
 /** The maximum number of builders */
