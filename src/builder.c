@@ -30,7 +30,7 @@ unsigned int nb_builders;
 Can be called multiple times. Can also do nothing. */
 void init_builders(unsigned int seed) {
     srand(seed);
-    nb_builders = 5 + (rand() % (MAX_BUILDERS - 5)); //To have at least 5 builders
+    nb_builders =(rand() % (MAX_BUILDERS ));
     printf("HERE IS THE NUMBER OF BUILDERS: %d \n",nb_builders);
     for (unsigned int i = 0; i < nb_builders; ++i) {
         game_builders[i].level = rand() % NUM_LEVELS;

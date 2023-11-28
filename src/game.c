@@ -13,11 +13,17 @@ Remove token
 */
 void remove_token(struct player players[NB_PLAYERS] , struct token_t *token, int current_player) {
     int i=0;
-    while(token_equals(*players[current_player].player_token[i], *token)){
+    while(token_equals(*players[current_player].player_token[i], *token) && i<NUM_TOKENS){
         i++;
     }
-    players[current_player].player_token[i] = NULL;
+    if(i==NUM_TOKENS){
+        players[current_player].player_token[i] = NULL;
+    }
+    else {
+        printf("there are a problem");
+    }
 }
+    
 
 /*return NULL if the player can't pay for a builder or return 1 if the player can pay the exact price or return 2*/
 int possibility_token_pay(struct player player, struct builder_t * b) {
@@ -138,5 +144,3 @@ void pick_a_token(int current_player, struct player players[NB_PLAYERS], int a){
     remove_token_from_market(token_in_market_is_available(a));
 
 }
-
-                           
