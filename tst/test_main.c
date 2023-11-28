@@ -104,14 +104,6 @@ int test_token_use(){
 
 }
 
-int test_new_market(int seed){
-    srand(seed);
-    int permutation[NUM_TOKENS]={};
-    for (unsigned int i=0; i< NUM_TOKENS; i++){
-        permutation[i]=(i+4)%NUM_TOKENS;
-    }
-    init_market(int *permutation);
-    return 1
-}
+
 
 #endif
