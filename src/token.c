@@ -12,23 +12,23 @@
 
 
 
-
+  /*Token.c*/
 struct token_t create_simple_token(enum color_t c) {
     struct token_t token;
     for (int i = 0; i < NUM_COLORS; ++i) {
-        token.c[i] = 0;
+        token.s.ressource[i] = 0;
     }
-    token.c[c] = 1;
+    token.s.ressource[c] = 1;
     return token;
     /*for (int i=0; i<NUM_COLORS; ++i){
         printf("%d",token.c[i]);
     }*/
 }
 
-struct token_t create_complex_token(unsigned int c[NUM_COLORS]) {
+struct token_t create_complex_token(struct set_t s) {
     struct token_t token;
     for (int i = 0; i < NUM_COLORS; ++i) {
-        token.c[i] = c[i];
+        token.s.ressource[i] = s.ressource[i];
     }
     return token;
 }
@@ -37,7 +37,7 @@ struct token_t create_complex_token(unsigned int c[NUM_COLORS]) {
     telling whether they are equal or different. */
 int token_equals(const struct token_t t1, const struct token_t t2) {
     for (int i = 0; i < NUM_COLORS; ++i) {
-        if (t1.c[i] != t2.c[i]) {
+        if (t1.s.ressource[i] != t2.s.ressource[i]) {
 
             return 0;
 
@@ -53,8 +53,8 @@ int token_equals(const struct token_t t1, const struct token_t t2) {
 void token_display(struct token_t t, const char * prefix) {
     printf("%s Token (", prefix);
     for (int i = 0; i < NUM_COLORS; ++i) {
-            if (t.c[i]) {
-                printf(" ( %s = %d) , ", color_to_short_string(i), t.c[i]);
+            if (t.s.ressource[i]) {
+                printf(" ( %s = %d) , ", color_to_short_string(i), t.s.ressource[i]);
                 //printf(" with the following address: %p", &t);
             }
     }

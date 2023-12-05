@@ -1,25 +1,16 @@
 #include "builder.h"
-
-#include "color.h"
-
-#include "game.h"
-#include "token.h"
-
-#include "player.h"
-
 #include <stdio.h>
-
 #include <stdlib.h>
-
 #include <time.h>
 
-#include "second_builder.h"
+#ifndef VICTORY_POINTS
+#define VICTORY_POINTS 20
 
 struct builder_t{
     char level;
     int points;
-    struct buildcost_t ressource;
-    struct buildcost_t production;
+    struct set_t ressource;
+    struct set_t production;
 
 };
 
@@ -35,10 +26,10 @@ void init_builders(unsigned int seed) {
     for (unsigned int i = 0; i < nb_builders; ++i) {
         game_builders[i].level = rand() % NUM_LEVELS;
         game_builders[i].points = rand() % (VICTORY_POINTS/2);
-        game_builders[i].ressource.c = rand() % NUM_COLORS;
-        game_builders[i].ressource.n = rand() % 2 + 1;
-        game_builders[i].production.c = rand() % NUM_COLORS;
-        game_builders[i].production.n = rand() % 3 + 1;
+        game_builders[i].ressource.ressource[rand() % NUM_COLORS]+=1;
+        game_builders[i].ressource.ressource[rand() % NUM_COLORS]+=1;
+        game_builders[i].production.ressource[rand() % NUM_COLORS]+=1;
+        game_builders[i].production.ressource[rand() % NUM_COLORS]+=1;
     }
 }
 
@@ -68,12 +59,12 @@ unsigned int builder_points(const struct builder_t * g) {
 }
 
 /** Returns the cost that must be payed in order to hire this builder. */
-struct buildcost_t builder_requires(const struct builder_t * g) {
+struct set_t builder_requires(const struct builder_t * g) {
     return g -> ressource;
 }
 
 /** Returns the cost of the tokens that can be produced by this builder. */
-struct buildcost_t builder_provides(const struct builder_t * g) {
+struct set_t builder_provides(const struct builder_t* g){
     return g -> production;
 }
 
@@ -87,7 +78,25 @@ struct buildcost_t builder_provides(const struct builder_t * g) {
 void builder_display(const struct builder_t * g, const char * prefix) {
     //printf("%p \n", &g);
     if (g) {
-        printf("%s Builder(lvl= %d, cost=%d %s, prod= %d %s, points = %d) \n \n", prefix, g -> level, g -> ressource.n, color_to_short_string(g -> ressource.c), g -> production.n, color_to_short_string(g -> production.c), g->points);
+        printf("%s Builder(lvl= %d, cost= ( ",prefix, g -> level);
+        for (unsigned int i=0; i<NUM_COLORS; ++i){
+            if (g -> ressource.ressource[i]>0){
+                printf("(%d=%s),",  g -> ressource.ressource[i], color_to_short_string(g -> ressource.ressource[i]));
+
+            }
+
+        }
+        printf(")    ");
+        printf(", prod: {");
+         for (unsigned int i=0; i<NUM_COLORS; ++i){
+            if (g -> ressource.ressource[i]>0){
+                printf("(%d= %s),",  g -> production.ressource[i], color_to_short_string(g -> production.ressource[i]));
+            }
+
+        }
+        printf("}  ");
+        printf(" ,points = %d) \n \n", g->points);
     }
 }
 
+#endif

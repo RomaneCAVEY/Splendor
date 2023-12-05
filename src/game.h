@@ -2,11 +2,7 @@
 #define __GAME_H__
 
 
-#include "token.h"
-#include "builder.h"
-#include "token.h"
-#include "color.h"
-#include "second_builder.h"
+#include "guild.h"
 #include "player.h"
 #include <stdio.h>
 #include <time.h>
@@ -14,11 +10,18 @@
 
 
 
- /*return NULL if the player can't pay for a builder or return 1 if the player can pay the exact price or return 2*/
+ struct builder_stack{
+    struct builder_t* stack[MAX_BUILDERS];
+    int nbr_stack;
+};
+
+ /*return NULL if the player can't pay for a buider
+ return 4 if he can use only his own builders
+ return 1 if he can pay*/
 int possibility_token_pay(struct player player, struct builder_t* builder );
 
 /**
-    Pay the builder with the tokens of the player
+    Pay the builder with the tokens and th builders of the player
 */
 int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int current_player);
 

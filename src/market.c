@@ -1,11 +1,4 @@
 #include "market.h"
-#include "token.h"
-#include "builder.h"
-#include "token.h"
-#include "color.h"
-#include "second_builder.h"
-#include "second_token.h"
-#include "player.h"
 #include <math.h>
 #include <stdio.h>
 #include <time.h>

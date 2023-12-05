@@ -21,14 +21,25 @@ struct stack_t{
     struct builder_t* values[MAX_BUILDERS];
 };
 
-
+/**
+Return an empty stack
+*/
 struct stack_t stack_empty();
 
+/**
+Pop a builder from the stack
+*/
 struct builder_t* stack_pop( struct stack_t *stack);
 
-
+/**
+Push a builder in the stack
+*/
 void stack_push(struct stack_t *stack, void* elem);
 
+
+/**
+Display the builders who are in the stack
+*/
 void stack_display(struct stack_t stack);
 
 #endif

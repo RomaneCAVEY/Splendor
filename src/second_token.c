@@ -3,6 +3,7 @@
 #include <stdio.h>
 
 #include <string.h>
+#include "set.h"
 #include "token.h"
 #include "builder.h"
 
@@ -18,9 +19,7 @@ struct token_t* token_get_adress(int i) {
 
 
 
-// Initialiser les tokens
 void init_all_tokens() {
-    srand(SEED);
     for (int i = 0; i < NUM_TOKENS; ++i) {
         if (rand() % 2 == 0) {
             struct token_t t = create_simple_token(rand() % NUM_COLORS);
@@ -28,9 +27,9 @@ void init_all_tokens() {
 
         } 
         else {
-            unsigned int c[NUM_COLORS]={};
-            c[rand() % NUM_COLORS] = 1;
-            c[rand() % NUM_COLORS] += 1;
+           struct set_t c={};
+            c.ressource[rand() % NUM_COLORS]= 1;
+            c.ressource[rand() % NUM_COLORS] += 1;
             struct token_t t = create_complex_token(c);
             all_tockens[i] = t;
 
@@ -51,7 +50,7 @@ struct token_t * make_token(unsigned int index) {
 int is_complex(struct token_t * t) {
     int count = 0;
     for (int i = 0; i < NUM_COLORS; ++i) {
-        count = count + t -> c[i];
+        count+= t -> s.ressource[i];
         if (count > 1) return 1;
     }
     return 0;
