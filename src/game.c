@@ -56,9 +56,7 @@ int possibility_token_pay(struct player player, struct builder_t * b) {
                 buildcost=builder_provides(player.player_builder[i]);
                 //Browse the table of the set of buildcost
                 for (unsigned int k=0;k<NUM_TOKENS; k++){
-                    if (buildcost.ressource[k]){
                         count_color[k] +=buildcost.ressource[k];
-                    }
                 }
 
             }
@@ -110,15 +108,14 @@ int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int
     struct set_t buildcost;
 
 
-    //Pay what you can wth the builder
+    //Pay what you can with the builder
         for (int i = 0; i <MAX_BUILDERS; ++i){
             if(players[current_player].player_builder[i]){
                 buildcost=builder_provides(players[current_player].player_builder[i]);
                 //Browse the table of the set of buildcost
                 for (unsigned int k=0;k<NUM_TOKENS; k++){
-                    if (buildcost.ressource[k]){
                         count_color[k] +=buildcost.ressource[k];
-                    }
+                
                 }
 
             }
