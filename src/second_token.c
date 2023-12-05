@@ -20,7 +20,6 @@ struct token_t* token_get_adress(int i) {
 
 
 void init_all_tokens() {
-    srand(SEED);
     for (int i = 0; i < NUM_TOKENS; ++i) {
         if (rand() % 2 == 0) {
             struct token_t t = create_simple_token(rand() % NUM_COLORS);
@@ -28,7 +27,7 @@ void init_all_tokens() {
 
         } 
         else {
-           struct set_t c;
+           struct set_t c={};
             c.ressource[rand() % NUM_COLORS]= 1;
             c.ressource[rand() % NUM_COLORS] += 1;
             struct token_t t = create_complex_token(c);

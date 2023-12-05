@@ -6,19 +6,32 @@
 #include <string.h>
 
 
-/***
+
+/**
 Remove token
 */
 void remove_token(struct player players[NB_PLAYERS] , struct token_t *token, int current_player) {
-    int i=0;
-    while(token_equals(*players[current_player].player_token[i], *token) && i<NUM_TOKENS){
-        i++;
+    //token_display(*token, "THE ONE WE WANT TO DELETE");
+    int verif=1;
+    int index=0;
+    for (int i=0; i<NUM_TOKENS;i++){
+        while (!players[current_player].player_token[i] && i<NUM_TOKENS){
+           i+=1;
+        }
+        if (i<NUM_TOKENS){
+            verif= token_equals(*players[current_player].player_token[i], *token);
+            if (verif){
+                index=i;
+            }
+        }
     }
-    if (i<NUM_TOKENS){
-        players[current_player].player_token[i] = NULL;
+
+    if(index<NUM_TOKENS){
+       // token_display( *players[current_player].player_token[i],"FIND: \n \n");
+        players[current_player].player_token[index] = NULL;
     }
-    else{
-        printf("the token wasnt' found");
+    else {
+        printf("there is a problem!!!!!!!!!!! This token doesn't exist");
     }
 }
     
@@ -49,15 +62,14 @@ int possibility_token_pay(struct player player, struct builder_t * b) {
                 }
 
             }
-            int count=0;
-            for (int i = 0; i <NUM_COLORS; ++i){
-                if (count_color[i]==cost_color.ressource[i]){
-                    count+=1;
-                }
+        }
+        for (int i = 0; i <NUM_COLORS; ++i){
+            if (count_color[i]==cost_color.ressource[i]){
+                count+=1;
             }
-            if (count==NUM_COLORS){
-                return 4;
-            }
+        }
+        if (count==NUM_COLORS){
+            return 4;
         }
 
         // Try to pay the rest with the tokens of the player
@@ -82,21 +94,35 @@ int possibility_token_pay(struct player player, struct builder_t * b) {
 }
 
 
-
 //Pay the builder with the tokens of the player, remove the token used to pay and put the token on the market
 int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int current_player) {
     if (possibility_token_pay(players[current_player], builder)==4){
         return 1;
     }
+
     
     struct set_t cost_color= builder_requires(builder);
     //tmp variable used in the loop to know the cost of the builder
     unsigned int count_color[NUM_COLORS]={};
-    int count=0;
 
     //tmp variable used in the loop
     struct token_t * token ;
     struct set_t buildcost;
+
+
+    //Pay what you can wth the builder
+        for (int i = 0; i <MAX_BUILDERS; ++i){
+            if(players[current_player].player_builder[i]){
+                buildcost=builder_provides(players[current_player].player_builder[i]);
+                //Browse the table of the set of buildcost
+                for (unsigned int k=0;k<NUM_TOKENS; k++){
+                    if (buildcost.ressource[k]){
+                        count_color[k] +=buildcost.ressource[k];
+                    }
+                }
+
+            }
+        }
 
     // Pay the rest with the tokens of the player
     for (int i = 0; i <NUM_TOKENS; ++i){
@@ -114,9 +140,9 @@ int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int
                 for (unsigned int k=0; k<NUM_COLORS;k++){
                     count_color[k]+=token->s.ressource[k];
                 }
-                    add_token_to_market(players[current_player].player_token[i]);
-                    remove_token(players, players[current_player].player_token[i], current_player);
-                    }
+                add_token_to_market(players[current_player].player_token[i]);
+                remove_token(players, players[current_player].player_token[i], current_player);
+            }
                 //Check if we reach the cost of the builder already
                 for (unsigned int i=0; i<NUM_COLORS;i++){
                     if(count_color[i]<cost_color.ressource[i]){
@@ -128,10 +154,10 @@ int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int
                 if (verif){
                     return 1;
                 }
-                }
+        
+        }
     }
-            
-        return 1;
+        return 0;
 }
 
 
