@@ -154,7 +154,7 @@ int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int
         
         }
     }
-        return 0;
+    return 0;
 }
 
 
