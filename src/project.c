@@ -62,9 +62,13 @@ int main(int argc, char *argv[]){
     int current_player = (get_random_player(NB_PLAYERS));
     //Init market and guild    
     init_permutation();
-    init_all_tokens(); // Init all_tokens
-    init_builders(seed_builder); // Use seed 0 at the beginning of a game  
-    init_guild(); // init the guild
+    // Init all_tokens
+    init_all_tokens(); 
+    //Init all_builders 
+    init_builders(seed_builder); 
+    // init the guild
+    init_guild(); 
+    // init the market
     init_market();
     int nb_turns_not_played = 0;
     int nb_turns = 0;
@@ -101,6 +105,7 @@ int main(int argc, char *argv[]){
 
         //If we can build a builder then we do it
         if (possibility_to_pay) {
+            //printf("THE BOUT DE CODE A ETE EXECUTE");
             //put in the market the tokens which were useful to pay the builder, except if they are builders
             pay(players,index, current_player);
             printf("this is the points  %d of player %d\n", players[current_player].points,current_player);

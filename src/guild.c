@@ -1,4 +1,5 @@
 #include "guild.h"
+#include "builder.h"
 #include "second_builder.h"
 #include "stack.h"
 #include <stdio.h>
@@ -54,7 +55,7 @@ void remove_builders_from_guild(struct builder_t * builder) {
             i++;
         }
         int next=0;
-        
+
         while ((guild.stack[(level+next)%NUM_LEVELS].nb <1) && (next< MAX_BUILDERS)){
             //stack_display(guild.stack[(level+next)%NUM_LEVELS]);
            // printf("guild.stack[(level + next) NUM_LEVELS].nb vaut %d \n", guild.stack[(level + next)%NUM_LEVELS].nb);
@@ -81,7 +82,7 @@ void guild_display(){
     printf("\n ########################################## \n");
     printf("\n  GUILD DISPLAY \n ");
     if (guild.nb_builder>0){
-        for ( int i=0; i< guild.nb_builder; i++){
+        for ( int i=0; i< MAX_BUILDERS; i++){
             //printf("%p \n", &guild.builder_available[i] );
             if(&guild.builder_available[i]){
                 builder_display(guild.builder_available[i], "this builder belongs to the guild \n");
