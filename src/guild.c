@@ -1,5 +1,5 @@
 #include "guild.h"
-
+#include "stack.h"
 struct guild guild={};
 /**
 Init the guild with random value for builders
