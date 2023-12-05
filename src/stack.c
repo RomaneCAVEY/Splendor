@@ -7,7 +7,7 @@ struct stack_t stack_empty(){
     return stack;
 }
 
-struct builder_t* stack_stack_pop( struct stack_t *stack)
+struct builder_t* stack_pop( struct stack_t *stack)
 {
     if (stack->nb == 0)
     {
