@@ -20,7 +20,8 @@ unsigned int nb_builders;
 /** Initializes the builders depending on an integer `seed`.
 Can be called multiple times. Can also do nothing. */
 void init_builders(unsigned int seed) {
-    nb_builders = 5 + (rand() % (MAX_BUILDERS - 5)); //To have at least 5 builders
+    srand(seed);
+    nb_builders =(rand() % (MAX_BUILDERS ));
     printf("HERE IS THE NUMBER OF BUILDERS: %d \n",nb_builders);
     for (unsigned int i = 0; i < nb_builders; ++i) {
         game_builders[i].level = rand() % NUM_LEVELS;
@@ -77,25 +78,24 @@ struct set_t builder_provides(const struct builder_t* g){
 void builder_display(const struct builder_t * g, const char * prefix) {
     //printf("%p \n", &g);
     if (g) {
-        printf("%s Builder(lvl= %d, cost= ",prefix, g -> level);
+        printf("%s Builder(lvl= %d, cost= ( ",prefix, g -> level);
         for (unsigned int i=0; i<NUM_COLORS; ++i){
             if (g -> ressource.ressource[i]>0){
-                printf("%d=%s",  g -> ressource.ressource[i], color_to_short_string(g -> ressource.ressource[i]));
+                printf("(%d=%s),",  g -> ressource.ressource[i], color_to_short_string(g -> ressource.ressource[i]));
 
             }
 
         }
-        printf(", prod: ");
+        printf(")    ");
+        printf(", prod: {");
          for (unsigned int i=0; i<NUM_COLORS; ++i){
             if (g -> ressource.ressource[i]>0){
-                printf("%d %s",  g -> production.ressource[i], color_to_short_string(g -> production.ressource[i]));
+                printf("(%d= %s),",  g -> production.ressource[i], color_to_short_string(g -> production.ressource[i]));
             }
 
         }
+        printf("}  ");
         printf(" ,points = %d) \n \n", g->points);
-    } 
-    else {
-        printf("NULL");
     }
 }
 

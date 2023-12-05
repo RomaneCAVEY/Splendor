@@ -7,14 +7,15 @@ struct stack_t stack_empty(){
     return stack;
 }
 
-struct builder_t* stack_stack_pop( struct stack_t *stack)
+struct builder_t* stack_pop( struct stack_t *stack)
 {
     if (stack->nb == 0)
-    {
+    {   
+        printf("empty stack");
         return NULL;
     }
     stack->nb--;
-    void* out= stack->values[stack->head];
+    struct builder_t* out= stack->values[stack->head];
     stack->head--;
     return out;
 }

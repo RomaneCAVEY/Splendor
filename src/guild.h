@@ -3,8 +3,8 @@
 
 
 #include"market.h"
-#include "stack.h"
-#include "player.h"
+#include"stack.h"
+#include"player.h"
 #include <stdio.h>
 #include <time.h>
 #include <string.h>
@@ -24,6 +24,7 @@ struct guild{
 void init_guild();
 /** Add the builder bought in the guild to the player_builder
  */
+ 
 void add_from_guild(int index, struct player players[NB_PLAYERS] , int current_player);
 /**
 Init the guild with random value for builders

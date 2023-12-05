@@ -14,5 +14,4 @@ void init_permutation(){
 
 int make_permutation(int index){
     return permutation[index];
-
 }

@@ -1,7 +1,5 @@
 #include "player.h"
-#include "game.h"
-#include "market.h"
-#include "token.h"
+#include "builder.h"
 #include <stdio.h>
 
 
@@ -49,7 +47,9 @@ void player_display(struct player player){
     printf("This is what the player owns \n");
     printf("=======================================\n");
     for (int i=0; i< player.nbr_token; ++i){
-        token_display(*player.player_token[i], "\n -");
+        if(player.player_token[i]){
+            token_display(*player.player_token[i], "\n -");
+        }
     }
     for (int i=0; i< player.nbr_builder; ++i){
         builder_display(player.player_builder[i], "\n -");
