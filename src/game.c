@@ -54,7 +54,7 @@ int possibility_token_pay(struct player player, struct builder_t * b) {
             if(player.player_builder[i]){
                 buildcost=builder_provides(player.player_builder[i]);
                 //Browse the table of the set of buildcost
-                for (unsigned int k=0;k<NUM_TOKENS; k++){
+                for (unsigned int k=0;k<NUM_COLORS; k++){
                         count_color[k] +=buildcost.ressource[k];
                 }
 
@@ -74,7 +74,7 @@ int possibility_token_pay(struct player player, struct builder_t * b) {
             token = player.player_token[i];
             if (token){
                 for (unsigned int k=0; k<NUM_COLORS;k++){
-                     count_color[k]+=token->s.ressource[k];
+                    count_color[k]+=token->s.ressource[k];
                 }
             }
             
@@ -112,7 +112,7 @@ int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int
             if(players[current_player].player_builder[i]){
                 buildcost=builder_provides(players[current_player].player_builder[i]);
                 //Browse the table of the set of buildcost
-                for (unsigned int k=0;k<NUM_TOKENS; k++){
+                for (unsigned int k=0;k<NUM_COLORS; k++){
                         count_color[k] +=buildcost.ressource[k];
                 
                 }
@@ -153,7 +153,7 @@ int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int
         
         }
     }
-        return 0;
+    return 0;
 }
 
 
