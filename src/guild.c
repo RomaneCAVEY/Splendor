@@ -54,10 +54,10 @@ void remove_builders_from_guild(struct builder_t * builder) {
             i++;
         }
         int next=0;
-        //PROBLEME CAR NE RENTRE PAS DANS LA BOUCLE 
+        
         while ((guild.stack[(level+next)%NUM_LEVELS].nb <1) && (next< MAX_BUILDERS)){
             //stack_display(guild.stack[(level+next)%NUM_LEVELS]);
-            printf("guild.stack[(level + next) NUM_LEVELS].nb vaut %d \n", guild.stack[(level + next)%NUM_LEVELS].nb);
+           // printf("guild.stack[(level + next) NUM_LEVELS].nb vaut %d \n", guild.stack[(level + next)%NUM_LEVELS].nb);
             next++;
         }
         if (next== MAX_BUILDERS){
@@ -89,7 +89,7 @@ void guild_display(){
         }
     }
     else{
-        printf("the guild is empty");
+        printf("the guild is empty \n");
     }
    printf("\n ########################################## \n");
 }

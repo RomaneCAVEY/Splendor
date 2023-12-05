@@ -26,9 +26,9 @@ void init_builders(unsigned int seed) {
     for (unsigned int i = 0; i < nb_builders; ++i) {
         game_builders[i].level = rand() % NUM_LEVELS;
         game_builders[i].points = rand() % (VICTORY_POINTS/2);
+        game_builders[i].ressource.ressource[rand() % NUM_COLORS]=1;
         game_builders[i].ressource.ressource[rand() % NUM_COLORS]+=1;
-        game_builders[i].ressource.ressource[rand() % NUM_COLORS]+=1;
-        game_builders[i].production.ressource[rand() % NUM_COLORS]+=1;
+        game_builders[i].production.ressource[rand() % NUM_COLORS]=1;
         game_builders[i].production.ressource[rand() % NUM_COLORS]+=1;
     }
 }
