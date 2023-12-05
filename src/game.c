@@ -132,6 +132,7 @@ int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int
                 }
 
             }
+            //if the value is useful to pay, we use it and add the other colors of it
             if(useful){
                 for (unsigned int k=0; k<NUM_COLORS;k++){
                     count_color[k]+=token->s.ressource[k];
