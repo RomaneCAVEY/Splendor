@@ -1,10 +1,6 @@
 #ifndef __MARKET_H__
 #define __MARKET_H__
 
-<<<<<<< HEAD
-
-=======
->>>>>>> achiev2
 #include "permutation.h"
 #include "player.h"
 #include <stdio.h>

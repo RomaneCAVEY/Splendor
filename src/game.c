@@ -11,20 +11,6 @@
 Remove token
 */
 void remove_token(struct player players[NB_PLAYERS] , struct token_t *token, int current_player) {
-<<<<<<< HEAD
-    int i=0;
-    while(token_equals(*players[current_player].player_token[i], *token) && i<NUM_TOKENS){
-        i++;
-    }
-    if(i==NUM_TOKENS){
-        players[current_player].player_token[i] = NULL;
-    }
-    else {
-        printf("there are a problem");
-    }
-}
-    
-=======
     //token_display(*token, "THE ONE WE WANT TO DELETE");
     int verif=1;
     int index=0;
@@ -39,7 +25,6 @@ void remove_token(struct player players[NB_PLAYERS] , struct token_t *token, int
             }
         }
     }
->>>>>>> achiev2
 
     if(index<NUM_TOKENS){
        // token_display( *players[current_player].player_token[i],"FIND: \n \n");
@@ -66,7 +51,6 @@ int possibility_token_pay(struct player player, struct builder_t * b) {
 
         // Try to pay with the builders of the player
         for (int i = 0; i <MAX_BUILDERS; ++i){
-            
             if(player.player_builder[i]){
                 buildcost=builder_provides(player.player_builder[i]);
                 //Browse the table of the set of buildcost
@@ -116,7 +100,7 @@ int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int
     
     struct set_t cost_color= builder_requires(builder);
     //tmp variable used in the loop to know the cost of the builder
-    unsigned int count_color[NUM_COLORS]={};
+    unsigned int count_color[NUM_COLORS*2]={};
 
     //tmp variable used in the loop
     struct token_t * token ;

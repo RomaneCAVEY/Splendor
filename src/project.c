@@ -61,17 +61,10 @@ int main(int argc, char *argv[]){
     }
     int current_player = (get_random_player(NB_PLAYERS));
     //Init market and guild    
-<<<<<<< HEAD
-    init_all_tokens(); // Init all_tokens
-    init_builders(seed_builder); // Use seed 0 at the beginning of a game  
-    init_guild(); // init the guild
-    init_permutation();
-=======
     init_permutation();
     init_all_tokens(); // Init all_tokens
     init_builders(seed_builder); // Use seed 0 at the beginning of a game  
     init_guild(); // init the guild
->>>>>>> achiev2
     init_market();
     int nb_turns_not_played = 0;
     int nb_turns = 0;
