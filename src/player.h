@@ -10,6 +10,7 @@
 #include "builder.h"
 #include "token.h"
 #include "color.h"
+#include "guild.h"
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
@@ -24,7 +25,7 @@ struct player{
     int nbr_token;
     int nbr_builder;
     int index;
-
+    int favor_nbr;
 };
 
 /**

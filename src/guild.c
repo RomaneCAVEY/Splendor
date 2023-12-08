@@ -72,6 +72,22 @@ void remove_builders_from_guild(struct builder_t * builder) {
     }
 }
 
+void builder_guild_renew(int level_choosen) {
+    struct builder_t*  stockage[3]={};
+    int index=0;
+    for (int i=0; i<MAX_BUILDERS) {
+        if (guild.builder_available[i]){
+            if ((guild.builder_available[i]->level==choosen_level) && (index<3)){
+                stockage[index]=builder_available[i];
+            }
+        }
+    }
+    for (int i=0; i<3; ++i) {
+        if (stockage[i]!=NULL) {
+            push(stockage[i])
+        }
+    }   
+}
 
 struct builder_t * guild_builder_in_guild(unsigned index) {
     return guild.builder_available[index];

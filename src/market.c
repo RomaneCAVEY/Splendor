@@ -1,5 +1,4 @@
 #include "market.h"
-#include "token.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,7 +18,17 @@ void init_market() {
         market.playing_board[i]= token_get_adress(make_permutation(i));
     }
 }
-
+int pick_any_token_in_market(int current_player, struct player players[NB_PLAYERS], int a) {
+    int random_index=rand()%NUM_TOKENS;
+    if (market.nbr_token>0) {
+        while (market[random_index]==NULL) {
+            random_index= (random_index + 1) % NUM_TOKENS;
+        }
+        pick_a_token(current_player, players, a);
+        return 1;
+    }
+    return 0;
+}
 
 struct token_t* make_market(int index){
     return market.playing_board[index];
@@ -73,6 +82,7 @@ void market_display() {
         if ( market.playing_board[i])
         {
             token_display( *market.playing_board[i], " this token belongs to the market \n");
+            
         }
     }
 }

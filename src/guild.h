@@ -43,6 +43,8 @@ of the same level if it's possible
 */
 void remove_builders_from_guild(struct builder_t * builder);
 
+void builder_guild_renew(int level_choosen);
+
 struct builder_t * guild_builder_in_guild(unsigned index);
 /**
 Display the available builders of the guild
@@ -52,6 +54,7 @@ void guild_display();
 /** Add the builder bought in the guild to the player_builder
  */
 void add_from_guild(int index, struct player players[NB_PLAYERS] , int current_player);
+
 
 
 

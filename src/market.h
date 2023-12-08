@@ -5,6 +5,7 @@
 #include "player.h"
 #include "second_token.h"
 #include "token.h"
+#include "game.h"
 #include <stdio.h>
 #include <time.h>
 #include <string.h>
@@ -15,7 +16,10 @@ struct market{
     int permutation[NUM_TOKENS];
 };
 
+
 void init_market();
+
+int pick_any_token_in_market(int current_player, struct player players[NB_PLAYERS], int a) {
 
 int market_nbr_token();
 
