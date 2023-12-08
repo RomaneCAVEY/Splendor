@@ -58,10 +58,6 @@ void token_display(struct token_t t, const char * prefix) {
                 //printf(" with the following address: %p", &t);
             }
     }
-<<<<<<< HEAD
-    printf(")       \n");
-=======
     printf(")  ");
->>>>>>> achiev3
 
 }
