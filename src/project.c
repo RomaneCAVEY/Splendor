@@ -81,7 +81,7 @@ int main(int argc, char *argv[]){
         int index;
         int possibility_to_pay=0;
        //printf("guild_nbr_builder %d \n", guild_nbr_builder());
-        guild_display();
+        //guild_display();
         for ( int i = guild_nbr_builder(); i>(-1) ; i--) {
          //   fprintf(stderr,"c:%d\n",c);
            // c+=1;
