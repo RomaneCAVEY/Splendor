@@ -96,10 +96,10 @@ int main(int argc, char *argv[]){
             }
         }
         
-        printf("===============================: \n");
-        printf("Market display: \n");
-        market_display();
-        printf("\n===============================: \n\n\n");
+        //printf("===============================: \n");
+        //printf("Market display: \n");
+        //market_display();
+        //printf("\n===============================: \n\n\n");
         //printf("this is the possibility %d\n", possibility_to_pay);
         
 
@@ -133,8 +133,8 @@ int main(int argc, char *argv[]){
                 nb_turns_not_played = nb_turns_not_played + 1;
                  }
         }
-        printf("PLAYER DISPLAY OF PLAYER %d \n", current_player);
-        player_display(players[current_player]);
+        //printf("PLAYER DISPLAY OF PLAYER %d \n", current_player);
+        //player_display(players[current_player]);
         
         current_player=next_player(NB_PLAYERS, current_player);
         nb_turns += 1;
