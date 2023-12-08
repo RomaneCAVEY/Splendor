@@ -50,8 +50,12 @@ struct token_t * make_token(unsigned int index) {
 int is_complex(struct token_t * t) {
     int count = 0;
     for (int i = 0; i < NUM_COLORS; ++i) {
-        count+= t -> s.ressource[i];
-        if (count > 1) return 1;
+        if(t->s.ressource[i]){
+            count+= 1;
+        }
+        if (count > 1){
+            return 1;
+         }   
     }
     return 0;
 

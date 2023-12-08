@@ -82,7 +82,7 @@ int main(int argc, char *argv[]){
         int possibility_to_pay=0;
        //printf("guild_nbr_builder %d \n", guild_nbr_builder());
         guild_display();
-        for ( int i = guild_nbr_builder(); i>(-1); i--) {
+        for ( int i = guild_nbr_builder(); i>(-1) ; i--) {
          //   fprintf(stderr,"c:%d\n",c);
            // c+=1;
             if (guild_available_builder(i)) {
@@ -95,13 +95,13 @@ int main(int argc, char *argv[]){
                 }
             }
         }
-        /* 
-        printf("===============================: \n");
-        printf("Market display: \n");
-        market_display();
-        printf("===============================: \n");
-        printf("this is the possibility %d\n", possibility_to_pay);
-        */
+        
+        //printf("===============================: \n");
+        //printf("Market display: \n");
+        //market_display();
+        //printf("\n===============================: \n\n\n");
+        //printf("this is the possibility %d\n", possibility_to_pay);
+        
 
         //If we can build a builder then we do it
         if (possibility_to_pay) {
@@ -116,31 +116,29 @@ int main(int argc, char *argv[]){
                 //nb = number between 1 and 3 of tokens the player will pick from the market
                 int nb = rand() % 3 +1;
                 ///add = number of tokens we have already picked from the market amoung the nb tokens
-                int add=0;
-                if (nb <= market_nbr_token()){
-                    while (add < nb) {
+                // int add=0;
+                int random = rand() % NUM_TOKENS;
+                if (nb <= market_nbr_token() && token_in_market_is_available(random)) {
+    
                         
-                        //printf("result: %d", nb>add);
-                        int random = rand() % NUM_TOKENS;
                        // printf("%d est aléatoire \n", nb);
                         //printf("there are %d tokens in the market \n",market_nbr_token());
-                        if (token_in_market_is_available(random)) {
-                            pick_a_token(current_player, players,random);
-                            add+=1;
-                        }
-                    }
+                            tokens_connex(random, nb, current_player, players);
+                    
+                }
                     //printf("PLAYER DISPLAY OF PLAYER %d \n", current_player);
                     //player_display(players[current_player]);
                     //printf("\n");
-                }
                 else {
                 nb_turns_not_played = nb_turns_not_played + 1;
                  }
         }
+        //printf("PLAYER DISPLAY OF PLAYER %d \n", current_player);
+        //player_display(players[current_player]);
+        
         current_player=next_player(NB_PLAYERS, current_player);
         nb_turns += 1;
-        printf("PLAYER DISPLAY OF PLAYER %d \n", current_player);
-        player_display(players[current_player]);
+        
 
     }
    

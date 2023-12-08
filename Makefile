@@ -21,7 +21,7 @@ project: src/project.o  src/color.o  src/token.o src/game.o src/player.o src/bui
 token: $src/token.o
 	$(CC) $(CFLAGS) token.o -o token
 
-test:tst/test.o tst/test_main.o src/color.o  src/token.o src/game.o src/player.o src/builder.o src/second_builder.o src/second_token.o src/market.o src/guild.o src/stack.o src/permutation.o
+test:tst/test.o tst/test_main.o src/color.o  src/token.o src/game.o src/player.o src/builder.o src/second_builder.o src/second_token.o src/market.o src/guild.o src/stack.o src/permutation.o tst/test_achiev1.o
 	$(CC) $(CFLAGS) $^ -o test
 	./test
 
