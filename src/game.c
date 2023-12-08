@@ -1,5 +1,6 @@
 #include "game.h"
 #include "color.h"
+#include "set.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -35,6 +36,11 @@ void remove_token(struct player players[NB_PLAYERS] , struct token_t *token, int
     }
 }
     
+
+
+
+
+
 /*return NULL if the player can't pay for a builder or return 1 if the player can pay the exact price or return 2*/
 int possibility_token_pay(struct player player, struct builder_t * b) {
     if(b){
@@ -42,7 +48,7 @@ int possibility_token_pay(struct player player, struct builder_t * b) {
         struct set_t cost_color= builder_requires(b);
 
         //tmp variable used in the loop to know the cost of the builder
-        unsigned int count_color[NUM_COLORS]={};
+        struct set_t count_color={};
         unsigned int count=0;
 
         //tmp variable used in the loop
@@ -55,13 +61,13 @@ int possibility_token_pay(struct player player, struct builder_t * b) {
                 buildcost=builder_provides(player.player_builder[i]);
                 //Browse the table of the set of buildcost
                 for (unsigned int k=0;k<NUM_COLORS; k++){
-                        count_color[k] +=buildcost.ressource[k];
+                        count_color.ressource[k] +=buildcost.ressource[k];
                 }
 
             }
         }
         for (int i = 0; i <NUM_COLORS; ++i){
-            if (count_color[i]==cost_color.ressource[i]){
+            if (count_color.ressource[i]==cost_color.ressource[i]){
                 count+=1;
             }
         }
@@ -74,15 +80,17 @@ int possibility_token_pay(struct player player, struct builder_t * b) {
             token = player.player_token[i];
             if (token){
                 for (unsigned int k=0; k<NUM_COLORS;k++){
-                    count_color[k]+=token->s.ressource[k];
+                    count_color.ressource[k]+=token->s.ressource[k];
                 }
             }
             
         }
         //End of the loop, check if it's possible to pay
+        set_display(cost_color);
         for (unsigned int k=0; k<NUM_COLORS;k++){
-                if (count_color[k]<cost_color.ressource[k]){
-                    return 0;
+            printf("\n the value of color %s is %d \n\n ", color_to_short_string(k), count_color.ressource[k]);
+            if (count_color.ressource[k]<cost_color.ressource[k]){
+                return 0;
             }
         }
         return 1;
@@ -100,7 +108,7 @@ int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int
     
     struct set_t cost_color= builder_requires(builder);
     //tmp variable used in the loop to know the cost of the builder
-    unsigned int count_color[NUM_COLORS*2]={};
+    unsigned int count_color[NUM_COLORS]={};
 
     //tmp variable used in the loop
     struct token_t * token ;

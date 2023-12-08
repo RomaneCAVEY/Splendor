@@ -62,16 +62,19 @@ int main(int argc, char *argv[]){
     int current_player = (get_random_player(NB_PLAYERS));
     //Init market and guild    
     init_permutation();
-    init_all_tokens(); 
     // Init all_tokens
-    init_builders(seed_builder); // Use seed 0 at the beginning of a game  
-    init_guild(); // init the guild
+    init_all_tokens(); 
+    //Init all_builders 
+    init_builders(seed_builder); 
+    // init the guild
+    init_guild(); 
+    // init the market
     init_market();
     int nb_turns_not_played = 0;
     int nb_turns = 0;
     printf("initialisation over \n");
     printf(" ********************************** \n");
-    int c=0;
+    //int c=0;
     while (!(has_won(players) && (nb_turns_not_played < 2)) && nb_turns < max_turn) {
         printf("This is the turn %d \n", nb_turns);
         printf("this is the points %d of the current player, player %d\n", players[current_player].points,current_player);
@@ -79,12 +82,14 @@ int main(int argc, char *argv[]){
         int possibility_to_pay=0;
        //printf("guild_nbr_builder %d \n", guild_nbr_builder());
         guild_display();
-        for ( int i = guild_nbr_builder(); i>(-1) ; i--) {
-            fprintf(stderr,"c:%d\n",c);
-            c+=1;
+        for ( int i = guild_nbr_builder(); i>(-1); i--) {
+         //   fprintf(stderr,"c:%d\n",c);
+           // c+=1;
             if (guild_available_builder(i)) {
                 if (possibility_token_pay(players[current_player], make_builder(i))) {
+                    
                     possibility_to_pay = possibility_token_pay(players[current_player], make_builder(i));
+                    printf("this is the possibility of the player %d \n", possibility_to_pay);
                     index = i;
 
                 }
@@ -100,6 +105,7 @@ int main(int argc, char *argv[]){
 
         //If we can build a builder then we do it
         if (possibility_to_pay) {
+            //printf("THE BOUT DE CODE A ETE EXECUTE");
             //put in the market the tokens which were useful to pay the builder, except if they are builders
             pay(players,index, current_player);
             printf("this is the points  %d of player %d\n", players[current_player].points,current_player);
