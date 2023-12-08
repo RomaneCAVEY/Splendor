@@ -40,7 +40,9 @@ int next_player(int size, int current) {
     return (current + 1) % size;
 }
 
-
+/**
+Display the builders and tokens of the player
+*/
 void player_display(struct player player){
     printf("This is what the player owns \n");
     printf("=======================================\n");
@@ -55,6 +57,10 @@ void player_display(struct player player){
     printf("=======================================\n");
 }
 
+
+/** 
+Give the winner of the game if he exists
+*/
 int winner(struct player players[NB_PLAYERS]){
     if (players[0].points >= VICTORY_POINTS) {
         printf("Victory of player 0 with %d points \n", players[0].points);
@@ -75,3 +81,4 @@ int winner(struct player players[NB_PLAYERS]){
         }
     }
 }
+

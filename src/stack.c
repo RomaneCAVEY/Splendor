@@ -11,7 +11,7 @@ struct builder_t* stack_pop( struct stack_t *stack)
 {
     if (stack->nb == 0)
     {   
-        printf("empty stack");
+        printf("\n WARNING:empty stack! \n");
         return NULL;
     }
     stack->nb--;

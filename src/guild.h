@@ -52,4 +52,7 @@ void guild_display();
 /** Add the builder bought in the guild to the player_builder
  */
 void add_from_guild(int index, struct player players[NB_PLAYERS] , int current_player);
+
+
+
 #endif

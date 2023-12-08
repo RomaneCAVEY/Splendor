@@ -1,4 +1,6 @@
 #include "guild.h"
+#include "builder.h"
+#include "second_builder.h"
 #include "stack.h"
 #include <stdio.h>
 #include <time.h>
@@ -53,10 +55,10 @@ void remove_builders_from_guild(struct builder_t * builder) {
             i++;
         }
         int next=0;
-        //PROBLEME CAR NE RENTRE PAS DANS LA BOUCLE 
+
         while ((guild.stack[(level+next)%NUM_LEVELS].nb <1) && (next< MAX_BUILDERS)){
             //stack_display(guild.stack[(level+next)%NUM_LEVELS]);
-            printf("guild.stack[(level + next) NUM_LEVELS].nb vaut %d \n", guild.stack[(level + next)%NUM_LEVELS].nb);
+           // printf("guild.stack[(level + next) NUM_LEVELS].nb vaut %d \n", guild.stack[(level + next)%NUM_LEVELS].nb);
             next++;
         }
         if (next== MAX_BUILDERS){
@@ -71,8 +73,6 @@ void remove_builders_from_guild(struct builder_t * builder) {
 }
 
 
-
-
 struct builder_t * guild_builder_in_guild(unsigned index) {
     return guild.builder_available[index];
 }
@@ -82,7 +82,7 @@ void guild_display(){
     printf("\n ########################################## \n");
     printf("\n  GUILD DISPLAY \n ");
     if (guild.nb_builder>0){
-        for ( int i=0; i< guild.nb_builder; i++){
+        for ( int i=0; i< MAX_BUILDERS; i++){
             //printf("%p \n", &guild.builder_available[i] );
             if(&guild.builder_available[i]){
                 builder_display(guild.builder_available[i], "this builder belongs to the guild \n");
@@ -90,7 +90,7 @@ void guild_display(){
         }
     }
     else{
-        printf("the guild is empty");
+        printf("the guild is empty \n");
     }
    printf("\n ########################################## \n");
 }
@@ -102,3 +102,6 @@ void add_from_guild(int index, struct player players[NB_PLAYERS] , int current_p
     players[current_player].points += builder_points(guild.builder_available[index]);
     players[current_player].nbr_builder += 1;
 }
+
+
+
