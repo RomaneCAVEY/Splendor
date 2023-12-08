@@ -54,7 +54,7 @@ void player_display(struct player player){
     for (int i=0; i< player.nbr_builder; ++i){
         builder_display(player.player_builder[i], "\n -");
     }
-    printf("=======================================\n");
+    printf("\n=======================================\n");
 }
 
 

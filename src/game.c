@@ -1,6 +1,7 @@
 #include "game.h"
 #include "color.h"
 #include "set.h"
+#include "token.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -178,10 +179,10 @@ void pay(struct player players[NB_PLAYERS], int index, int current){
 
 /* Pick a token in the market, add in the player's token list, and remove it from the market
 */
-void pick_a_token(int current_player, struct player players[NB_PLAYERS], int a){
-    players[current_player].player_token[players[current_player].nbr_token] = token_get_adress(a);
+void pick_tokens(int current_player, struct player players[NB_PLAYERS], int index){
+    players[current_player].player_token[players[current_player].nbr_token] = token_in_market_is_available(index);
     //printf("adress of the token %d : %p",current_player, token_get_adress(a));
     players[current_player].nbr_token = players[current_player].nbr_token + 1;
-    remove_token_from_market(token_in_market_is_available(a));
+    remove_token_from_market(token_in_market_is_available(index));
 
 }
