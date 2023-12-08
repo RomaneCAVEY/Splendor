@@ -54,10 +54,14 @@ void token_display(struct token_t t, const char * prefix) {
     printf("%s Token (", prefix);
     for (int i = 0; i < NUM_COLORS; ++i) {
             if (t.s.ressource[i]) {
-                printf(" ( %s = %d) , ", color_to_short_string(i), t.s.ressource[i]);
+                printf(" ( %s = %d) ,", color_to_short_string(i), t.s.ressource[i]);
                 //printf(" with the following address: %p", &t);
             }
     }
+<<<<<<< HEAD
     printf(")       \n");
+=======
+    printf(")  ");
+>>>>>>> achiev3
 
 }
