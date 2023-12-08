@@ -69,10 +69,18 @@ int market_token_is_available(int i){
 */
 void market_display() {
     unsigned int i = 0;
+    int square = sqrt(NUM_TOKENS);
     for (i=0; i< NUM_TOKENS; i++){
+        if (i%square){
+            printf("\n \n");
+             printf("___________________________________________________________________________________________________________");
+        }
         if ( market.playing_board[i])
         {
-            token_display( *market.playing_board[i], " this token belongs to the market \n");
+            token_display( *market.playing_board[i], " ~ \n");
+        }
+        else {
+            printf("empty space");
         }
     }
 }

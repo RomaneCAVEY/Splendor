@@ -1,4 +1,5 @@
 #include "test.h"
+#include "test_achiev1.h"
 #include <stdio.h>
 
 
@@ -56,6 +57,12 @@ int main(int argc, char* argv[])
         printf("test passed");
         }
     else {printf("test failed");
+    }
+
+    printf("\n \n ========================================== \n \n");
+    if(!market_display_test()){
+        printf("market_display_test \n");
+        printf("test passed");
     }
     return 0;
 }

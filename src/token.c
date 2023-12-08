@@ -58,6 +58,6 @@ void token_display(struct token_t t, const char * prefix) {
                 //printf(" with the following address: %p", &t);
             }
     }
-    printf(")\n");
+    printf(")       \n");
 
 }
