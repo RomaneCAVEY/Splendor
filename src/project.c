@@ -82,7 +82,7 @@ int main(int argc, char *argv[]){
         int possibility_to_pay=0;
        //printf("guild_nbr_builder %d \n", guild_nbr_builder());
         guild_display();
-        for ( int i = guild_nbr_builder(); i>0 ; i--) {
+        for ( int i = guild_nbr_builder(); i>(-1) ; i--) {
          //   fprintf(stderr,"c:%d\n",c);
            // c+=1;
             if (guild_available_builder(i)) {
@@ -137,10 +137,11 @@ int main(int argc, char *argv[]){
                 nb_turns_not_played = nb_turns_not_played + 1;
                  }
         }
-        current_player=next_player(NB_PLAYERS, current_player);
-        nb_turns += 1;
         printf("PLAYER DISPLAY OF PLAYER %d \n", current_player);
         player_display(players[current_player]);
+        current_player=next_player(NB_PLAYERS, current_player);
+        nb_turns += 1;
+        
 
     }
    

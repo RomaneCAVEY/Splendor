@@ -104,6 +104,6 @@ int tokens_neighbour(int index){
         count += 1;
      }
 
-    return 0;
+    return count;
 }
 
