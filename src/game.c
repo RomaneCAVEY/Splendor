@@ -1,121 +1,165 @@
 #include "game.h"
-#include "market.h"
-#include "guild.h"
-#include "second_token.h"
+#include "color.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
+//please compile
 
 
 /**
 Remove token
 */
 void remove_token(struct player players[NB_PLAYERS] , struct token_t *token, int current_player) {
-    int i=0;
-    while(token_equals(*players[current_player].player_token[i], *token)){
-        i++;
+    //token_display(*token, "THE ONE WE WANT TO DELETE");
+    int verif=1;
+    int index=0;
+    for (int i=0; i<NUM_TOKENS;i++){
+        while (!players[current_player].player_token[i] && i<NUM_TOKENS){
+           i+=1;
+        }
+        if (i<NUM_TOKENS){
+            verif= token_equals(*players[current_player].player_token[i], *token);
+            if (verif){
+                index=i;
+            }
+        }
     }
-    players[current_player].player_token[i] = NULL;
-}
 
+    if(index<NUM_TOKENS){
+       // token_display( *players[current_player].player_token[i],"FIND: \n \n");
+        players[current_player].player_token[index] = NULL;
+    }
+    else {
+        printf("there is a problem!!!!!!!!!!! This token doesn't exist");
+    }
+}
+    
 /*return NULL if the player can't pay for a builder or return 1 if the player can pay the exact price or return 2*/
 int possibility_token_pay(struct player player, struct builder_t * b) {
     if(b){
 
-        struct buildcost_t cost = builder_requires(b);
-        unsigned int count_desired_color = 0;
-        unsigned int count_just_desired_color = 0;
+        struct set_t cost_color= builder_requires(b);
+
+        //tmp variable used in the loop to know the cost of the builder
+        unsigned int count_color[NUM_COLORS]={};
+        unsigned int count=0;
 
         //tmp variable used in the loop
         struct token_t * token ;
-        struct buildcost_t buildcost;
-
+        struct set_t buildcost;
 
         // Try to pay with the builders of the player
         for (int i = 0; i <MAX_BUILDERS; ++i){
-            
             if(player.player_builder[i]){
                 buildcost=builder_provides(player.player_builder[i]);
-                if (buildcost.c== cost.c){
-                    count_desired_color += cost.c;
-                    count_just_desired_color+= cost.c;
-
+                //Browse the table of the set of buildcost
+                for (unsigned int k=0;k<NUM_COLORS; k++){
+                        count_color[k] +=buildcost.ressource[k];
                 }
-            }
 
+            }
         }
-        if (count_desired_color>= cost.c){
+        for (int i = 0; i <NUM_COLORS; ++i){
+            if (count_color[i]==cost_color.ressource[i]){
+                count+=1;
+            }
+        }
+        if (count==NUM_COLORS){
             return 4;
         }
-        // Try to pay the rest with the tokens of the player
 
-         for (int i = 0; i <NUM_TOKENS; ++i){
+        // Try to pay the rest with the tokens of the player
+        for (int i = 0; i <NUM_TOKENS; ++i){
             token = player.player_token[i];
             if (token){
-                count_desired_color = count_desired_color + token-> c[cost.c];
-                if (is_complex(token)) {
-                    if (token-> c[cost.c] == 2) {
-                        count_just_desired_color = count_desired_color + 2;
-                    }
+                for (unsigned int k=0; k<NUM_COLORS;k++){
+                    count_color[k]+=token->s.ressource[k];
                 }
-                else{
-                    count_just_desired_color = count_desired_color + token-> c[cost.c];
-                 }
+            }
+            
+        }
+        //End of the loop, check if it's possible to pay
+        for (unsigned int k=0; k<NUM_COLORS;k++){
+                if (count_color[k]<cost_color.ressource[k]){
+                    return 0;
             }
         }
-        if (count_just_desired_color >= cost.c) {
-            return 1;
-        }
-        if (count_desired_color > cost.c) {
-            return 2;
-        }
+        return 1;
     }
     return 0;
 }
 
 
-
 //Pay the builder with the tokens of the player, remove the token used to pay and put the token on the market
 int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int current_player) {
-    if (possibility_token_pay(players[current_player], builder)){
+    if (possibility_token_pay(players[current_player], builder)==4){
         return 1;
     }
-    struct buildcost_t cost = builder_requires(builder);
-    unsigned int count = 0;
+
+    
+    struct set_t cost_color= builder_requires(builder);
+    //tmp variable used in the loop to know the cost of the builder
+    unsigned int count_color[NUM_COLORS*2]={};
+
+    //tmp variable used in the loop
     struct token_t * token ;
-    struct buildcost_t buildcost;
+    struct set_t buildcost;
 
 
-        //Pay with the builders of the player
+    //Pay what you can with the builder
         for (int i = 0; i <MAX_BUILDERS; ++i){
             if(players[current_player].player_builder[i]){
                 buildcost=builder_provides(players[current_player].player_builder[i]);
-                if (buildcost.c== cost.c){
-                    count += cost.c;
+                //Browse the table of the set of buildcost
+                for (unsigned int k=0;k<NUM_COLORS; k++){
+                        count_color[k] +=buildcost.ressource[k];
+                
                 }
+
             }
-
         }
-        if (count>= cost.c){
-            return 1;
-        }
-        // Pay the rest with the tokens of the player
 
-         for (int i = 0; i <NUM_TOKENS; ++i){
-            token = players[current_player].player_token[i];
-            if (token){
-                if (token-> c[cost.c]){
-                    count+= token->c[cost.c];
-                    add_token_to_market(players[current_player].player_token[i]);
-                    remove_token(players, players[current_player].player_token[i], current_player);
+    // Pay the rest with the tokens of the player
+    for (int i = 0; i <NUM_TOKENS; ++i){
+        int verif=1;
+        token = players[current_player].player_token[i];
+        if (token){
+            int useful=0;
+            for (int j=0; j<NUM_COLORS;j++){
+                if (  (count_color[j]<cost_color.ressource[j]) &&  token->s.ressource[j] ){
+                    useful=j;
                 }
+
             }
+            //if the value is useful to pay, we use it and add the other colors of it
+            if(useful){
+                for (unsigned int k=0; k<NUM_COLORS;k++){
+                    count_color[k]+=token->s.ressource[k];
+                }
+                add_token_to_market(players[current_player].player_token[i]);
+                remove_token(players, players[current_player].player_token[i], current_player);
+            }
+                //Check if we reach the cost of the builder already
+                for (unsigned int i=0; i<NUM_COLORS;i++){
+                    if(count_color[i]<cost_color.ressource[i]){
+                        verif=0;
+
+                    }
+
+                }
+                if (verif){
+                    return 1;
+                }
         
         }
+<<<<<<< HEAD
         return 1;
+=======
+    }
+    return 0;
+>>>>>>> 99efeda42e1b17b098532efee25b0846c3f32916
 }
-
 
 
 /* Pay the builder game_builder[index] with the tokens of the players current_player
@@ -137,8 +181,12 @@ void pick_a_token(int current_player, struct player players[NB_PLAYERS], int a){
     players[current_player].nbr_token = players[current_player].nbr_token + 1;
     remove_token_from_market(token_in_market_is_available(a));
 
+<<<<<<< HEAD
 }
 
 
 
                            
+=======
+}
+>>>>>>> 99efeda42e1b17b098532efee25b0846c3f32916

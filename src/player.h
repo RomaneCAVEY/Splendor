@@ -9,6 +9,8 @@
 
 #include "builder.h"
 #include "token.h"
+#include "second_builder.h"
+#include "second_token.h"
 #include "color.h"
 #include <stdio.h>
 #include <time.h>

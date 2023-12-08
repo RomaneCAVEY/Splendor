@@ -2,7 +2,6 @@
 #define __SECOND_BUILDER_H__
 
 #include "builder.h"
-#include "player.h"
 
 
 //return 1 si builders are equal else 0

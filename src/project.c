@@ -5,6 +5,7 @@
 #include "color.h"
 #include "player.h"
 #include "game.h"
+#include "permutation.h"
 #include "second_token.h"
 #include "second_builder.h"
 #include <stdio.h>
@@ -60,18 +61,17 @@ int main(int argc, char *argv[]){
     }
     int current_player = (get_random_player(NB_PLAYERS));
     //Init market and guild    
-    int permutation[NUM_TOKENS]={};
-    for (unsigned int i=0; i< NUM_TOKENS; i++){
-        permutation[i]=(i+4)%NUM_TOKENS;
-    }
-    init_all_tokens(); // Init all_tokens
+    init_permutation();
+    init_all_tokens(); 
+    // Init all_tokens
     init_builders(seed_builder); // Use seed 0 at the beginning of a game  
     init_guild(); // init the guild
-    init_market(permutation);
+    init_market();
     int nb_turns_not_played = 0;
     int nb_turns = 0;
     printf("initialisation over \n");
     printf(" ********************************** \n");
+    int c=0;
     while (!(has_won(players) && (nb_turns_not_played < 2)) && nb_turns < max_turn) {
         printf("This is the turn %d \n", nb_turns);
         printf("this is the points %d of the current player, player %d\n", players[current_player].points,current_player);
@@ -79,7 +79,9 @@ int main(int argc, char *argv[]){
         int possibility_to_pay=0;
        //printf("guild_nbr_builder %d \n", guild_nbr_builder());
         guild_display();
-        for ( int i = guild_nbr_builder(); i>0 ; i--) {
+        for ( int i = guild_nbr_builder(); i>(-1) ; i--) {
+            fprintf(stderr,"c:%d\n",c);
+            c+=1;
             if (guild_available_builder(i)) {
                 if (possibility_token_pay(players[current_player], make_builder(i))) {
                     possibility_to_pay = possibility_token_pay(players[current_player], make_builder(i));
