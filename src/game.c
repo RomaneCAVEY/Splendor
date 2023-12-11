@@ -162,12 +162,8 @@ int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int
                 }
         
         }
-<<<<<<< HEAD
-        return 1;
-=======
     }
     return 0;
->>>>>>> 99efeda42e1b17b098532efee25b0846c3f32916
 }
 
 
@@ -190,12 +186,4 @@ void pick_tokens(int current_player, struct player players[NB_PLAYERS], int inde
     players[current_player].nbr_token = players[current_player].nbr_token + 1;
     remove_token_from_market(token_in_market_is_available(index));
 
-<<<<<<< HEAD
 }
-
-
-
-                           
-=======
-}
->>>>>>> 99efeda42e1b17b098532efee25b0846c3f32916

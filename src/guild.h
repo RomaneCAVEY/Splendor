@@ -2,9 +2,8 @@
 #define __GUILD_H__
 
 
-#include"market.h"
+
 #include"stack.h"
-#include"player.h"
 #include <stdio.h>
 #include <time.h>
 #include <string.h>

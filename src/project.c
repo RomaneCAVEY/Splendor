@@ -96,10 +96,10 @@ int main(int argc, char *argv[]){
             }
         }
         
-        //printf("===============================: \n");
-        //printf("Market display: \n");
-        //market_display();
-        //printf("\n===============================: \n\n\n");
+        printf("===============================: \n");
+        printf("Market display: \n");
+        market_display();
+        printf("\n===============================: \n\n\n");
         //printf("this is the possibility %d\n", possibility_to_pay);
         
 

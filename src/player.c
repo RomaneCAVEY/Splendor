@@ -1,7 +1,7 @@
 #include "player.h"
 #include "builder.h"
 #include <stdio.h>
-
+#include "guild.h"
 
 /**
 Init the player and all his parameter
