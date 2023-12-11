@@ -83,7 +83,8 @@ void panic_market(){
 /**
 Current player can steal a token to the other player
 */
-void token_steal(int current_player, struct player players[NB_PLAYERS]){
+
+void token_steal(int current_player, int player_to_steal, struct player players[NB_PLAYERS]){
     if (players[current_player].nbr_token< NUM_TOKENS){
         int random= rand();
         int c=0;
@@ -106,3 +107,6 @@ void token_steal(int current_player, struct player players[NB_PLAYERS]){
     }
 
 }
+
+
+

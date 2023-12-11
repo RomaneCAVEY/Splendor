@@ -1,11 +1,8 @@
 #include "market.h"
-<<<<<<< HEAD
-=======
 #include "game.h"
 #include "player.h"
 #include "second_token.h"
 #include "token.h"
->>>>>>> 2f9d6db41783d6399aafaf4675efe420249d087d
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -79,12 +76,6 @@ void market_display() {
     unsigned int i = 0;
     int square = sqrt(NUM_TOKENS);
     for (i=0; i< NUM_TOKENS; i++){
-<<<<<<< HEAD
-        if ( market.playing_board[i])
-        {
-            token_display( *market.playing_board[i], " this token belongs to the market \n");
-            
-=======
         if((i%square)==0){
             printf("\n______________________________________________________________________________________________________________________");
             printf("________________________________________________________________________\n\n\n\n");
@@ -97,7 +88,6 @@ void market_display() {
         }
         else {
             printf(" ||         empty space           ");
->>>>>>> 2f9d6db41783d6399aafaf4675efe420249d087d
         }
     }
 }

@@ -84,7 +84,7 @@ void builder_guild_renew(int level_choosen) {
     }
     for (int i=0; i<3; ++i) {
         if (stockage[i]!=NULL) {
-            push(stockage[i])
+            push(stockage[i]);
         }
     }   
 }
