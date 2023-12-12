@@ -22,10 +22,10 @@ struct set_t create_simple_set(enum color_t c) {
     }*/
 }
 
-struct set_t create_complex_set(struct set_t s) {
+struct set_t create_complex_set(unsigned int c[NUM_COLORS]) {
     struct set_t set;
     for (int i = 0; i < NUM_COLORS; ++i) {
-        set.ressource[i] = s.ressource[i];
+        set.ressource[i] = c[i];
     }
     return set;
 }

@@ -18,7 +18,7 @@ struct set_t create_simple_set(enum color_t c) ;
 
 
 /**Creation of complex set*/
-struct set_t create_complex_set(struct set_t s);
+struct set_t create_complex_set(unsigned int c[NUM_COLORS]);
 
 
 #endif
