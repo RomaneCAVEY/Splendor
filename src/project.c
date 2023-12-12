@@ -131,7 +131,7 @@ int main(int argc, char *argv[]){
                     //printf("\n");
                 else {
                 nb_turns_not_played = nb_turns_not_played + 1;
-                 }
+                }
         }
         //printf("PLAYER DISPLAY OF PLAYER %d \n", current_player);
         //player_display(players[current_player]);

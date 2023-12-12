@@ -25,11 +25,16 @@ void panic_market();
 /**
 Current player can steal a token to the other player
 */
-void token_steal(int current_player, struct player players[NB_PLAYERS]);
+void token_steal(int current_player, int player_to_steal, struct player players[NB_PLAYERS]);
 
+void gain_favor_with_builder(struct players[NB_PLAYERS], int current_player);
 
 /**
 The player can take off one of the player of the guild and 
 remplace it by a new one
 */
 void guild_panic();
+
+void gain_favor_with_builder(struct players[NB_PLAYERS], int current_player);
+
+void favor_steal(struct player players[NB_PLAYERS], int current_player);
