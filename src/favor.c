@@ -1,7 +1,7 @@
 #include "favor.h"
 
 //The player can renew the builders from a specific level in  the guild
-void builder_guild_renew(int level_choosen) {
+void builder_guild_renew(int level_choosen ) {
     struct builder_t*  stockage[3]={};
     int index=0;
     for (int i=0; i<MAX_BUILDERS) {

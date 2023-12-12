@@ -132,4 +132,23 @@ void gain_favor_with_builder(struct players[NB_PLAYERS], int current_player) {
     ++players[current_player].favor_nbr;
 }
 
+int master_hand(struct players[NB_PLAYERS], int current_player, sruct builder_t b) {
+    int counter=0;
+    struct set provide=builder_provides(b);
+    for(int i=0; i<NUM_TOKENS; ++i){
+        counter==0;
+        for(int k=0; k<NUM_COLORS; ++k){
+            if (market.playing_board[i]!=NULL){
+                provide[k]<=market.playing_board[i]->s[k];
+                
+            }
+        }
+        if (counter==NUM_COLORS){
+            pick_tokens(current_player, players, i);
+            return 1;
+        }
+    }
+    return 0;
+
+}
 

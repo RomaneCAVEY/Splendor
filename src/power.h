@@ -38,3 +38,5 @@ void guild_panic();
 void gain_favor_with_builder(struct players[NB_PLAYERS], int current_player);
 
 void favor_steal(struct player players[NB_PLAYERS], int current_player);
+
+int master_hand(struct players[NB_PLAYERS], int current_player, sruct builder_t b);
