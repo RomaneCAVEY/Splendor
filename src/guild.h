@@ -18,6 +18,7 @@ struct guild{
     struct builder_t* builders[MAX_BUILDERS]; //All the builder of the beginning
     struct builder_t* builder_available[MAX_BUILDERS];// The MAX_BUILDER_PER_LEVEL we can pick each turn
     struct stack_t stack[NUM_LEVELS];
+	
 };
 
 void init_guild();

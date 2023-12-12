@@ -7,7 +7,6 @@
 struct market{
     int nbr_token;
     struct token_t* playing_board[NUM_TOKENS];
-    void* power[NUM_TOKENS];
     int permutation[NUM_TOKENS];
 };
 

@@ -96,6 +96,7 @@ void builder_guild_renew(int level_choosen) {
 	}
 }
 
+
 struct builder_t * guild_builder_in_guild(unsigned index) {
 	return guild.builder_available[index];
 }
