@@ -74,6 +74,10 @@ void remove_builders_from_guild(struct builder_t * builder) {
 	}
 }
 
+struct stack_t guild_stack(int i){
+	return guild.stack[i];
+}
+
 void builder_guild_renew(int level_choosen) {
 	struct builder_t*  stockage[MAX_BUILDERS_AVAILABLE_PER_LVL]={};
 	int index=0;

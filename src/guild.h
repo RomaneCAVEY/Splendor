@@ -55,7 +55,9 @@ void guild_display();
  */
 void add_from_guild(int index, struct player players[NB_PLAYERS] , int current_player);
 
-
-
+/**
+Return the stack at place i in the guild
+*/
+struct stack_t guild_stack(int i);
 
 #endif

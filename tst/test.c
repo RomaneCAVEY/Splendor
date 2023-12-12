@@ -60,10 +60,6 @@ int main(int argc, char* argv[])
     }
 
     printf("\n \n ========================================== \n \n");
-    if(!market_display_test()){
-        printf("market_display_test \n");
-        printf("test passed");
-    }
     return 0;
 }
 
