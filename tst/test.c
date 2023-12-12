@@ -56,9 +56,9 @@ int main(int argc, char* argv[])
         printf("test_token_use \n");
         printf("test passed");
         }
-    else {printf("test failed");
+    else {
+		printf("test failed");
     }
-
     printf("\n \n ========================================== \n \n");
     return 0;
 }
