@@ -8,3 +8,24 @@ void set_display(struct set_t set){
 
     }
 }
+
+/**Creation of set*/
+struct set_t create_simple_set(enum color_t c) {
+    struct set_t set;
+    for (int i = 0; i < NUM_COLORS; ++i) {
+        set.ressource[i] = 0;
+    }
+    set.ressource[c] = 1;
+    return set;
+    /*for (int i=0; i<NUM_COLORS; ++i){
+        printf("%d",token.c[i]);
+    }*/
+}
+
+struct set_t create_complex_set(unsigned int c[NUM_COLORS]) {
+    struct set_t set;
+    for (int i = 0; i < NUM_COLORS; ++i) {
+        set.ressource[i] = c[i];
+    }
+    return set;
+}

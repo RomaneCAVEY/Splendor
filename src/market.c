@@ -8,6 +8,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
+#include "permutation.h"
+
 
 struct market market={};
 
@@ -21,17 +23,6 @@ void init_market() {
     for (unsigned int i=0; i< NUM_TOKENS; i++){
         market.playing_board[i]= token_get_adress(make_permutation(i));
     }
-}
-int pick_any_token_in_market(int current_player, struct player players[NB_PLAYERS], int a) {
-    int random_index=rand()%NUM_TOKENS;
-    if (market.nbr_token>0) {
-        while (market[random_index]==NULL) {
-            random_index= (random_index + 1) % NUM_TOKENS;
-        }
-        pick_a_token(current_player, players, a);
-        return 1;
-    }
-    return 0;
 }
 
 struct token_t* make_market(int index){
@@ -159,7 +150,7 @@ int tokens_connex(int index, int nbr_token,int current_player, struct player pla
 
 void remove_token_from_market(struct token_t * token){
     for (int i=0; i<NUM_TOKENS; i++){
-        if (token== market.playing_board[i]){
+        if (token == market.playing_board[i]){
             market.playing_board[i] = NULL;
             market.nbr_token-=1;
         }

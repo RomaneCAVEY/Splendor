@@ -1,19 +1,14 @@
 #ifndef __MARKET_H__
 #define __MARKET_H__
 
-#include "permutation.h"
-#include "player.h"
-#include "second_token.h"
 #include "token.h"
-#include "game.h"
-#include <stdio.h>
-#include <time.h>
-#include <string.h>
+#include "player.h"
+
+extern struct market market;
 
 struct market{
     int nbr_token;
     struct token_t* playing_board[NUM_TOKENS];
-    void* power[NUM_TOKENS];
     int permutation[NUM_TOKENS];
 };
 /**

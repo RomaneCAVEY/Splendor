@@ -2,9 +2,8 @@
 #define __GUILD_H__
 
 
-#include"market.h"
+#include "player.h"
 #include"stack.h"
-#include"player.h"
 #include <stdio.h>
 #include <time.h>
 #include <string.h>
@@ -19,12 +18,16 @@ struct guild{
     struct builder_t* builders[MAX_BUILDERS]; //All the builder of the beginning
     struct builder_t* builder_available[MAX_BUILDERS];// The MAX_BUILDER_PER_LEVEL we can pick each turn
     struct stack_t stack[NUM_LEVELS];
+	
 };
 
+extern struct guild guild;
+
 void init_guild();
+
+
 /** Add the builder bought in the guild to the player_builder
  */
- 
 void add_from_guild(int index, struct player players[NB_PLAYERS] , int current_player);
 /**
 Init the guild with random value for builders
@@ -43,8 +46,6 @@ of the same level if it's possible
 */
 void remove_builders_from_guild(struct builder_t * builder);
 
-void builder_guild_renew(int level_choosen);
-
 struct builder_t * guild_builder_in_guild(unsigned index);
 /**
 Display the available builders of the guild
@@ -55,7 +56,9 @@ void guild_display();
  */
 void add_from_guild(int index, struct player players[NB_PLAYERS] , int current_player);
 
-
-
+/**
+Return the stack at place i in the guild
+*/
+struct stack_t guild_stack(int i);
 
 #endif

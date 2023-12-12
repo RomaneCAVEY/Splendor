@@ -10,11 +10,8 @@
 #include "builder.h"
 #include "token.h"
 #include "color.h"
-#include "guild.h"
-#include <stdio.h>
-#include <time.h>
-#include <stdlib.h>
-#include <string.h>
+
+
 
 //Declaration of some variables
 

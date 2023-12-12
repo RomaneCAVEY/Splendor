@@ -1,10 +1,14 @@
 #include"power.h"
+#include"guild.h"
+#include"market.h"
+
 const char * power_string[] = {
     "PANIC_MARKET",
     "PANIC_GUILD",
     "TOKEN_STEAL",
     "TURN_STOLEN",
-    "MASTER_MAIN"
+    "MASTER_MAIN",
+	"NULL"
 };
 
 const char * power_to_string(enum power power) {
@@ -14,6 +18,9 @@ const char * power_to_string(enum power power) {
 
     return power_string[power];
 }
+
+
+
 
 /**
 The current player chooses the builders he wants to steal
@@ -34,7 +41,7 @@ int choose_a_builder(int current_player, struct player players[NB_PLAYERS]){
 }
 
 /**
-The player pick one of the player of the guild and 
+The player pick one of the builder of the guild and 
 remplace it by one them
 
 void guild_panic(){
@@ -90,7 +97,7 @@ void token_steal(int current_player, int player_to_steal, struct player players[
         int c=0;
         int rank=(random+c)%players[current_player].nbr_token;
         while (!players[(current_player+1)%NB_PLAYERS].player_token[rank] && c<players[current_player].nbr_token){
-            c++;
+            ++c;
             rank=(random+c)%players[current_player].nbr_token;
     }
     
@@ -108,5 +115,21 @@ void token_steal(int current_player, int player_to_steal, struct player players[
 
 }
 
+void favor_steal(struct player players[NB_PLAYERS], int current_player) {
+    int random= rand()%NB_PLAYERS;
+    int counter=0;
+    while((players[NB_PLAYERS].favor_nbr=0) || (random==current_player) && (counter<NB_PLAYERS)){
+        random=rand()%NB_PLAYERS;
+        ++counter;
+    }
+    if (counter!=NB_PLAYERS){
+        ++players[current_player].favor_nbr;
+        --players[random].favor_nbr;
+    }
+}
+
+void gain_favor_with_builder(struct players[NB_PLAYERS], int current_player) {
+    ++players[current_player].favor_nbr;
+}
 
 
