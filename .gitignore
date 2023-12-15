@@ -1,9 +1,4 @@
 *~
 *.o
 project
-<<<<<<< HEAD
-test_*
-=======
-test_*
-test
->>>>>>> achiev1
+test_
