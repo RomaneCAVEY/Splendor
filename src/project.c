@@ -91,7 +91,7 @@ int main(int argc, char *argv[]){
         for ( int i = guild_nbr_builder(&guild); i>(-1) ; i--) {
          //   fprintf(stderr,"c:%d\n",c);
            // c+=1;
-            if (guild_available_builder(i,&guild)) {
+            if (guild_available_builder(i, &guild)) {
                 if (possibility_token_pay(players[current_player], make_builder(i))) {
                     
                     possibility_to_pay = possibility_token_pay(players[current_player], make_builder(i));
