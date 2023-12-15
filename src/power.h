@@ -15,7 +15,7 @@
 #define NUM_POWER 5
 
 
-enum power{
+enum power_id{
     PANIC_MARKET,
     PANIC_GUILD,
     TOKEN_STEAL,
@@ -29,7 +29,7 @@ enum power{
 typedef int (*skill)(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market_t *market,struct guild_t *guild);
 
 
-const char * power_to_string(enum power power);
+const char * power_to_string(enum power_id power);
 
 
 /**Init all the power*/
@@ -74,17 +74,16 @@ After hiring this architect, the player can take a token of one of the resources
 int master_hand(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market_t *market,struct guild_t *guild);
 
 
-extern skill skills[5];
-
 
 /**
 return the power of the index index
 */
-skill give_the_power(int index);
+skill give_the_power(enum power_id power_id);
 
 void gain_favor_with_builder(struct player players[NB_PLAYERS], int current_player);
 
 void favor_steal(struct player players[NB_PLAYERS], int current_player);
+
 
 
 

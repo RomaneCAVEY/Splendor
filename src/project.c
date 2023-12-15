@@ -12,6 +12,7 @@
 #include "game.h"
 #include "super_builder.h"
 #include "market.h"
+#include "super_token.h"
 
 #define NB_PLAYERS 2
 
@@ -68,11 +69,15 @@ int main(int argc, char *argv[]){
     // Init all_tokens
     init_all_tokens(); 
     //Init all_builders 
-    init_builders(seed_builder); 
+    init_builders(seed_builder);
     // init the guild
     init_guild(&guild); 
+	guild_display(&guild);
     // init the market
    	init_market(&market);
+	market_display(&market);
+	init_power_builders();
+	init_power_tokens();
     int nb_turns_not_played = 0;
     int nb_turns = 0;
     printf("initialisation over \n");

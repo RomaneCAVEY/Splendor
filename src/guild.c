@@ -1,4 +1,5 @@
 #include "guild.h"
+#include "builder.h"
 #include "stack.h"
 #include <stdio.h>
 #include <time.h>
@@ -11,20 +12,23 @@
 Init the guild with random value for builders
 */
 void init_guild(struct guild_t* guild) {
-	guild->nb_builder = num_builders();
-	printf("nb_builder= %d \n", guild->nb_builder);
-	for ( int i = 0; i < guild->nb_builder; ++i) {
+	guild->nb_builder =0;
+	//printf("nb_builder= %d \n", guild->nb_builder);
+	for ( int i = 0; i < MAX_BUILDERS; ++i) {
 		if(make_builder(i)){
 			guild->builders[i]= make_builder(i);
+			guild->nb_builder +=1;
 		}
 	}
 	for (unsigned int i = 0; i < NUM_LEVELS; ++i) {
-		for (int j = 0; j < guild->nb_builder; ++j) {
-			if (builder_level(guild->builders[j])==i && guild->builders[j]){
-				stack_push(&guild->stack[i],guild->builders[j]);
+		for (int j = 0; j < MAX_BUILDERS; ++j) {
+			if (guild->builders[j]){
+				if (builder_level(guild->builders[j])==i && guild->builders[j]){
+					stack_push(&guild->stack[i],guild->builders[j]);
+				}
 			}
 		}
-	printf("nb in the stack %d :  %d ",i, guild->stack[i].nb);
+	printf("nb in the stack %d :  %d \n",i, guild->stack[i].nb);
 	stack_display(guild->stack[i]);
 	}
 	for (int level = 0; level <NUM_LEVELS; ++level) {

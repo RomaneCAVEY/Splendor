@@ -1,5 +1,8 @@
 #include"power.h"
+#include "builder.h"
 #include "game.h"
+#include "guild.h"
+#include <stdio.h>
 
 const char * power_string[] = {
     "PANIC_MARKET",
@@ -10,17 +13,26 @@ const char * power_string[] = {
 	"MAX"
 };
 
+skill skills[5]={
+	panic_market,
+	guild_panic,
+	token_steal,
+	steal_turn,
+	master_hand
+};
 
 
-skill give_the_power(int index){
-	return skills[index];	
+skill give_the_power(enum power_id power_id){
+	return skills[power_id];	
 }
 
-const char * power_to_string(enum power power) {
-    if (power > 4) {
+
+
+const char * power_to_string(enum power_id power_id) {
+    if (power_id > 4) {
         return "??????????????";
     }
-    return power_string[power];
+    return power_string[power_id];
 }
 
 
@@ -49,17 +61,32 @@ remplace it by one them */
 
 int guild_panic(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market_t *market,struct guild_t *guild){
     if (guild_nbr_builder(guild)){
+		printf("GUILD_PANIC IS RUNNING!!!!!!! \n");
+		printf("The guild before: \n");
+		guild_display(guild);
 		int random=rand()%MAX_BUILDERS;
 		int c=0;
-		while(!guild_available_builder((random+c)%MAX_BUILDERS_AVAILABLE_PER_LVL,guild) && (c<(MAX_BUILDERS_AVAILABLE_PER_LVL*NUM_LEVELS))){
+		while(!guild_available_builder((random+c)%MAX_BUILDERS,guild) && (c<(MAX_BUILDERS))){
 			c++;
 		}
-		remove_builders_from_guild(guild_available_builder(random+c,guild),guild);
+		struct builder_t* builder= guild_available_builder(random+c,guild);
+		remove_builders_from_guild(builder,guild);
+		int level_b= builder_level(builder);
+		for (int level = 0; level <NUM_LEVELS; ++level) {
+				if(guild->stack[level_b+level].nb){
+					guild->builder_available[random+c]=stack_pop(&guild->stack[level_b+level]);
+				}
+		}
+		// printf("guild.stack[%d].nb = %d !!!!!!!!!!!!!!!!\n",level, guild.stack[level].nb);
 
-	}
+
+			}
+
     else{
         printf("panic_guild failed, the guild is empty \n");
     }
+	printf("The guild at the end: \n");
+	guild_display(guild);
 	return 0;
 
 }
@@ -75,6 +102,7 @@ empty place of the market
 int panic_market(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market_t *market,struct guild_t *guild){
     int random= rand();
     int c=0;
+	printf("PANIC_MARKET IS RUNNING!!!!! \n");
     //pick an available random token
 	if(market->nbr_token){ 
     while (!make_market((random+c)%NUM_TOKENS,market) && c<NUM_TOKENS){
@@ -115,6 +143,8 @@ int token_steal(int current_player, struct player players[NB_PLAYERS], void* res
 		int nb=players[current_player].nbr_token;
 		players[current_player].player_token[nb]=players[(current_player+1)%NB_PLAYERS].player_token[rank];
         }
+
+	printf("TOKEN_STEAL IS RUNNING!!!!!!!!! \n");
     return 0;
     
 }
@@ -147,6 +177,7 @@ void gain_favor_with_builder(struct player players[NB_PLAYERS], int current_play
 
 int master_hand(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market_t *market,struct guild_t *guild){
     int counter=0;
+	printf("MASTER_HAND IS RUNNING!!!!!!!!! \n");
 	struct builder_t *b=ressource;
     struct set_t provide=builder_provides(b);
     for(int i=0; i<NUM_TOKENS; ++i){
@@ -168,10 +199,3 @@ int master_hand(int current_player, struct player players[NB_PLAYERS], void* res
 
 }
 
-skill skills[5]={
-	panic_market,
-	guild_panic,
-	token_steal,
-	steal_turn,
-	master_hand
-};

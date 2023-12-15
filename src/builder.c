@@ -5,7 +5,7 @@
 
 #ifndef VICTORY_POINTS
 #define VICTORY_POINTS 20
-
+#define MIN_BUILDER 5
 struct builder_t{
     char level;
     int points;
@@ -21,7 +21,7 @@ unsigned int nb_builders;
 Can be called multiple times. Can also do nothing. */
 void init_builders(unsigned int seed) {
     srand(seed);
-    nb_builders =(rand() % (MAX_BUILDERS ));
+    nb_builders =(rand() % (MAX_BUILDERS-MIN_BUILDER)+MIN_BUILDER);
     printf("HERE IS THE NUMBER OF BUILDERS: %d \n",nb_builders);
     for (unsigned int i = 0; i < nb_builders; ++i) {
         game_builders[i].level = rand() % NUM_LEVELS;
@@ -30,6 +30,7 @@ void init_builders(unsigned int seed) {
         game_builders[i].ressource.ressource[rand() % NUM_COLORS]+=1;
         game_builders[i].production.ressource[rand() % NUM_COLORS]=1;
         game_builders[i].production.ressource[rand() % NUM_COLORS]+=1;
+		builder_display(&game_builders[i], "This is a new builder");
     }
 }
 

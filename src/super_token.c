@@ -21,11 +21,28 @@ void init_power_tokens(){
 }
 
 
-skill token_has_the_power_i(struct token_t* token, int index){
-	int count=0;
-	while ( token_equals(*token, *token_power[count].token) && count<MAX_BUILDERS)
+skill token_has_the_power_i(struct token_t* token, int i){
+
+
+	for (int index = 0 ; index < NUM_TOKENS; ++index)
 	{
-		count++;
+		if (token_power[index].token == token)
+		{
+			return token_power[index].powers[i];
+		}
 	}
-	return token_power[count].powers[index];
+	return NULL;
+}
+
+
+void execute_token_power(int current, struct player players[NB_PLAYERS],struct token_t* token,struct guild_t *guild, struct market_t *market){
+	int flag = 0;
+	for (enum power_id power_id = PANIC_MARKET ; power_id<= MASTER_HAND; power_id++){
+		skill skill = token_has_the_power_i(token,power_id);
+		if (power_id == TURN_STOLEN) 
+			continue;
+		if (skill){
+			skill(current,players,token,market,guild);
+		}
+	}
 }
