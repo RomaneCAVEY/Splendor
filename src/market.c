@@ -14,47 +14,47 @@
 struct market market={};
 
 
-void init_market() {
-    market.nbr_token = NUM_TOKENS;
+void init_market(struct market* market) {
+    market->nbr_token = NUM_TOKENS;
     /*init the playing_board*/
     for (unsigned int i=0; i< NUM_TOKENS; i++){
-        market.permutation[i]= make_permutation(i);
+        market->permutation[i]= make_permutation(i);
     }
     for (unsigned int i=0; i< NUM_TOKENS; i++){
-        market.playing_board[i]= token_get_adress(make_permutation(i));
+        market->playing_board[i]= token_get_adress(make_permutation(i));
     }
 }
 
-struct token_t* make_market(int index){
-    return market.playing_board[index];
+struct token_t* make_market(int index, struct market* market){
+    return market->playing_board[index];
 }
 
-int market_nbr_token() {
-    return market.nbr_token;
+int market_nbr_token(struct market* market) {
+    return market->nbr_token;
 }
 /**
 Replace the token j to i, token at place i is free
 */
-void market_moove_i_to_j(int i, int j){
-    market.playing_board[i]=market.playing_board[j];
-    remove_token_from_market(market.playing_board[j]);
-    market.nbr_token+=1;
+void market_moove_i_to_j(int i, int j, struct market* market){
+    market->playing_board[i]=market->playing_board[j];
+    remove_token_from_market(market->playing_board[j], market);
+    market->nbr_token+=1;
 }
 
 
-void add_token_to_market(struct token_t * token) {
+void add_token_to_market(struct token_t * token, struct market* market) {
     int i = 0;
-     while (market.playing_board[i] && i< NUM_TOKENS) {
+     while (market->playing_board[i] && i< NUM_TOKENS) {
         i++;
     }
-    market.playing_board[i] = token;
-    market.nbr_token = market.nbr_token + 1;
+    market->playing_board[i] = token;
+    market->nbr_token = market->nbr_token + 1;
 
 }
 
 
-int market_token_is_available(int i){
-    if(market.playing_board[i]){
+int market_token_is_available(int i, struct market* market){
+    if(market->playing_board[i]){
         return 1;
     }
     return 0;
@@ -63,7 +63,7 @@ int market_token_is_available(int i){
 
 /* Display the market
 */
-void market_display() {
+void market_display(struct market* market) {
     unsigned int i = 0;
     int square = sqrt(NUM_TOKENS);
     for (i=0; i< NUM_TOKENS; i++){
@@ -71,9 +71,9 @@ void market_display() {
             printf("\n______________________________________________________________________________________________________________________");
             printf("________________________________________________________________________\n\n\n\n");
         }
-        if ( market.playing_board[i]){
-            token_display( *market.playing_board[i], "|| ");
-            if (!is_complex(market.playing_board[i])){
+        if ( market->playing_board[i]){
+            token_display( *market->playing_board[i], "|| ");
+            if (!is_complex(market->playing_board[i])){
                 printf("          ");
             }
         }
@@ -85,28 +85,28 @@ void market_display() {
 
 /* Return the adress of the token in the market at the place i
 */
-struct token_t * token_in_market_is_available(int i) {
-    return market.playing_board[i];
+struct token_t * token_in_market_is_available(int i, struct market* market) {
+    return market->playing_board[i];
 }
 
 
 
 /*Return the number of token connex to the token (himself counts for one)*/
-int tokens_neighbour(int index){
+int tokens_neighbour(int index, struct market* market){
     int square = sqrt(NUM_TOKENS);
     int count = 1;
-    if (index<(NUM_TOKENS-square) && market.playing_board[index+square]){
+    if (index<(NUM_TOKENS-square) && market->playing_board[index+square]){
         count += 1;
     }
-    if ((index>square) && market.playing_board[index-square]){
+    if ((index>square) && market->playing_board[index-square]){
         count += 1;
     }
    
-    if ((index % square != 1) && (market.playing_board[index+1])){
+    if ((index % square != 1) && (market->playing_board[index+1])){
         count += 1;
      }
     
-    if ((index % square != 0) && (market.playing_board[index-1])){
+    if ((index % square != 0) && (market->playing_board[index-1])){
         count += 1;
      }
 
@@ -114,32 +114,32 @@ int tokens_neighbour(int index){
 }
 
 
-int tokens_connex(int index, int nbr_token,int current_player, struct player players[NB_PLAYERS]){
+int tokens_connex(int index, int nbr_token,int current_player, struct player players[NB_PLAYERS], struct market* market) {
     int square = sqrt(NUM_TOKENS);
     int count=1;
 
-    pick_tokens(current_player,players,index);
+    pick_tokens(current_player,players,index, market);
 
 
-    if (index<(NUM_TOKENS-square) && market.playing_board[index+square]){
-        pick_tokens(current_player,players,index+square);
+    if (index<(NUM_TOKENS-square) && market->playing_board[index+square]){
+        pick_tokens(current_player,players,index+square, market);
         count+=1;
     }
     if (count<nbr_token && nbr_token>count){      
-        if ((index>square) && market.playing_board[index-square]){
-            pick_tokens(current_player,players,index-square);
+        if ((index>square) && market->playing_board[index-square]){
+            pick_tokens(current_player,players,index-square, market);
             count += 1;
         }
     }
     if (count<nbr_token && nbr_token>count){      
-        if ((index % square != 1) && (market.playing_board[index+1])){
-            pick_tokens(current_player,players,index+1);
+        if ((index % square != 1) && (market->playing_board[index+1])){
+            pick_tokens(current_player,players,index+1, market);
             count += 1;
         }
     }
     if (count<nbr_token && nbr_token>count){         
-        if ((index % square != 0) && (market.playing_board[index-1])){
-            pick_tokens(current_player,players,index-1);
+        if ((index % square != 0) && (market->playing_board[index-1])){
+            pick_tokens(current_player,players,index-1, market);
             count += 1;
         }
     }
@@ -148,11 +148,11 @@ int tokens_connex(int index, int nbr_token,int current_player, struct player pla
 }
 
 
-void remove_token_from_market(struct token_t * token){
+void remove_token_from_market(struct token_t * token, struct market* market){
     for (int i=0; i<NUM_TOKENS; i++){
-        if (token == market.playing_board[i]){
-            market.playing_board[i] = NULL;
-            market.nbr_token-=1;
+        if (token == market->playing_board[i]){
+            market->playing_board[i] = NULL;
+            market->nbr_token-=1;
         }
     }
 }

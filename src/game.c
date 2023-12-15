@@ -100,7 +100,7 @@ int possibility_token_pay(struct player player, struct builder_t * b) {
 
 
 //Pay the builder with the tokens of the player, remove the token used to pay and put the token on the market
-int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int current_player) {
+int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int current_player, struct market* market) {
     if (possibility_token_pay(players[current_player], builder)==4){
         return 1;
     }
@@ -145,7 +145,7 @@ int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int
                 for (unsigned int k=0; k<NUM_COLORS;k++){
                     count_color[k]+=token->s.ressource[k];
                 }
-                add_token_to_market(players[current_player].player_token[i]);
+                add_token_to_market(players[current_player].player_token[i], market);
                 remove_token(players, players[current_player].player_token[i], current_player);
             }
                 //Check if we reach the cost of the builder already
@@ -168,21 +168,21 @@ int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int
 
 /* Pay the builder game_builder[index] with the tokens of the players current_player
 */
-void pay(struct player players[NB_PLAYERS], int index, int current){
+void pay(struct player players[NB_PLAYERS], int index, int current, struct guild* guild){
     //printf(const char *restrict format, ...)
-    token_pay(guild_builder_in_guild(index), players, current);
+    token_pay(guild_builder_in_guild(index, guild), players, current);
     //printf(" \n payed \n ");
-    add_from_guild(index, players, current);
-    remove_builders_from_guild(guild_builder_in_guild(index));
+    add_from_guild(index, players, current, guild);
+    remove_builders_from_guild(guild_builder_in_guild(index, guild), guild);
 }
 
 
 /* Pick a token in the market, add in the player's token list, and remove it from the market
 */
-void pick_tokens(int current_player, struct player players[NB_PLAYERS], int a){
+void pick_tokens(int current_player, struct player players[NB_PLAYERS], int a, struct market* market){
     players[current_player].player_token[players[current_player].nbr_token] = token_get_adress(a);
     //printf("adress of the token %d : %p",current_player, token_get_adress(a));
     players[current_player].nbr_token = players[current_player].nbr_token + 1;
-    remove_token_from_market(token_in_market_is_available(a));
+    remove_token_from_market(token_in_market_is_available(a, market), market);
 
 }

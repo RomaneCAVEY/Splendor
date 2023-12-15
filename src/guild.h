@@ -21,44 +21,42 @@ struct guild{
 	
 };
 
-extern struct guild guild;
 
-void init_guild();
 
 
 /** Add the builder bought in the guild to the player_builder
  */
-void add_from_guild(int index, struct player players[NB_PLAYERS] , int current_player);
+void add_from_guild(int index, struct player players[NB_PLAYERS] , int current_player, struct guild* guild);
 /**
 Init the guild with random value for builders
 */
-void init_guild();
+void init_guild(struct guild* guild);
 
 /**
 Return 1 if the builder is available in the guile, else 0
 */
-struct builder_t* guild_available_builder(int i);
-int guild_nbr_builder();
+struct builder_t* guild_available_builder(int i, struct guild* guild);
+int guild_nbr_builder(struct guild* guild);
 
 /**
 Remove the buider we bought from the guild, pick another one to complete the guild, with a builder
 of the same level if it's possible
 */
-void remove_builders_from_guild(struct builder_t * builder);
+void remove_builders_from_guild(struct builder_t * builder, struct guild* guild);
 
-struct builder_t * guild_builder_in_guild(unsigned index);
+struct builder_t * guild_builder_in_guild(unsigned index, struct guild* guild);
 /**
 Display the available builders of the guild
 */
-void guild_display();
+void guild_display(struct guild* guild);
 
 /** Add the builder bought in the guild to the player_builder
  */
-void add_from_guild(int index, struct player players[NB_PLAYERS] , int current_player);
+void add_from_guild(int index, struct player players[NB_PLAYERS] , int current_player, struct guild* guild);
 
 /**
 Return the stack at place i in the guild
 */
-struct stack_t guild_stack(int i);
+struct stack_t guild_stack(int i, struct guild* guild);
 
 #endif
