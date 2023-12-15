@@ -6,8 +6,8 @@
 #include "market.h"
 #include "game.h"
 
-void builder_guild_renew(int level_choosen, struct guild* guild);
+void builder_guild_renew(int level_choosen, struct guild_t* guild);
 
-int pick_any_token_in_market(int current_player, struct player players[NB_PLAYERS], int a, struct market* market,struct guild *guild);
+int pick_any_token_in_market(int current_player, struct player players[NB_PLAYERS], int a, struct market_t* market,struct guild_t *guild);
 
 #endif

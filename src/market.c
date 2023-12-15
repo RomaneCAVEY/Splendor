@@ -2,10 +2,9 @@
 #include "game.h"
 
 
-struct market market={};
 
 
-void init_market(struct market* market) {
+void init_market(struct market_t* market) {
     market->nbr_token = NUM_TOKENS;
     /*init the playing_board*/
     for (unsigned int i=0; i< NUM_TOKENS; i++){
@@ -16,24 +15,24 @@ void init_market(struct market* market) {
     }
 }
 
-struct token_t* make_market(int index, struct market* market){
+struct token_t* make_market(int index, struct market_t* market){
     return market->playing_board[index];
 }
 
-int market_nbr_token(struct market* market) {
+int market_nbr_token(struct market_t* market) {
     return market->nbr_token;
 }
 /**
 Replace the token j to i, token at place i is free
 */
-void market_moove_i_to_j(int i, int j, struct market* market){
+void market_moove_i_to_j(int i, int j, struct market_t* market){
     market->playing_board[i]=market->playing_board[j];
     remove_token_from_market(market->playing_board[j], market);
     market->nbr_token+=1;
 }
 
 
-void add_token_to_market(struct token_t * token, struct market* market) {
+void add_token_to_market(struct token_t * token, struct market_t* market) {
     int i = 0;
      while (market->playing_board[i] && i< NUM_TOKENS) {
         i++;
@@ -44,7 +43,7 @@ void add_token_to_market(struct token_t * token, struct market* market) {
 }
 
 
-int market_token_is_available(int i, struct market* market){
+int market_token_is_available(int i, struct market_t* market){
     if(market->playing_board[i]){
         return 1;
     }
@@ -54,7 +53,7 @@ int market_token_is_available(int i, struct market* market){
 
 /* Display the market
 */
-void market_display(struct market* market) {
+void market_display(struct market_t* market) {
     unsigned int i = 0;
     int square = sqrt(NUM_TOKENS);
     for (i=0; i< NUM_TOKENS; i++){
@@ -76,14 +75,14 @@ void market_display(struct market* market) {
 
 /* Return the adress of the token in the market at the place i
 */
-struct token_t * token_in_market_is_available(int i, struct market* market) {
+struct token_t * token_in_market_is_available(int i, struct market_t* market) {
     return market->playing_board[i];
 }
 
 
 
 /*Return the number of token connex to the token (himself counts for one)*/
-int tokens_neighbour(int index, struct market* market){
+int tokens_neighbour(int index, struct market_t* market){
     int square = sqrt(NUM_TOKENS);
     int count = 1;
     if (index<(NUM_TOKENS-square) && market->playing_board[index+square]){
@@ -105,7 +104,7 @@ int tokens_neighbour(int index, struct market* market){
 }
 
 
-int tokens_connex(int index, int nbr_token,int current_player, struct player players[NB_PLAYERS], struct market* market,struct guild* guild) {
+int tokens_connex(int index, int nbr_token,int current_player, struct player players[NB_PLAYERS], struct market_t* market,struct guild_t* guild) {
     int square = sqrt(NUM_TOKENS);
     int count=1;
 
@@ -139,7 +138,7 @@ int tokens_connex(int index, int nbr_token,int current_player, struct player pla
 }
 
 
-void remove_token_from_market(struct token_t * token, struct market* market){
+void remove_token_from_market(struct token_t * token, struct market_t* market){
     for (int i=0; i<NUM_TOKENS; i++){
         if (token == market->playing_board[i]){
             market->playing_board[i] = NULL;

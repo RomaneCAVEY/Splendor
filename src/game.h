@@ -30,17 +30,17 @@ int possibility_token_pay(struct player player, struct builder_t* builder );
 /**
     Pay the builder with the tokens and th builders of the player
 */
-int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int current_player, struct market* market);
+int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int current_player, struct market_t* market);
 
 
 
 void remove_token(struct player players[NB_PLAYERS] , struct token_t *token, int current_player);
 /* Pay the builder game_builder[index] with the tokens of the players current_player
 */
-void pay(struct player players[NB_PLAYERS], int index, int current, struct guild* guild, struct market* market);
+void pay(struct player players[NB_PLAYERS], int index, int current, struct guild_t* guild, struct market_t* market);
 
 
 /* Pick a token in the market, add in the player's token list, and remove it from the market
 */
-void pick_tokens(int current_player, struct player players[NB_PLAYERS], int a, struct market* market,struct guild *guild);
+void pick_tokens(int current_player, struct player players[NB_PLAYERS], int a, struct market_t* market,struct guild_t *guild);
 #endif

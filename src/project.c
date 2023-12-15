@@ -1,25 +1,22 @@
-#include "builder.h"
-#include "guild.h"
-#include "super_builder.h"
-#include "token.h"
-#include "player.h"
-#include "game.h"
-#include "power.h"
-#include "permutation.h"
-#include "second_token.h"
-#include "second_builder.h"
-#include <stdio.h>
-#include <stdlib.h>
 #include <threads.h>
 #include <time.h>
 #include <unistd.h>
 #include <string.h>
 #include <getopt.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "power.h"
+#include "guild.h"
+#include "player.h"
+#include "game.h"
+#include "super_builder.h"
+#include "market.h"
 
 #define NB_PLAYERS 2
 
-struct guild guild={};
-struct market market={};
+struct guild_t guild={};
+struct market_t market={};
 struct player players[NB_PLAYERS];
 
 int main(int argc, char *argv[]){

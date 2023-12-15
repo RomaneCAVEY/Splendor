@@ -26,7 +26,7 @@ enum power{
 
 
 
-typedef int (*skill)(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market *market,struct guild *guild);
+typedef int (*skill)(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market_t *market,struct guild_t *guild);
 
 
 const char * power_to_string(enum power power);
@@ -42,13 +42,13 @@ void init_power();
 Pick an available token market and move it in a random 
 empty place of the market
 */
-int panic_market(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market *market,struct guild *guild);
+int panic_market(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market_t *market,struct guild_t *guild);
 
 
 /**
 Current player can steal a token to the other player
 */
-int token_steal(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market *market,struct guild *guild);
+int token_steal(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market_t *market,struct guild_t *guild);
 
 void gain_favor_with_builder(struct player players [NB_PLAYERS], int current_player);
 
@@ -58,20 +58,20 @@ void gain_favor_with_builder(struct player players [NB_PLAYERS], int current_pla
 The player can take off one of the player of the guild and 
 remplace it by a new one
 */
-int guild_panic(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market *market,struct guild *guild);
+int guild_panic(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market_t *market,struct guild_t *guild);
 
 
 /**
 Play again, new turn of the player
 */
 
-int steal_turn(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market *market,struct guild *guild);
+int steal_turn(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market_t *market,struct guild_t *guild);
 
 /**
 After hiring this architect, the player can take a token of one of the resources produced by the architect from the market.
 */
 
-int master_hand(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market *market,struct guild *guild);
+int master_hand(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market_t *market,struct guild_t *guild);
 
 
 extern skill skills[5];

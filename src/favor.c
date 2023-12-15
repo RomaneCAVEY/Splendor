@@ -3,7 +3,7 @@
 
 
 //The player can renew the builders from a specific level in  the guild
-void builder_guild_renew(int level_choosen, struct guild* guild ) {
+void builder_guild_renew(int level_choosen, struct guild_t* guild ) {
     struct builder_t*  stockage[MAX_BUILDERS_AVAILABLE_PER_LVL]={};
     int index=0;
     for (int i=0; i<MAX_BUILDERS; ++i) {
@@ -26,7 +26,7 @@ void builder_guild_renew(int level_choosen, struct guild* guild ) {
 }
 
 //The player can use his favor to take one of the many tokens available on the market
-int pick_any_token_in_market(int current_player, struct player players[NB_PLAYERS], int a, struct market* market,struct guild *guild) { //(int a) is used in the fonction pick_token in game.c 
+int pick_any_token_in_market(int current_player, struct player players[NB_PLAYERS], int a, struct market_t* market,struct guild_t *guild) { //(int a) is used in the fonction pick_token in game.c 
     int random_index=rand()%NUM_TOKENS;
     int counter=0;
     if (market->nbr_token>0) {

@@ -47,8 +47,7 @@ The player pick one of the player of the guild and
 remplace it by one them */
 
 
-int guild_panic(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market *market,struct guild *guild){
-   
+int guild_panic(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market_t *market,struct guild_t *guild){
     if (guild_nbr_builder(guild)){
 		int random=rand()%MAX_BUILDERS;
 		int c=0;
@@ -73,7 +72,7 @@ int guild_panic(int current_player, struct player players[NB_PLAYERS], void* res
 Pick an available token market and move it in a random 
 empty place of the market
 */
-int panic_market(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market *market,struct guild *guild){
+int panic_market(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market_t *market,struct guild_t *guild){
     int random= rand();
     int c=0;
     //pick an available random token
@@ -102,7 +101,7 @@ int panic_market(int current_player, struct player players[NB_PLAYERS], void* re
 /**
 Current player can steal a token to the other player
 */
-int token_steal(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market *market,struct guild *guild){
+int token_steal(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market_t *market,struct guild_t *guild){
     if (players[current_player].nbr_token< NUM_TOKENS &&  players[current_player+1].nbr_token>0){
         int random= rand();
         int c=0;
@@ -122,7 +121,7 @@ int token_steal(int current_player, struct player players[NB_PLAYERS], void* res
 
 
 
-int steal_turn(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market *market,struct guild *guild){
+int steal_turn(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market_t *market,struct guild_t *guild){
 	return ((current_player -1) % NB_PLAYERS);
 
 }
@@ -146,7 +145,7 @@ void gain_favor_with_builder(struct player players[NB_PLAYERS], int current_play
     ++players[current_player].favor_nbr;
 }
 
-int master_hand(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market *market,struct guild *guild){
+int master_hand(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market_t *market,struct guild_t *guild){
     int counter=0;
 	struct builder_t *b=ressource;
     struct set_t provide=builder_provides(b);

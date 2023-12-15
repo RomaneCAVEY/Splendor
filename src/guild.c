@@ -10,7 +10,7 @@
 /**
 Init the guild with random value for builders
 */
-void init_guild(struct guild* guild) {
+void init_guild(struct guild_t* guild) {
 	guild->nb_builder = num_builders();
 	printf("nb_builder= %d \n", guild->nb_builder);
 	for ( int i = 0; i < guild->nb_builder; ++i) {
@@ -37,16 +37,16 @@ void init_guild(struct guild* guild) {
 	}
 }
 
-int guild_nbr_builder(struct guild* guild) {
+int guild_nbr_builder(struct guild_t* guild) {
 	return guild->nb_builder;
 }
 
-struct builder_t* guild_available_builder(int i, struct guild* guild){
+struct builder_t* guild_available_builder(int i, struct guild_t* guild){
 	return guild->builder_available[i];
 
 }
 
-void remove_builders_from_guild(struct builder_t * builder, struct guild* guild) {
+void remove_builders_from_guild(struct builder_t * builder, struct guild_t* guild) {
 	unsigned int i = 0;
 	if (guild->nb_builder >0){
 		int level=builder_level(builder); 
@@ -71,16 +71,16 @@ void remove_builders_from_guild(struct builder_t * builder, struct guild* guild)
 	}
 }
 
-struct stack_t guild_stack(int i, struct guild* guild){
+struct stack_t guild_stack(int i, struct guild_t* guild){
 	return guild->stack[i];
 }
 
-struct builder_t * guild_builder_in_guild(unsigned index, struct guild* guild) {
+struct builder_t * guild_builder_in_guild(unsigned index, struct guild_t* guild) {
 	return guild->builder_available[index];
 }
 
 
-void guild_display(struct guild* guild){
+void guild_display(struct guild_t* guild){
 	printf("\n ########################################## \n");
 	printf("\n  GUILD DISPLAY \n ");
 	if (guild->nb_builder>0){
@@ -99,7 +99,7 @@ printf("\n ########################################## \n");
 
 /** Add the builder bought in the guild to the player_builder
 */
-void add_from_guild(int index, struct player players[NB_PLAYERS] , int current_player, struct guild* guild) {
+void add_from_guild(int index, struct player players[NB_PLAYERS] , int current_player, struct guild_t* guild) {
 	players[current_player].player_builder[players[current_player].nbr_builder] = guild_builder_in_guild(index, guild);
 	players[current_player].points += builder_points(guild->builder_available[index]);
 	players[current_player].nbr_builder += 1;

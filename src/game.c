@@ -102,7 +102,7 @@ int possibility_token_pay(struct player player, struct builder_t * b) {
 
 
 //Pay the builder with the tokens of the player, remove the token used to pay and put the token on the market
-int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int current_player, struct market* market) {
+int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int current_player, struct market_t* market) {
     if (possibility_token_pay(players[current_player], builder)==4){
         return 1;
     }
@@ -170,7 +170,7 @@ int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int
 
 /* Pay the builder game_builder[index] with the tokens of the players current_player
 */
-void pay(struct player players[NB_PLAYERS], int index, int current, struct guild* guild, struct market* market){
+void pay(struct player players[NB_PLAYERS], int index, int current, struct guild_t* guild, struct market_t* market){
     //printf(const char *restrict format, ...)
     token_pay(guild_builder_in_guild(index, guild), players, current, market);
     //printf(" \n payed \n ");
@@ -187,7 +187,7 @@ void pay(struct player players[NB_PLAYERS], int index, int current, struct guild
 
 /* Pick a token in the market, add in the player's token list, and remove it from the market
 */
-void pick_tokens(int current_player, struct player players[NB_PLAYERS], int a, struct market* market,struct guild *guild){
+void pick_tokens(int current_player, struct player players[NB_PLAYERS], int a, struct market_t* market,struct guild_t *guild){
     players[current_player].player_token[players[current_player].nbr_token] = token_get_adress(a);
 	struct token_t *token=token_get_adress(a);
 	 skill skill_panic_market=token_has_the_power_i(token,0);
