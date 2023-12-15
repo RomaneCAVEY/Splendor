@@ -131,3 +131,42 @@ int steal_turn(int current_player, struct player players[NB_PLAYERS], void* ress
 	return ((current_player -1) % NB_PLAYERS);
 
 }
+
+
+
+void favor_steal(struct player players[NB_PLAYERS], int current_player) {
+    int random= rand()%NB_PLAYERS;
+    int counter=0;
+    while((players[NB_PLAYERS].favor_nbr=0) || (random==current_player) && (counter<NB_PLAYERS)){
+        random=rand()%NB_PLAYERS;
+        ++counter;
+    }
+    if (counter!=NB_PLAYERS){
+        ++players[current_player].favor_nbr;
+        --players[random].favor_nbr;
+    }
+}
+
+void gain_favor_with_builder(struct players[NB_PLAYERS], int current_player) {
+    ++players[current_player].favor_nbr;
+}
+
+int master_hand(struct players[NB_PLAYERS], int current_player, sruct builder_t b) {
+    int counter=0;
+    struct set provide=builder_provides(b);
+    for(int i=0; i<NUM_TOKENS; ++i){
+        counter==0;
+        for(int k=0; k<NUM_COLORS; ++k){
+            if (market.playing_board[i]!=NULL){
+                provide[k]<=market.playing_board[i]->s[k];
+                
+            }
+        }
+        if (counter==NUM_COLORS){
+            pick_tokens(current_player, players, i);
+            return 1;
+        }
+    }
+    return 0;
+
+}
