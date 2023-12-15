@@ -1,5 +1,4 @@
 #include"power.h"
-#include "builder.h"
 #include "game.h"
 
 const char * power_string[] = {
@@ -11,7 +10,7 @@ const char * power_string[] = {
 	"MAX"
 };
 
-extern skill skills[5]={
+skill skills[5]={
 	panic_market,
 	guild_panic,
 	token_steal,
@@ -20,7 +19,9 @@ extern skill skills[5]={
 };
 
 
-
+skill give_the_power(int index){
+	return skills[index];	
+}
 
 const char * power_to_string(enum power power) {
     if (power > 4) {
@@ -94,7 +95,7 @@ int panic_market(int current_player, struct player players[NB_PLAYERS], void* re
         while (make_market((i+c)%NUM_TOKENS) && c<NUM_TOKENS){
         c++;
         }
-    market_replace((random),(i+c)%NUM_TOKENS);
+    market_moove_i_to_j((random),(i+c)%NUM_TOKENS);
     }
     else{
         printf("panic_market failed");
@@ -102,11 +103,6 @@ int panic_market(int current_player, struct player players[NB_PLAYERS], void* re
 	return 0;
 
 }
-
-skill give_the_power(int index){
-	return skills[index];
-}
-
 
 /**
 Current player can steal a token to the other player

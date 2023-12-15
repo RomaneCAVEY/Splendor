@@ -1,3 +1,6 @@
+#ifndef __POWER_H__
+#define __POWER_H__
+
 #include "builder.h"
 #include "guild.h"
 #include "market.h"
@@ -19,6 +22,7 @@ enum power{
     TURN_STOLEN,
     MASTER_HAND,
 };
+
 
 
 
@@ -74,10 +78,15 @@ extern skill skills[5];
 
 
 /**
-return the power
+return the power of the index index
 */
 skill give_the_power(int index);
 
 void gain_favor_with_builder(struct player players[NB_PLAYERS], int current_player);
 
 void favor_steal(struct player players[NB_PLAYERS], int current_player);
+
+
+
+
+#endif

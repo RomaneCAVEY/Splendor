@@ -45,6 +45,11 @@ int tokens_connex(int index, int nbr_token,int current_player, struct player pla
 /*return the number of available tokens*/
 int tokens_neighbour(int index);
 
+/**
+Replace the token j to i, token at place i is free
+*/
+void market_moove_i_to_j(int i, int j);
+
 
 /**
 Give the token at the index index of the market (perutation order)

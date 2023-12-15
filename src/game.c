@@ -1,6 +1,7 @@
 #include "game.h"
 #include "builder.h"
-
+#include "super_token.h"
+#include "super_builder.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>

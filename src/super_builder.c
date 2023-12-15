@@ -1,4 +1,5 @@
 #include "super_builder.h"
+#include "power.h"
 
 
 
@@ -14,15 +15,15 @@ void init_power_builders(){
 		int level=builder_level(make_builder(i));
 		int random=rand()%MAX_BUILDERS;
 		if (random<(level+1)){
-			builder_power[i].powers[1]=skills[1];
+			builder_power[i].powers[1]=give_the_power(1);
 		}
 		random=rand()%MAX_BUILDERS;
 		if (random<(level+1)){
-			builder_power[i].powers[3]=skills[3];
+			builder_power[i].powers[3]=give_the_power(3);
 		}
 		random=rand()%MAX_BUILDERS;
 		if (random<(level+1)){
-			builder_power[i].powers[4]=skills[4];
+			builder_power[i].powers[4]=give_the_power(4);;
 		}
 	}
 }
