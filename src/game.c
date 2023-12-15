@@ -1,11 +1,13 @@
 #include "game.h"
-#include "color.h"
-#include "set.h"
+#include "builder.h"
+#include "guild.h"
+#include "super_token.h"
+#include "super_builder.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
-//please compile
+
 
 
 /**
@@ -172,15 +174,27 @@ void pay(struct player players[NB_PLAYERS], int index, int current, struct guild
     //printf(const char *restrict format, ...)
     token_pay(guild_builder_in_guild(index, guild), players, current,market);
     //printf(" \n payed \n ");
-    add_from_guild(index, players, current, guild);
-    remove_builders_from_guild(guild_builder_in_guild(index, guild), guild);
+    add_from_guild(index, players, current,guild);
+	struct builder_t *builder= guild_builder_in_guild(index,guild);
+	 skill skill_panic_guild=builder_has_the_power_i(builder,1);
+	 skill skill_master_hands=builder_has_the_power_i(builder,4);
+	void* ressource=guild_builder_in_guild(index,guild);
+	skill_panic_guild(current, players, ressource,market,guild);
+	skill_master_hands(current, players, ressource,market,guild);
+    remove_builders_from_guild(guild_builder_in_guild(index,guild),guild);
 }
 
 
 /* Pick a token in the market, add in the player's token list, and remove it from the market
 */
-void pick_tokens(int current_player, struct player players[NB_PLAYERS], int a, struct market* market){
+void pick_tokens(int current_player, struct player players[NB_PLAYERS], int a, struct market* market,struct guild *guild){
     players[current_player].player_token[players[current_player].nbr_token] = token_get_adress(a);
+	struct token_t *token=token_get_adress(a);
+	 skill skill_panic_market=token_has_the_power_i(token,0);
+	 skill skill_token_steal=token_has_the_power_i(token,2);
+	void* ressource=token_get_adress(a);
+	skill_panic_market( current_player, players, ressource,market,guild);
+	skill_token_steal( current_player, players, ressource,market,guild);
     //printf("adress of the token %d : %p",current_player, token_get_adress(a));
     players[current_player].nbr_token = players[current_player].nbr_token + 1;
     remove_token_from_market(token_in_market_is_available(a, market), market);

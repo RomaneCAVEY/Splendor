@@ -1,6 +1,5 @@
 #include"power.h"
-#include"guild.h"
-#include"market.h"
+#include "game.h"
 
 const char * power_string[] = {
     "PANIC_MARKET",
@@ -8,18 +7,21 @@ const char * power_string[] = {
     "TOKEN_STEAL",
     "TURN_STOLEN",
     "MASTER_MAIN",
-	"NULL"
+	"MAX"
 };
 
-const char * power_to_string(enum power power) {
-    if (power > MAX_COLORS) {
-        return "??????????????";
-    }
 
-    return power_string[power];
+
+skill give_the_power(int index){
+	return skills[index];	
 }
 
-
+const char * power_to_string(enum power power) {
+    if (power > 4) {
+        return "??????????????";
+    }
+    return power_string[power];
+}
 
 
 /**
@@ -41,21 +43,28 @@ int choose_a_builder(int current_player, struct player players[NB_PLAYERS]){
 }
 
 /**
-The player pick one of the builder of the guild and 
-remplace it by one them
+The player pick one of the player of the guild and 
+remplace it by one them */
 
-void guild_panic(){
+
+int guild_panic(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market *market,struct guild *guild){
    
-    if (c!= MAX_BUILDERS){
+    if (guild_nbr_builder(guild)){
+		int random=rand()%MAX_BUILDERS;
+		int c=0;
+		while(!guild_available_builder((random+c)%MAX_BUILDERS_AVAILABLE_PER_LVL,guild) && (c<(MAX_BUILDERS_AVAILABLE_PER_LVL*NUM_LEVELS))){
+			c++;
+		}
+		remove_builders_from_guild(guild_available_builder(random+c,guild),guild);
 
-    }
+	}
     else{
-        printf("panic_guild failed");
+        printf("panic_guild failed, the guild is empty \n");
     }
+	return 0;
 
 }
 
-*/
 
 
 
@@ -64,11 +73,12 @@ void guild_panic(){
 Pick an available token market and move it in a random 
 empty place of the market
 */
-void panic_market(){
+int panic_market(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market *market,struct guild *guild){
     int random= rand();
     int c=0;
-    //pick an available random token 
-    while (!make_market((random+c)%NUM_TOKENS) && c<NUM_TOKENS){
+    //pick an available random token
+	if(market->nbr_token){ 
+    while (!make_market((random+c)%NUM_TOKENS,market) && c<NUM_TOKENS){
         c++;
     }
     random=(random+c)%NUM_TOKENS;
@@ -76,23 +86,24 @@ void panic_market(){
     if (c!= NUM_TOKENS){
         int i=rand();
         c=0;
-        while (make_market((i+c)%NUM_TOKENS) && c<NUM_TOKENS){
+        while (make_market((i+c)%NUM_TOKENS,market) && c<NUM_TOKENS){
         c++;
         }
-    market_replace((random),(i+c)%NUM_TOKENS);
+    market_moove_i_to_j((random),(i+c)%NUM_TOKENS,market);
     }
     else{
         printf("panic_market failed");
     }
+	}
+	return 0;
 
 }
 
 /**
 Current player can steal a token to the other player
 */
-
-void token_steal(int current_player, int player_to_steal, struct player players[NB_PLAYERS]){
-    if (players[current_player].nbr_token< NUM_TOKENS){
+int token_steal(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market *market,struct guild *guild){
+    if (players[current_player].nbr_token< NUM_TOKENS &&  players[current_player+1].nbr_token>0){
         int random= rand();
         int c=0;
         int rank=(random+c)%players[current_player].nbr_token;
@@ -101,19 +112,22 @@ void token_steal(int current_player, int player_to_steal, struct player players[
             rank=(random+c)%players[current_player].nbr_token;
     }
     
-    for (int i=0; i<NUM_TOKENS; i++) {
-        if(!players[current_player].player_token[i]){
-            players[current_player].player_token[i]=players[(current_player+1)%NB_PLAYERS].player_token[rank];
-            break;
+        remove_token(players, players[(current_player+1)%NB_PLAYERS].player_token[rank], ((current_player+1)%NB_PLAYERS));
+		int nb=players[current_player].nbr_token;
+		players[current_player].player_token[nb]=players[(current_player+1)%NB_PLAYERS].player_token[rank];
         }
+    return 0;
     
-    }
-    remove_token(players, players[(current_player+1)%NB_PLAYERS].player_token[rank], ((current_player+1)%NB_PLAYERS));
+}
 
 
-    }
+
+int steal_turn(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market *market,struct guild *guild){
+	return ((current_player -1) % NB_PLAYERS);
 
 }
+
+
 
 void favor_steal(struct player players[NB_PLAYERS], int current_player) {
     int random= rand()%NB_PLAYERS;
@@ -128,23 +142,26 @@ void favor_steal(struct player players[NB_PLAYERS], int current_player) {
     }
 }
 
-void gain_favor_with_builder(struct players[NB_PLAYERS], int current_player) {
+void gain_favor_with_builder(struct player players[NB_PLAYERS], int current_player) {
     ++players[current_player].favor_nbr;
 }
 
-int master_hand(struct players[NB_PLAYERS], int current_player, sruct builder_t b) {
+int master_hand(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market *market,struct guild *guild){
     int counter=0;
-    struct set provide=builder_provides(b);
+	struct builder_t *b=ressource;
+    struct set_t provide=builder_provides(b);
     for(int i=0; i<NUM_TOKENS; ++i){
-        counter==0;
+        counter=0;
         for(int k=0; k<NUM_COLORS; ++k){
-            if (market.playing_board[i]!=NULL){
-                provide[k]<=market.playing_board[i]->s[k];
+            if (token_in_market_is_available(i,market)!=NULL){
+                if(provide.ressource[k]>=token_in_market_is_available(i,market)->s.ressource[k]){
+					++counter;
+				}
                 
             }
         }
         if (counter==NUM_COLORS){
-            pick_tokens(current_player, players, i);
+            pick_tokens(current_player, players, i,market,guild);
             return 1;
         }
     }
@@ -152,3 +169,10 @@ int master_hand(struct players[NB_PLAYERS], int current_player, sruct builder_t 
 
 }
 
+skill skills[5]={
+	panic_market,
+	guild_panic,
+	token_steal,
+	steal_turn,
+	master_hand
+};

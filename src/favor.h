@@ -8,7 +8,6 @@
 
 void builder_guild_renew(int level_choosen, struct guild* guild);
 
-int pick_any_token_in_market(int current_player, struct player players[NB_PLAYERS], int a, struct market* market);
-
+int pick_any_token_in_market(int current_player, struct player players[NB_PLAYERS], int a, struct market* market,struct guild *guild);
 
 #endif

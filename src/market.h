@@ -1,8 +1,16 @@
 #ifndef __MARKET_H__
 #define __MARKET_H__
 
-#include "token.h"
+#include "guild.h"
 #include "player.h"
+#include "second_token.h"
+#include "token.h"
+#include "permutation.h"
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
 
 
 struct market{
@@ -37,12 +45,14 @@ void market_display(struct market* market);
 */
 struct token_t * token_in_market_is_available(int i, struct market* market);
 
-/*if there are enought connex tokens, current_player takes it*/
-int tokens_connex(int index, int nbr_token,int current_player, struct player players[NB_PLAYERS], struct market* market);
-
 
 /*return the number of available tokens*/
 int tokens_neighbour(int index, struct market* market);
+
+/**
+Replace the token j to i, token at place i is free
+*/
+void market_moove_i_to_j(int i, int j, struct market* market);
 
 
 /**
@@ -54,6 +64,9 @@ struct token_t* make_market(int index, struct market* market);
 Put the token at place i to the empty space of index i in the market 
 */
 void market_replace(int i, int j, struct market* market);
+
+/*if there are enought connex tokens, current_player takes it*/
+int tokens_connex(int index, int nbr_token,int current_player, struct player players[NB_PLAYERS], struct market* market,struct guild* guild);
 
 
 #endif

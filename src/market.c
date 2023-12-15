@@ -1,14 +1,5 @@
 #include "market.h"
 #include "game.h"
-#include "player.h"
-#include "second_token.h"
-#include "token.h"
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <string.h>
-#include "permutation.h"
 
 
 struct market market={};
@@ -114,32 +105,32 @@ int tokens_neighbour(int index, struct market* market){
 }
 
 
-int tokens_connex(int index, int nbr_token,int current_player, struct player players[NB_PLAYERS], struct market* market) {
+int tokens_connex(int index, int nbr_token,int current_player, struct player players[NB_PLAYERS], struct market* market,struct guild* guild) {
     int square = sqrt(NUM_TOKENS);
     int count=1;
 
-    pick_tokens(current_player,players,index, market);
+    pick_tokens(current_player,players,index, market,guild);
 
 
     if (index<(NUM_TOKENS-square) && market->playing_board[index+square]){
-        pick_tokens(current_player,players,index+square, market);
+        pick_tokens(current_player,players,index+square, market,guild);
         count+=1;
     }
     if (count<nbr_token && nbr_token>count){      
         if ((index>square) && market->playing_board[index-square]){
-            pick_tokens(current_player,players,index-square, market);
+            pick_tokens(current_player,players,index-square, market,guild);
             count += 1;
         }
     }
     if (count<nbr_token && nbr_token>count){      
         if ((index % square != 1) && (market->playing_board[index+1])){
-            pick_tokens(current_player,players,index+1, market);
+            pick_tokens(current_player,players,index+1, market,guild);
             count += 1;
         }
     }
     if (count<nbr_token && nbr_token>count){         
         if ((index % square != 0) && (market->playing_board[index-1])){
-            pick_tokens(current_player,players,index-1, market);
+            pick_tokens(current_player,players,index-1, market,guild);
             count += 1;
         }
     }

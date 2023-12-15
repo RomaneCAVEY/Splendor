@@ -1,10 +1,10 @@
 #include "builder.h"
 #include "guild.h"
+#include "super_builder.h"
 #include "token.h"
-#include "market.h"
-#include "color.h"
 #include "player.h"
 #include "game.h"
+#include "power.h"
 #include "permutation.h"
 #include "second_token.h"
 #include "second_builder.h"
@@ -18,7 +18,8 @@
 
 #define NB_PLAYERS 2
 
-
+struct guild guild={};
+struct market market={};
 struct player players[NB_PLAYERS];
 
 int main(int argc, char *argv[]){
@@ -27,11 +28,13 @@ int main(int argc, char *argv[]){
     int seed;
     int seed_builder;
     int opt;
+	int display;
 
     max_turn = 0;
     seed = 0;
     seed_builder = 0;
-    while ((opt= getopt(argc, argv, "s:m:c:"))!=(-1)) {
+	display=0;
+    while ((opt= getopt(argc, argv, "s:m:c:d:"))!=(-1)) {
         switch (opt) {
             case 's':
                 seed= atoi(optarg);
@@ -42,9 +45,12 @@ int main(int argc, char *argv[]){
             case 'c':
                 seed_builder = atoi(optarg);
                 break;
+			case 'd':
+				display=atoi(optarg);
+
                 
             default: /* '?' */
-                fprintf(stderr, "Usage: %s [-s seed] [-m max_turn]  [-c seed_builder] \n",argv[0]);
+                fprintf(stderr, "Usage: %s [-s seed] [-m max_turn]  [-c seed_builder] [-d display] \n",argv[0]);
                 exit(EXIT_FAILURE);
         }
     }
@@ -52,7 +58,7 @@ int main(int argc, char *argv[]){
         fprintf(stderr, "Expected argument after options\n");
         exit(EXIT_FAILURE);
     }
-    printf("max_turn=%d; seed=%d; seed_builder=%d \n", max_turn, seed, seed_builder );
+    printf("max_turn=%d; seed=%d; seed_builder=%d , display=%d \n", max_turn, seed, seed_builder,display);
     srand(seed);
     //Init player
     for (int i = 0; i < NB_PLAYERS; i++) {
@@ -67,9 +73,9 @@ int main(int argc, char *argv[]){
     //Init all_builders 
     init_builders(seed_builder); 
     // init the guild
-    init_guild(); 
+    init_guild(&guild); 
     // init the market
-    init_market();
+   	init_market(&market);
     int nb_turns_not_played = 0;
     int nb_turns = 0;
     printf("initialisation over \n");
@@ -82,10 +88,10 @@ int main(int argc, char *argv[]){
         int possibility_to_pay=0;
        //printf("guild_nbr_builder %d \n", guild_nbr_builder());
         //guild_display();
-        for ( int i = guild_nbr_builder(); i>(-1) ; i--) {
+        for ( int i = guild_nbr_builder(&guild); i>(-1) ; i--) {
          //   fprintf(stderr,"c:%d\n",c);
            // c+=1;
-            if (guild_available_builder(i)) {
+            if (guild_available_builder(i,&guild)) {
                 if (possibility_token_pay(players[current_player], make_builder(i))) {
                     
                     possibility_to_pay = possibility_token_pay(players[current_player], make_builder(i));
@@ -95,19 +101,21 @@ int main(int argc, char *argv[]){
                 }
             }
         }
-        
-        printf("===============================: \n");
-        printf("Market display: \n");
-        market_display();
-        printf("\n===============================: \n\n\n");
-        //printf("this is the possibility %d\n", possibility_to_pay);
+        if (display) {
+			 printf("===============================: \n");
+			printf("Market display: \n");
+			market_display(&market);
+			printf("\n===============================: \n\n\n");
+			printf("this is the possibility %d\n", possibility_to_pay);
+			
+		}
+       
         
 
         //If we can build a builder then we do it
         if (possibility_to_pay) {
-            //printf("THE BOUT DE CODE A ETE EXECUTE");
             //put in the market the tokens which were useful to pay the builder, except if they are builders
-            pay(players,index, current_player);
+            pay(players,index, current_player,&guild,&market);
             printf("this is the points  %d of player %d\n", players[current_player].points,current_player);
              }
              
@@ -118,26 +126,32 @@ int main(int argc, char *argv[]){
                 ///add = number of tokens we have already picked from the market amoung the nb tokens
                 // int add=0;
                 int random = rand() % NUM_TOKENS;
-                if (nb <= market_nbr_token() && token_in_market_is_available(random)) {
+                if (nb <= market_nbr_token(&market) && token_in_market_is_available(random,&market)) {
     
                         
                        // printf("%d est aléatoire \n", nb);
                         //printf("there are %d tokens in the market \n",market_nbr_token());
-                            tokens_connex(random, nb, current_player, players);
+                            tokens_connex(random, nb, current_player, players,&market,&guild);
                     
                 }
-                    //printf("PLAYER DISPLAY OF PLAYER %d \n", current_player);
-                    //player_display(players[current_player]);
-                    //printf("\n");
                 else {
                 nb_turns_not_played = nb_turns_not_played + 1;
                 }
         }
+		if(display){
+                    printf("PLAYER DISPLAY OF PLAYER %d \n", current_player);
+                    player_display(players[current_player]);
+                    printf("\n");
+				}
         //printf("PLAYER DISPLAY OF PLAYER %d \n", current_player);
         //player_display(players[current_player]);
         
         current_player=next_player(NB_PLAYERS, current_player);
         nb_turns += 1;
+		skill steal_turn= builder_has_the_power_i(make_builder(index), 3);
+		if (steal_turn){
+			current_player=steal_turn(current_player,players, NULL,&market,&guild);
+		}
         
 
     }
