@@ -21,8 +21,3 @@
 int builder_t_equals(struct builder_t * builder1, struct builder_t * builder2) {
     return (builder1==builder2);
 }
-
-struct builder_t* create_builder(){
-    struct builder_t* builder;
-    
-}

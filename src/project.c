@@ -105,7 +105,6 @@ int main(int argc, char *argv[]){
 
         //If we can build a builder then we do it
         if (possibility_to_pay) {
-            //printf("THE BOUT DE CODE A ETE EXECUTE");
             //put in the market the tokens which were useful to pay the builder, except if they are builders
             pay(players,index, current_player);
             printf("this is the points  %d of player %d\n", players[current_player].points,current_player);

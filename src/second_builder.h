@@ -2,6 +2,7 @@
 #define __SECOND_BUILDER_H__
 
 #include "builder.h"
+#include "second_builder.h"
 
 
 //return 1 si builders are equal else 0

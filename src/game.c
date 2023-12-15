@@ -184,5 +184,6 @@ void pick_tokens(int current_player, struct player players[NB_PLAYERS], int inde
     //printf("adress of the token %d : %p",current_player, token_get_adress(a));
     players[current_player].nbr_token = players[current_player].nbr_token + 1;
     remove_token_from_market(token_in_market_is_available(index));
+	//skill f=getskill(PANIC_MARKET);
 
 }
