@@ -11,7 +11,7 @@
 #ifndef MAX_BUILDERS_AVAILABLE_PER_LVL
 #define MAX_BUILDERS_AVAILABLE_PER_LVL 3
 #endif
-
+  
 
 struct guild{
     int nb_builder;

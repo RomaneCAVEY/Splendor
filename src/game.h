@@ -33,7 +33,7 @@ int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int
 void remove_token(struct player players[NB_PLAYERS] , struct token_t *token, int current_player);
 /* Pay the builder game_builder[index] with the tokens of the players current_player
 */
-void pay(struct player players[NB_PLAYERS], int index, int current, struct guild* guild);
+void pay(struct player players[NB_PLAYERS], int index, int current, struct guild* guild, struct market* market);
 
 
 /* Pick a token in the market, add in the player's token list, and remove it from the market

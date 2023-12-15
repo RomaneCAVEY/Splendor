@@ -168,9 +168,9 @@ int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int
 
 /* Pay the builder game_builder[index] with the tokens of the players current_player
 */
-void pay(struct player players[NB_PLAYERS], int index, int current, struct guild* guild){
+void pay(struct player players[NB_PLAYERS], int index, int current, struct guild* guild, struct market* market){
     //printf(const char *restrict format, ...)
-    token_pay(guild_builder_in_guild(index, guild), players, current);
+    token_pay(guild_builder_in_guild(index, guild), players, current, market);
     //printf(" \n payed \n ");
     add_from_guild(index, players, current, guild);
     remove_builders_from_guild(guild_builder_in_guild(index, guild), guild);
