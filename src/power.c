@@ -1,6 +1,6 @@
 #include"power.h"
 #include "builder.h"
-
+#include "game.h"
 
 const char * power_string[] = {
     "PANIC_MARKET",
@@ -11,20 +11,23 @@ const char * power_string[] = {
 	"MAX"
 };
 
+extern skill skills[5]={
+	panic_market,
+	guild_panic,
+	token_steal,
+	steal_turn,
+	master_hand
+};
 
 
 
-//eum de poitneur de fonction
+
 const char * power_to_string(enum power power) {
     if (power > 4) {
         return "??????????????";
     }
     return power_string[power];
 }
-
-
-#include"guild.h"
-#include"market.h"
 
 
 /**

@@ -2,7 +2,6 @@
 #define __SUPER_TOKEN_H__
 
 
-#include "second_token.h"
 #include"token.h"
 #include "power.h"
 #include <stdio.h>
@@ -18,6 +17,11 @@ struct token_power{
 /**Init the powers of the tokens*/
 void init_power_tokens();
 
+
+/**
+Return the power of the token at place i
+*/
+skill token_has_the_power_i(struct token_t* token, int index);
 
 
 #endif

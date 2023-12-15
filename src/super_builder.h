@@ -16,12 +16,11 @@ struct builder_power{
 /**Init the powers of the builders*/
 void  init_power_builders();
 
-
 /**
-Return the fonction of the ressources
-
-skill give_the_power(int index);
+Return the skill at place i in the tab of power of the builder builder
 */
+skill builder_has_the_power_i(struct builder_t* builder, int index);
+
 
 
 #endif

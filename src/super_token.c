@@ -1,4 +1,5 @@
 #include"super_token.h"
+#include "token.h"
 
 
 struct token_power token_power[NUM_TOKENS]={};
@@ -17,4 +18,14 @@ void init_power_tokens(){
 		}
 		token_power[i].token= make_token(i);
 	}
+}
+
+
+skill token_has_the_power_i(struct token_t* token, int index){
+	int count=0;
+	while ( token_equals(*token, *token_power[count].token) && count<MAX_BUILDERS)
+	{
+		count++;
+	}
+	return token_power[count].powers[index];
 }

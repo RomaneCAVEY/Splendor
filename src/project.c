@@ -1,10 +1,12 @@
 #include "builder.h"
 #include "guild.h"
+#include "super_builder.h"
 #include "token.h"
 #include "market.h"
 #include "color.h"
 #include "player.h"
 #include "game.h"
+#include "power.h"
 #include "permutation.h"
 #include "second_token.h"
 #include "second_builder.h"
@@ -27,11 +29,13 @@ int main(int argc, char *argv[]){
     int seed;
     int seed_builder;
     int opt;
+	int display;
 
     max_turn = 0;
     seed = 0;
     seed_builder = 0;
-    while ((opt= getopt(argc, argv, "s:m:c:"))!=(-1)) {
+	display=0;
+    while ((opt= getopt(argc, argv, "s:m:c:d:"))!=(-1)) {
         switch (opt) {
             case 's':
                 seed= atoi(optarg);
@@ -42,9 +46,12 @@ int main(int argc, char *argv[]){
             case 'c':
                 seed_builder = atoi(optarg);
                 break;
+			case 'd':
+				display=atoi(optarg);
+
                 
             default: /* '?' */
-                fprintf(stderr, "Usage: %s [-s seed] [-m max_turn]  [-c seed_builder] \n",argv[0]);
+                fprintf(stderr, "Usage: %s [-s seed] [-m max_turn]  [-c seed_builder] [-d display] \n",argv[0]);
                 exit(EXIT_FAILURE);
         }
     }
@@ -52,7 +59,7 @@ int main(int argc, char *argv[]){
         fprintf(stderr, "Expected argument after options\n");
         exit(EXIT_FAILURE);
     }
-    printf("max_turn=%d; seed=%d; seed_builder=%d \n", max_turn, seed, seed_builder );
+    printf("max_turn=%d; seed=%d; seed_builder=%d , display=%d \n", max_turn, seed, seed_builder,display);
     srand(seed);
     //Init player
     for (int i = 0; i < NB_PLAYERS; i++) {
@@ -125,6 +132,7 @@ int main(int argc, char *argv[]){
                             tokens_connex(random, nb, current_player, players);
                     
                 }
+				if(display){}
                     //printf("PLAYER DISPLAY OF PLAYER %d \n", current_player);
                     //player_display(players[current_player]);
                     //printf("\n");
@@ -137,6 +145,10 @@ int main(int argc, char *argv[]){
         
         current_player=next_player(NB_PLAYERS, current_player);
         nb_turns += 1;
+		skill steal_turn= builder_has_the_power_i(make_builder(index), 3);
+		if (steal_turn){
+			current_player=steal_turn(current_player,players, NULL);
+		}
         
 
     }

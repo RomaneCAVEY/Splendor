@@ -4,6 +4,7 @@
 
 #include "player.h"
 #include"stack.h"
+#include "second_builder.h"
 #include <stdio.h>
 #include <time.h>
 #include <string.h>

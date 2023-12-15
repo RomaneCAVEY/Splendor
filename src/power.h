@@ -1,6 +1,4 @@
 #include "builder.h"
-#include "game.h"
-#include "builder.h"
 #include "guild.h"
 #include "market.h"
 #include "player.h"
@@ -20,14 +18,6 @@ enum power{
     TOKEN_STEAL,
     TURN_STOLEN,
     MASTER_HAND,
-};
-
-struct game{
-	int nbtour;
-	struct player players[NB_PLAYERS];
-	struct guild guild;
-	struct market market; 
-	void* ressource;
 };
 
 
@@ -80,13 +70,7 @@ After hiring this architect, the player can take a token of one of the resources
 int master_hand(int current_player, struct player players[NB_PLAYERS], void* ressource);
 
 
-extern skill skills[5]={
-	panic_market,
-	guild_panic,
-	token_steal,
-	steal_turn,
-	master_hand
-};
+extern skill skills[5];
 
 
 /**

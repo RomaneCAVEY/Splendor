@@ -28,8 +28,11 @@ void init_power_builders(){
 }
 
 
-skill builder_has_the_power(struct builder_t* builder, int i){
+skill builder_has_the_power_i(struct builder_t* builder, int index){
 	int count=0;
-	while ( builder_t_equals(builder,) && count<MAX_BUILDERS)
-	return builder_power[]
+	while ( builder_t_equals(builder,builder_power[count].buider) && count<MAX_BUILDERS)
+	{
+		count++;
+	}
+	return builder_power[count].powers[index];
 }

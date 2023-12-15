@@ -2,11 +2,6 @@
 #define __SECOND_BUILDER_H__
 
 #include "builder.h"
-#include "color.h"
-#include"guild.h"
-#include "game.h"
-#include "token.h"
-#include "player.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
