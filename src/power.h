@@ -2,6 +2,7 @@
 #include "game.h"
 #include "builder.h"
 #include "guild.h"
+#include "market.h"
 #include "player.h"
 #include "second_token.h"
 #include "token.h"
@@ -55,6 +56,7 @@ Current player can steal a token to the other player
 */
 int token_steal(int current_player, struct player players[NB_PLAYERS], void* ressource);
 
+void gain_favor_with_builder(struct player players [NB_PLAYERS], int current_player);
 
 /**
 
@@ -91,3 +93,7 @@ extern skill skills[5]={
 return the power
 */
 skill give_the_power(int index);
+
+void gain_favor_with_builder(struct player players[NB_PLAYERS], int current_player);
+
+void favor_steal(struct player players[NB_PLAYERS], int current_player);

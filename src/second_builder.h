@@ -2,8 +2,14 @@
 #define __SECOND_BUILDER_H__
 
 #include "builder.h"
-#include "second_builder.h"
-
+#include "color.h"
+#include"guild.h"
+#include "game.h"
+#include "token.h"
+#include "player.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 //return 1 si builders are equal else 0
 

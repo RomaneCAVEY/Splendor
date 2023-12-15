@@ -3,7 +3,11 @@
 
 
 #include "guild.h"
+#include"market.h"
 #include "player.h"
+#include "color.h"
+#include "second_token.h"
+#include "set.h"
 #include <stdio.h>
 #include <time.h>
 #include <string.h>

@@ -8,6 +8,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
+#include "permutation.h"
+
 
 struct market market={};
 
@@ -22,7 +24,6 @@ void init_market() {
         market.playing_board[i]= token_get_adress(make_permutation(i));
     }
 }
-
 
 struct token_t* make_market(int index){
     return market.playing_board[index];
@@ -149,7 +150,7 @@ int tokens_connex(int index, int nbr_token,int current_player, struct player pla
 
 void remove_token_from_market(struct token_t * token){
     for (int i=0; i<NUM_TOKENS; i++){
-        if (token== market.playing_board[i]){
+        if (token == market.playing_board[i]){
             market.playing_board[i] = NULL;
             market.nbr_token-=1;
         }

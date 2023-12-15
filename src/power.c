@@ -1,9 +1,6 @@
-#include "power.h"
+#include"power.h"
 #include "builder.h"
-#include "game.h"
-#include "guild.h"
-#include "player.h"
-#include <stdlib.h>
+
 
 const char * power_string[] = {
     "PANIC_MARKET",
@@ -24,6 +21,10 @@ const char * power_to_string(enum power power) {
     }
     return power_string[power];
 }
+
+
+#include"guild.h"
+#include"market.h"
 
 
 /**
@@ -113,7 +114,7 @@ int token_steal(int current_player, struct player players[NB_PLAYERS], void* res
         int c=0;
         int rank=(random+c)%players[current_player].nbr_token;
         while (!players[(current_player+1)%NB_PLAYERS].player_token[rank] && c<players[current_player].nbr_token){
-            c++;
+            ++c;
             rank=(random+c)%players[current_player].nbr_token;
     }
     
@@ -147,18 +148,19 @@ void favor_steal(struct player players[NB_PLAYERS], int current_player) {
     }
 }
 
-void gain_favor_with_builder(struct players[NB_PLAYERS], int current_player) {
+void gain_favor_with_builder(struct player players[NB_PLAYERS], int current_player) {
     ++players[current_player].favor_nbr;
 }
 
-int master_hand(struct players[NB_PLAYERS], int current_player, sruct builder_t b) {
+int master_hand(int current_player, struct player players[NB_PLAYERS], void* ressource){
     int counter=0;
-    struct set provide=builder_provides(b);
+	struct builder_t *b=ressource;
+    struct set_t provide=builder_provides(b);
     for(int i=0; i<NUM_TOKENS; ++i){
-        counter==0;
+        counter=0;
         for(int k=0; k<NUM_COLORS; ++k){
             if (market.playing_board[i]!=NULL){
-                provide[k]<=market.playing_board[i]->s[k];
+                provide.ressource[k]=market.playing_board[i]->s.ressource[k];
                 
             }
         }
