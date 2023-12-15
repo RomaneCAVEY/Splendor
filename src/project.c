@@ -102,12 +102,15 @@ int main(int argc, char *argv[]){
                 }
             }
         }
-        
-        printf("===============================: \n");
-        printf("Market display: \n");
-        market_display();
-        printf("\n===============================: \n\n\n");
-        //printf("this is the possibility %d\n", possibility_to_pay);
+        if (display) {
+			 printf("===============================: \n");
+			printf("Market display: \n");
+			market_display();
+			printf("\n===============================: \n\n\n");
+			printf("this is the possibility %d\n", possibility_to_pay);
+			
+		}
+       
         
 
         //If we can build a builder then we do it
@@ -132,14 +135,15 @@ int main(int argc, char *argv[]){
                             tokens_connex(random, nb, current_player, players);
                     
                 }
-				if(display){}
-                    //printf("PLAYER DISPLAY OF PLAYER %d \n", current_player);
-                    //player_display(players[current_player]);
-                    //printf("\n");
                 else {
                 nb_turns_not_played = nb_turns_not_played + 1;
                 }
         }
+		if(display){
+                    printf("PLAYER DISPLAY OF PLAYER %d \n", current_player);
+                    player_display(players[current_player]);
+                    printf("\n");
+				}
         //printf("PLAYER DISPLAY OF PLAYER %d \n", current_player);
         //player_display(players[current_player]);
         

@@ -163,7 +163,9 @@ int master_hand(int current_player, struct player players[NB_PLAYERS], void* res
         counter=0;
         for(int k=0; k<NUM_COLORS; ++k){
             if (market.playing_board[i]!=NULL){
-                provide.ressource[k]=market.playing_board[i]->s.ressource[k];
+                if(provide.ressource[k]>=market.playing_board[i]->s.ressource[k]){
+					++counter;
+				}
                 
             }
         }
