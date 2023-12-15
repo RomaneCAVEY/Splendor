@@ -2,7 +2,9 @@
 #define __SECOND_BUILDER_H__
 
 #include "builder.h"
-
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 //return 1 si builders are equal else 0
 

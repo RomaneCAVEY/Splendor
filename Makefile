@@ -14,7 +14,7 @@ all: project
 	echo compiling $< into $@
 	$(CC) $(CFLAGS) -c $< -o $@
 
-project: src/project.o  src/color.o  src/token.o src/game.o src/player.o src/builder.o src/second_builder.o src/second_token.o src/market.o src/guild.o src/stack.o src/permutation.o src/set.o
+project: src/project.o  src/color.o  src/token.o src/game.o src/player.o src/builder.o src/second_builder.o src/second_token.o src/market.o src/guild.o src/stack.o src/permutation.o src/set.o src/super_builder.o src/super_token.o src/power.o
 	$(CC) $(CFLAGS) $^ -o project
 
 
