@@ -37,6 +37,7 @@ void remove_token(struct player players[NB_PLAYERS] , struct token_t *token, int
     else {
         printf("there is a problem!!!!!!!!!!! This token doesn't exist");
     }
+	players[current_player].nbr_token-=1;
 }
     
 
@@ -59,7 +60,7 @@ int possibility_token_pay(struct player player, struct builder_t * b) {
         struct set_t buildcost;
 
         // Try to pay with the builders of the player
-        for (int i = 0; i <MAX_BUILDERS; ++i){
+        for (int i = 0; i <player.nbr_builder; ++i){
             if(player.player_builder[i]){
                 buildcost=builder_provides(player.player_builder[i]);
                 //Browse the table of the set of buildcost
@@ -79,11 +80,11 @@ int possibility_token_pay(struct player player, struct builder_t * b) {
         }
 
         // Try to pay the rest with the tokens of the player
-        for (int i = 0; i <NUM_TOKENS; ++i){
+        for (int i = 0; i <player.nbr_token; ++i){
             token = player.player_token[i];
             if (token){
                 for (unsigned int k=0; k<NUM_COLORS;k++){
-                    count_color.ressource[k]+=token->s.ressource[k];
+            		count_color.ressource[k]+=token->s.ressource[k];
                 }
             }
             
@@ -179,6 +180,7 @@ void pay(struct player players[NB_PLAYERS], int index, int current, struct guild
     add_from_guild(index, players, current,guild);
 	struct builder_t *builder= guild_builder_in_guild(index,guild);
 	remove_builders_from_guild(guild_builder_in_guild(index,guild),guild);
+	players[current].nbr_builder+=1;
 	execute_builder_power(current, players, builder,guild,market);
     
 }
@@ -190,7 +192,7 @@ void pick_tokens(int current_player, struct player players[NB_PLAYERS], int a, s
 	struct token_t *token=token_get_adress(a);
 	execute_token_power(current_player, players, token,guild,market);
     //printf("adress of the token %d : %p",current_player, token_get_adress(a));
-    players[current_player].nbr_token = players[current_player].nbr_token + 1;
+    players[current_player].nbr_token +=1;
     remove_token_from_market(token_in_market_is_available(a, market), market);
 
 }

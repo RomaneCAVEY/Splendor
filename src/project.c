@@ -89,17 +89,18 @@ int main(int argc, char *argv[]){
         printf("this is the points %d of the current player, player %d\n", players[current_player].points,current_player);
         int index;
         int possibility_to_pay=0;
-       //printf("guild_nbr_builder %d \n", guild_nbr_builder());
-        //guild_display();
-        for ( int i = MAX_BUILDERS; i>(-1) ; i--) {
-         //   fprintf(stderr,"c:%d\n",c);
-           // c+=1;
+        printf("guild_nbr_builder %d \n", guild_nbr_builder(&guild));
+        guild_display(&guild);
+        for ( int i = (num_builders()-1); i>(-1) ; i--) {
+        //fprintf(stderr,"c:%d\n",c);
+        // c+=1;
             if (guild_available_builder(i, &guild)) {
-                if (possibility_token_pay(players[current_player], make_builder(i))) {
+                if (possibility_token_pay(players[current_player], guild_available_builder(i, &guild))) {
                     
-                    possibility_to_pay = possibility_token_pay(players[current_player], make_builder(i));
+                    possibility_to_pay = possibility_token_pay(players[current_player], guild_available_builder(i, &guild));
                     printf("this is the possibility of the player %d \n", possibility_to_pay);
                     index = i;
+					//printf("INDEX: %d \n",index);
 
                 }
             }
@@ -157,7 +158,8 @@ int main(int argc, char *argv[]){
         
         current_player=next_player(NB_PLAYERS, current_player);
         nb_turns += 1;
-		skill steal_turn= builder_has_the_power_i(make_builder(index), 3);
+		printf("THE INDEX IS :%d \n",index);
+		skill steal_turn= builder_has_the_power_i(make_builder(index), TURN_STOLEN);
 		if (steal_turn){
 			current_player=steal_turn(current_player,players, NULL,&market,&guild);
 		}

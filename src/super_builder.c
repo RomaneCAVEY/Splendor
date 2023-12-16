@@ -1,4 +1,5 @@
 #include "super_builder.h"
+#include "builder.h"
 #include "guild.h"
 #include "market.h"
 #include "player.h"
@@ -13,7 +14,7 @@ struct builder_power builder_power[MAX_BUILDERS]={};
 
 void init_power_builders(){
 	srand(0);
-	for (unsigned int i=0; i< MAX_BUILDERS; i++){
+	for (unsigned int i=0; i< num_builders(); i++){
 		if (make_builder(i)){
 		builder_power[i].builder= make_builder(i);
 		int level=builder_level(make_builder(i));

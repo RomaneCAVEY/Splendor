@@ -12,12 +12,12 @@
 Init the guild with random value for builders
 */
 void init_guild(struct guild_t* guild) {
-	guild->nb_builder =0;
-	//printf("nb_builder= %d \n", guild->nb_builder);
-	for ( int i = 0; i < MAX_BUILDERS; ++i) {
+	guild->nb_builder =num_builders();
+	printf("nb_builder = %d \n", guild->nb_builder);
+	for ( int i = 0; i < guild->nb_builder; ++i) {
 		if(make_builder(i)){
 			guild->builders[i]= make_builder(i);
-			guild->nb_builder +=1;
+			
 		}
 	}
 	for (unsigned int i = 0; i < NUM_LEVELS; ++i) {
@@ -29,7 +29,7 @@ void init_guild(struct guild_t* guild) {
 			}
 		}
 	printf("nb in the stack %d :  %d \n",i, guild->stack[i].nb);
-	stack_display(guild->stack[i]);
+	//stack_display(guild->stack[i]);
 	}
 	for (int level = 0; level <NUM_LEVELS; ++level) {
 		for (int k = 0; k < MAX_BUILDERS_AVAILABLE_PER_LVL; ++k) {
@@ -88,9 +88,9 @@ void guild_display(struct guild_t* guild){
 	printf("\n ########################################## \n");
 	printf("\n  GUILD DISPLAY \n ");
 	if (guild->nb_builder>0){
-		for ( int i=0; i< MAX_BUILDERS; i++){
-			//printf("%p \n", &guild.builder_available[i] );
-			if(&guild->builder_available[i]){
+		for ( int i=0; i< guild->nb_builder; i++){
+			//printf("%p \n", &guild->builder_available[i] );
+			if(guild->builder_available[i]){
 				builder_display(guild->builder_available[i], "this builder belongs to the guild \n");
 			}
 		}

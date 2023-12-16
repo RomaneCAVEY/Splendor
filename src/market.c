@@ -133,7 +133,7 @@ int tokens_connex(int index, int nbr_token,int current_player, struct player pla
             count += 1;
         }
     }
-
+	players[current_player].nbr_token+=count;
     return 0;
 }
 
