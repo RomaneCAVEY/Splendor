@@ -84,6 +84,7 @@ int main(int argc, char *argv[]){
     printf("initialisation over \n");
     printf(" ********************************** \n");
     //int c=0;
+	struct builder_t *builder;
     while (!(has_won(players) && (nb_turns_not_played < 2)) && nb_turns < max_turn) {
         printf("This is the turn %d \n", nb_turns);
         printf("this is the points %d of the current player, player %d\n", players[current_player].points,current_player);
@@ -100,6 +101,9 @@ int main(int argc, char *argv[]){
                     possibility_to_pay = possibility_token_pay(players[current_player], guild_available_builder(i, &guild));
                     printf("this is the possibility of the player %d \n", possibility_to_pay);
                     index = i;
+					builder=guild_available_builder(i, &guild);
+
+					
 					//printf("INDEX: %d \n",index);
 
                 }
