@@ -43,7 +43,7 @@ unsigned int num_builders() {
 
 /** Returns the `index`-th builder and NULL if it does not exist. */
 struct builder_t * make_builder(unsigned int index) {
-    if (index < nb_builders) {
+    if (index <=nb_builders) {
         return & game_builders[index];
     }
     return NULL;
