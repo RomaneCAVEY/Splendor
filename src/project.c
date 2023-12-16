@@ -162,7 +162,7 @@ int main(int argc, char *argv[]){
         
         current_player=next_player(NB_PLAYERS, current_player);
         nb_turns += 1;
-		printf("THE INDEX IS :%d \n",index);
+		//printf("THE INDEX IS :%d \n",index);
 		skill steal_turn= builder_has_the_power_i(builder, TURN_STOLEN);
 		if (steal_turn){
 			current_player=steal_turn(current_player,players, NULL,&market,&guild);
