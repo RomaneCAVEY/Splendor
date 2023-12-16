@@ -32,7 +32,7 @@ int main(int argc, char *argv[]){
     max_turn = 0;
     seed = 0;
     seed_builder = 0;
-	display=1;
+	display=0;
     while ((opt= getopt(argc, argv, "s:m:c:d:"))!=(-1)) {
         switch (opt) {
             case 's':
@@ -73,10 +73,10 @@ int main(int argc, char *argv[]){
     init_builders(seed_builder);
     // init the guild
     init_guild(&guild); 
-	guild_display(&guild);
+	//guild_display(&guild);
     // init the market
    	init_market(&market);
-	market_display(&market);
+	//market_display(&market);
 	init_power_builders();
 	init_power_tokens();
     int nb_turns_not_played = 0;
@@ -91,7 +91,7 @@ int main(int argc, char *argv[]){
         int possibility_to_pay=0;
 		struct builder_t *builder=NULL;
         printf("guild_nbr_builder %d \n", guild_nbr_builder(&guild));
-        guild_display(&guild);
+        //guild_display(&guild);
         for ( int i = (num_builders()-1); i>(-1) ; i--) {
         //fprintf(stderr,"c:%d\n",c);
         // c+=1;
