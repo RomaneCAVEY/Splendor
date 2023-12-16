@@ -1,15 +1,15 @@
 #ifndef _TEST_INIT_H_
 #define _TEST_INIT_H_
 
-#include "../src/builder.h"
-#include "../src/guild.h"
-#include "../src/token.h"
-#include "../src/market.h"
-#include "../src/color.h"
-#include "../src/player.h"
-#include "../src/game.h"
-#include "../src/second_token.h"
-#include "../src/second_builder.h"
+#include "builder.h"
+#include "guild.h"
+#include "token.h"
+#include "market.h"
+#include "color.h"
+#include "player.h"
+#include "game.h"
+#include "second_token.h"
+#include "second_builder.h"
 #include <stdio.h>
 #include <stdlib.h>
 

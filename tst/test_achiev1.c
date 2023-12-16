@@ -1,13 +1,12 @@
 #include"test_achiev1.h"
 
+
 /*Test a permutation of the market*/
 int test_new_market(int seed){
+	struct market_t market={};
     srand(seed);
-    int permutation[NUM_TOKENS]={};
-    for (unsigned int i=0; i< NUM_TOKENS; i++){
-        permutation[i]=(i+4)%NUM_TOKENS;
-    }
-    init_market(permutation);
+	init_permutation();
+    init_market(&market);
     return 1;
 }
 
@@ -15,20 +14,21 @@ int test_new_market(int seed){
 /*Test stack diplay of th guild*/
 int stack(int seed){
     srand(seed);
+	struct guild_t guild={};
+	init_guild(&guild);
     init_builders(seed);
     for (int i=0; i<NUM_LEVELS; i++){
-        stack_display(guild_stack( i));
+        stack_display(guild_stack(i,&guild));
     }
     return 1;
 }
 
-int return_int(){
-
-	return 12;
-}
 /*Test the market display*/
 int market_display_test(){
-    init_market();
-    market_display();
+	struct market_t market={};
+    srand(0);
+	init_permutation();
+    init_market(&market);
+    market_display(&market);
     return 1;
 }
