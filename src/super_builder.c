@@ -37,7 +37,7 @@ void init_power_builders(){
 
 skill builder_has_the_power_i(struct builder_t* builder, int i){
 
-	for (int index = 0 ; index < NUM_TOKENS; ++index)
+	for (int index = 0 ; index < MAX_BUILDERS; ++index)
 	{
 		if (builder_power[index].builder == builder)
 		{

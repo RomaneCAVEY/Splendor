@@ -170,6 +170,7 @@ int main(int argc, char *argv[]){
         
 
     }
+	
    
     if (nb_turns_not_played >= 2){
         printf("both loose");
