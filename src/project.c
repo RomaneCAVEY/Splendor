@@ -84,12 +84,12 @@ int main(int argc, char *argv[]){
     printf("initialisation over \n");
     printf(" ********************************** \n");
     //int c=0;
-	struct builder_t *builder;
     while (!(has_won(players) && (nb_turns_not_played < 2)) && nb_turns < max_turn) {
         printf("This is the turn %d \n", nb_turns);
         printf("this is the points %d of the current player, player %d\n", players[current_player].points,current_player);
         int index;
         int possibility_to_pay=0;
+		struct builder_t *builder=NULL;
         printf("guild_nbr_builder %d \n", guild_nbr_builder(&guild));
         guild_display(&guild);
         for ( int i = (num_builders()-1); i>(-1) ; i--) {
@@ -170,7 +170,7 @@ int main(int argc, char *argv[]){
         
 
     }
-	
+
    
     if (nb_turns_not_played >= 2){
         printf("both loose");
