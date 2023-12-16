@@ -37,14 +37,20 @@ void init_builders(unsigned int seed) {
 /** Returns the total number of builders in the game. */
 unsigned int num_builders() {
     //printf("num_builders: %d \n",nb_builders );
-    return nb_builders;
-
+	if (nb_builders<=MAX_BUILDERS){
+   		return nb_builders;
+	}
+	else{
+		return MAX_BUILDERS;
+	}
 }
 
+
+
 /** Returns the `index`-th builder and NULL if it does not exist. */
-struct builder_t * make_builder(unsigned int index) {
+struct builder_t *make_builder(unsigned int index) {
     if (index <=nb_builders) {
-        return & game_builders[index];
+        return &game_builders[index];
     }
     return NULL;
 }
