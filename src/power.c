@@ -3,7 +3,6 @@
 #include "game.h"
 #include "guild.h"
 #include <stdio.h>
-#define UNUSED(x) (void)(x)
 
 
 const char * power_string[] = {
@@ -62,7 +61,11 @@ remplace it by one them */
 
 
 int guild_panic(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market_t *market,struct guild_t *guild){
-    if (guild_nbr_builder(guild)){
+    UNUSED(players);
+	UNUSED(current_player);
+	UNUSED(ressource);
+	UNUSED(market);
+	if (guild_nbr_builder(guild)){
 		printf("GUILD_PANIC IS RUNNING!!!!!!! \n");
 		printf("The guild before: \n");
 		guild_display(guild);
@@ -82,9 +85,9 @@ int guild_panic(int current_player, struct player players[NB_PLAYERS], void* res
 		// printf("guild.stack[%d].nb = %d !!!!!!!!!!!!!!!!\n",level, guild.stack[level].nb);
 
 
-			}
-
-    else{
+	}
+    
+	else{
         printf("panic_guild failed, the guild is empty \n");
     }
 	printf("The guild at the end: \n");
@@ -104,6 +107,10 @@ empty place of the market
 int panic_market(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market_t *market,struct guild_t *guild){
     int random= rand();
     int c=0;
+	UNUSED(players);
+	UNUSED(guild);
+	UNUSED(current_player);
+	UNUSED(ressource);
 	printf("PANIC_MARKET IS RUNNING!!!!! \n");
     //pick an available random token
 	if(market->nbr_token){ 
@@ -132,7 +139,10 @@ int panic_market(int current_player, struct player players[NB_PLAYERS], void* re
 Current player can steal a token to the other player
 */
 int token_steal(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market_t *market,struct guild_t *guild){
-    if (players[current_player].nbr_token< NUM_TOKENS &&  players[current_player+1].nbr_token>0){
+	UNUSED(ressource);
+	UNUSED(market);
+	UNUSED(guild);
+	if (players[current_player].nbr_token< NUM_TOKENS &&  players[current_player+1].nbr_token>0){
         int random= rand();
         int c=0;
         int rank=(random+c)%players[current_player].nbr_token;
@@ -154,6 +164,10 @@ int token_steal(int current_player, struct player players[NB_PLAYERS], void* res
 
 
 int steal_turn(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market_t *market,struct guild_t *guild){
+	UNUSED(players);
+	UNUSED(market);
+	UNUSED(guild);
+	UNUSED(ressource);
 	return ((current_player -1) % NB_PLAYERS);
 
 }
@@ -163,7 +177,7 @@ int steal_turn(int current_player, struct player players[NB_PLAYERS], void* ress
 void favor_steal(struct player players[NB_PLAYERS], int current_player) {
     int random= rand()%NB_PLAYERS;
     int counter=0;
-    while((players[NB_PLAYERS].favor_nbr=0) || (random==current_player) && (counter<NB_PLAYERS)){
+    while((players[NB_PLAYERS].favor_nbr=0) || ((random==current_player) && (counter<NB_PLAYERS))){
         random=rand()%NB_PLAYERS;
         ++counter;
     }
@@ -181,6 +195,7 @@ int master_hand(int current_player, struct player players[NB_PLAYERS], void* res
     int counter=0;
 	printf("MASTER_HAND IS RUNNING!!!!!!!!! \n");
 	struct builder_t *b=ressource;
+	UNUSED(guild);
     struct set_t provide=builder_provides(b);
     for(int i=0; i<NUM_TOKENS; ++i){
         counter=0;

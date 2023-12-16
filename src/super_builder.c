@@ -48,7 +48,6 @@ skill builder_has_the_power_i(struct builder_t* builder, int i){
 }
 
 void execute_builder_power(int current, struct player players[NB_PLAYERS],struct builder_t* builder,struct guild_t *guild, struct market_t *market){
-	int flag = 0;
 	for (enum power_id power_id = PANIC_MARKET ; power_id<= MASTER_HAND; power_id++){
 		skill skill = builder_has_the_power_i(builder,power_id);
 		if (power_id == TURN_STOLEN) 

@@ -36,7 +36,6 @@ skill token_has_the_power_i(struct token_t* token, int i){
 
 
 void execute_token_power(int current, struct player players[NB_PLAYERS],struct token_t* token,struct guild_t *guild, struct market_t *market){
-	int flag = 0;
 	for (enum power_id power_id = PANIC_MARKET ; power_id<= MASTER_HAND; power_id++){
 		skill skill = token_has_the_power_i(token,power_id);
 		if (power_id == TURN_STOLEN) 
