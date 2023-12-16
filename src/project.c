@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "builder.h"
 #include "power.h"
 #include "guild.h"
 #include "player.h"
@@ -45,7 +46,7 @@ int main(int argc, char *argv[]){
                 break;
 			case 'd':
 				display=atoi(optarg);
-
+				break;
                 
             default: /* '?' */
                 fprintf(stderr, "Usage: %s [-s seed] [-m max_turn]  [-c seed_builder] [-d display] \n",argv[0]);
@@ -108,7 +109,12 @@ int main(int argc, char *argv[]){
 			printf("Market display: \n");
 			market_display(&market);
 			printf("\n===============================: \n\n\n");
-			printf("this is the possibility %d\n", possibility_to_pay);
+
+			printf("===============================: \n");
+			printf("Guild display: \n");
+			guild_display(&guild);
+			printf("\n===============================: \n\n\n");
+			//printf("this is the possibility %d\n", possibility_to_pay);
 			
 		}
        
@@ -117,6 +123,7 @@ int main(int argc, char *argv[]){
         //If we can build a builder then we do it
         if (possibility_to_pay) {
             //put in the market the tokens which were useful to pay the builder, except if they are builders
+			builder_display(guild_available_builder(index, &guild), "THIS IS THE BUILDER WE WANT TO BUY");
             pay(players,index, current_player,&guild,&market);
             printf("this is the points  %d of player %d\n", players[current_player].points,current_player);
              }

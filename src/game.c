@@ -91,7 +91,7 @@ int possibility_token_pay(struct player player, struct builder_t * b) {
         //End of the loop, check if it's possible to pay
         //set_display(cost_color);
         for (unsigned int k=0; k<NUM_COLORS;k++){
-            printf("\n the value of color %s is %d \n\n ", color_to_short_string(k), count_color.ressource[k]);
+            //printf("\n the value of color %s is %d \n\n ", color_to_short_string(k), count_color.ressource[k]);
             if (count_color.ressource[k]<cost_color.ressource[k]){
                 return 0;
             }
@@ -173,12 +173,14 @@ int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int
 */
 void pay(struct player players[NB_PLAYERS], int index, int current, struct guild_t* guild, struct market_t* market){
     //printf(const char *restrict format, ...)
+	
     token_pay(guild_builder_in_guild(index, guild), players, current, market);
     //printf(" \n payed \n ");
     add_from_guild(index, players, current,guild);
 	struct builder_t *builder= guild_builder_in_guild(index,guild);
+	remove_builders_from_guild(guild_builder_in_guild(index,guild),guild);
 	execute_builder_power(current, players, builder,guild,market);
-    remove_builders_from_guild(guild_builder_in_guild(index,guild),guild);
+    
 }
 
 /* Pick a token in the market, add in the player's token list, and remove it from the market

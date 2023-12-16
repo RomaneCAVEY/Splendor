@@ -13,7 +13,7 @@
 #include <string.h>
 
 #define NUM_POWER 5
-
+#define UNUSED(x) (void)(x)
 
 enum power_id{
     PANIC_MARKET,

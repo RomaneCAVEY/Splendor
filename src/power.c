@@ -3,6 +3,8 @@
 #include "game.h"
 #include "guild.h"
 #include <stdio.h>
+#define UNUSED(x) (void)(x)
+
 
 const char * power_string[] = {
     "PANIC_MARKET",
@@ -42,7 +44,7 @@ The current player chooses the builders he wants to steal
 int choose_a_builder(int current_player, struct player players[NB_PLAYERS]){
     int next=(current_player+1)%NB_PLAYERS;
     int index=0;
-    int max=builder_points(players[next].player_builder[0]);
+    unsigned max=builder_points(players[next].player_builder[0]);
     for (int i=1; i<NUM_TOKENS;i++){
         if(builder_points(players[next].player_builder[i]) > max){
             max=builder_points(players[next].player_builder[i]);
