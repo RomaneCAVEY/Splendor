@@ -1,5 +1,6 @@
 #include"power.h"
 #include "builder.h"
+#include "color.h"
 #include "game.h"
 #include "guild.h"
 #include <stdio.h>
@@ -66,25 +67,33 @@ int guild_panic(int current_player, struct player players[NB_PLAYERS], void* res
 	UNUSED(ressource);
 	UNUSED(market);
 	if (guild_nbr_builder(guild)){
-		printf("GUILD_PANIC IS RUNNING!!!!!!! \n");
+		printf(BHRED "GUILD_PANIC IS RUNNING!!!!!!! \n" COLOR_RESET);
 		printf("The guild before: \n");
 		guild_display(guild);
 		int random=rand()%MAX_BUILDERS;
 		int c=0;
-		while(!guild_available_builder((random+c)%MAX_BUILDERS,guild) && (c<(MAX_BUILDERS))){
+		while(!guild_available_builder((random+c)%MAX_BUILDERS,guild) && (c<(MAX_BUILDERS))	){
 			c++;
+			//printf("c=%d, \n",c);
 		}
-		if(c<MAX_BUILDERS){
-		struct builder_t* builder= guild_available_builder(random+c,guild);
-		remove_builders_from_guild(builder,guild);
-		int level_b= builder_level(builder);
-		for (int level = 0; level <NUM_LEVELS; ++level) {
-				if(guild->stack[level_b+level].nb){
-					guild->builder_available[random+c]=stack_pop(&guild->stack[level_b+level]);
-				}
+		if (c<MAX_BUILDERS){
+			struct builder_t* builder= guild_available_builder((random+c)%MAX_BUILDERS,guild);
+			builder_display(builder, "celui qui fait foirer les test");
+			guild_display(guild);
+			remove_builders_from_guild(builder,guild);
+			guild_display(guild);
+			int level_b= builder_level(builder);
+			for (int level = 0; level <NUM_LEVELS; ++level) {
+					if(guild->stack[level_b+level].nb){
+						guild->builder_available[random+c]=stack_pop(&guild->stack[level_b+level]);
+						return 0;
+					}
+			}
+		// printf("guild.stack[%d].nb = %d !!!!!!!!!!!!!!!!\n",level, guild.stack[level].nb);
 		}
-		}
-		printf("guild.stack[%d].nb = %d !!!!!!!!!!!!!!!!\n",level, guild.stack[level].nb);
+		else{
+        printf("panic_guild failed, the guild is empty \n");
+    }
 
 
 	}
