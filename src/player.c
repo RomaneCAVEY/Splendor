@@ -47,7 +47,7 @@ Display the builders and tokens of the player
 */
 void player_display(struct player players[NB_PLAYERS],int current){
 	struct player player=players[current];
-	printf(HYEL"PLAYER DISPLAY OF PLAYER %d \n"COLOR_RESET, current);
+	printf(HYEL"\n\n PLAYER DISPLAY OF PLAYER %d \n"COLOR_RESET, current);
     printf(HYEL "This is what the player owns \n" );
     printf("=======================================\n" COLOR_RESET);
     for (int i=0; i< player.nbr_token; ++i){
@@ -69,22 +69,23 @@ Give the winner of the game if he exists
 */
 int winner(struct player players[NB_PLAYERS]){
     if (players[0].points >= VICTORY_POINTS) {
-        printf(UWHT"Victory of player 0 with %d points \n" COLOR_RESET, players[0].points);
+        printf(UWHT"Victory of player 0 with %d points!!!! \n\n\n\n" COLOR_RESET, players[0].points);
         return 0;
     }
     if (players[1].points >= VICTORY_POINTS) {
-        printf(UWHT"Victory of player 1 with %d points \n"COLOR_RESET, players[1].points);
+        printf(UWHT"Victory of player 1 with %d points !!!\n\n\n\n"COLOR_RESET, players[1].points);
         return 0;
     }
     else{
         if (players[1].points>players[0].points){
-            printf(UWHT"Victory of player 1 with %d points \n"COLOR_RESET, players[1].points);
+            printf(UWHT"Victory of player 1 with %d points!!!! \n\n\n\n"COLOR_RESET, players[1].points);
             return 0;
         }
         else{
-            printf(UWHT"Victory of player 0 with %d points \n"COLOR_RESET, players[0].points);
+            printf(UWHT"Victory of player 0 with %d points !!!!\n\n\n\n"COLOR_RESET, players[0].points);
             return 0;
         }
+
     }
 }
 

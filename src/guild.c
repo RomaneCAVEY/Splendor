@@ -63,10 +63,11 @@ void remove_builders_from_guild(struct builder_t * builder, struct guild_t* guil
 
 		while ((guild->stack[(level+next)%NUM_LEVELS].nb <1) && (next< MAX_BUILDERS)){
 			//stack_display(guild.stack[(level+next)%NUM_LEVELS]);
-		// printf("guild.stack[(level + next) NUM_LEVELS].nb vaut %d \n", guild.stack[(level + next)%NUM_LEVELS].nb);
+			// printf("guild.stack[(level + next) NUM_LEVELS].nb vaut %d \n", guild.stack[(level + next)%NUM_LEVELS].nb);
 			next++;
 		}
-		if (next== MAX_BUILDERS){
+		if (next>=MAX_BUILDERS){
+			//We can't replace the builder by another one
 			guild->builder_available[i]= NULL; 
 		}
 		else{
@@ -90,7 +91,7 @@ void guild_display(struct guild_t* guild){
 	printf(BBLU"\n ########################################## \n" COLOR_RESET);
 	printf(BBLU"\n  GUILD DISPLAY \n " COLOR_RESET);
 	if (guild->nb_builder>0){
-		for ( int i=0; i< guild->nb_builder; i++){
+		for ( int i=0; i< MAX_BUILDERS; i++){
 			//printf("%p \n", &guild->builder_available[i] );
 			if(guild->builder_available[i]){
 				builder_display(guild->builder_available[i], "this builder belongs to the guild \n");

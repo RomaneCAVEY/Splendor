@@ -58,8 +58,8 @@ void market_display(struct market_t* market) {
     int square = sqrt(NUM_TOKENS);
     for (i=0; i< NUM_TOKENS; i++){
         if((i%square)==0){
-            printf("\n______________________________________________________________________________________________________________________");
-            printf("________________________________________________________________________\n\n\n\n");
+            printf(HBLK"\n______________________________________________________________________________________________________________________"COLOR_RESET);
+            printf(HBLK"________________________________________________________________________\n\n\n\n"COLOR_RESET);
         }
         if ( market->playing_board[i]){
             token_display( *market->playing_board[i], "|| ");
@@ -71,6 +71,7 @@ void market_display(struct market_t* market) {
             printf(" ||         empty space           ");
         }
     }
+	printf("\n\n");
 }
 
 /* Return the adress of the token in the market at the place i
