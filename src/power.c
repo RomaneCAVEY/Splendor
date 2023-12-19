@@ -74,6 +74,7 @@ int guild_panic(int current_player, struct player players[NB_PLAYERS], void* res
 		while(!guild_available_builder((random+c)%MAX_BUILDERS,guild) && (c<(MAX_BUILDERS))){
 			c++;
 		}
+		if(c<MAX_BUILDERS){
 		struct builder_t* builder= guild_available_builder(random+c,guild);
 		remove_builders_from_guild(builder,guild);
 		int level_b= builder_level(builder);
@@ -82,7 +83,8 @@ int guild_panic(int current_player, struct player players[NB_PLAYERS], void* res
 					guild->builder_available[random+c]=stack_pop(&guild->stack[level_b+level]);
 				}
 		}
-		// printf("guild.stack[%d].nb = %d !!!!!!!!!!!!!!!!\n",level, guild.stack[level].nb);
+		}
+		printf("guild.stack[%d].nb = %d !!!!!!!!!!!!!!!!\n",level, guild.stack[level].nb);
 
 
 	}
