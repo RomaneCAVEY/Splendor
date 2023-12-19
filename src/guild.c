@@ -1,6 +1,8 @@
 #include "guild.h"
+#include "ansi_color.h"
 #include "builder.h"
 #include "stack.h"
+#include "second_color.h"
 #include <stdio.h>
 #include <time.h>
 #include <string.h>
@@ -85,8 +87,8 @@ struct builder_t * guild_builder_in_guild(unsigned index, struct guild_t* guild)
 
 
 void guild_display(struct guild_t* guild){
-	printf("\n ########################################## \n");
-	printf("\n  GUILD DISPLAY \n ");
+	printf(BBLU"\n ########################################## \n" COLOR_RESET);
+	printf(BBLU"\n  GUILD DISPLAY \n " COLOR_RESET);
 	if (guild->nb_builder>0){
 		for ( int i=0; i< guild->nb_builder; i++){
 			//printf("%p \n", &guild->builder_available[i] );
@@ -98,7 +100,7 @@ void guild_display(struct guild_t* guild){
 	else{
 		printf("the guild is empty \n");
 	}
-printf("\n ########################################## \n");
+printf(BBLU"\n ########################################## \n"COLOR_RESET);
 }
 
 /** Add the builder bought in the guild to the player_builder

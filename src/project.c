@@ -32,7 +32,7 @@ int main(int argc, char *argv[]){
     max_turn = 0;
     seed = 0;
     seed_builder = 0;
-	display=0;
+	display=1;
     while ((opt= getopt(argc, argv, "s:m:c:d:"))!=(-1)) {
         switch (opt) {
             case 's':
@@ -110,15 +110,10 @@ int main(int argc, char *argv[]){
             }
         }
         if (display) {
-			 printf("===============================: \n");
-			printf("Market display: \n");
+		
 			market_display(&market);
-			printf("\n===============================: \n\n\n");
-
-			printf("===============================: \n");
-			printf("Guild display: \n");
 			guild_display(&guild);
-			printf("\n===============================: \n\n\n");
+
 			//printf("this is the possibility %d\n", possibility_to_pay);
 			
 		}
@@ -153,8 +148,8 @@ int main(int argc, char *argv[]){
                 }
         }
 		if(display){
-                    printf("PLAYER DISPLAY OF PLAYER %d \n", current_player);
-                    player_display(players[current_player]);
+                   
+                    player_display(players,current_player);
                     printf("\n");
 				}
         //printf("PLAYER DISPLAY OF PLAYER %d \n", current_player);

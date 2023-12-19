@@ -49,7 +49,7 @@ int next_player(int size, int current);
 /**
 Display the builders and tokens of the player
 */
-void player_display(struct player player);
+void player_display(struct player players[NB_PLAYERS],int current);
 
 /** 
 Give the winner of the game if he exists
