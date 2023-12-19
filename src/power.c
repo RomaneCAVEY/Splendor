@@ -12,15 +12,20 @@ const char * power_string[] = {
     "TOKEN_STEAL",
     "TURN_STOLEN",
     "MASTER_MAIN",
+	"GAIN_FAVOR_WITH_BUILDER",
+	"FAVOR_STEAL",
 	"MAX"
 };
 
-skill skills[5]={
+skill skills[NUM_POWER]={
 	panic_market,
 	guild_panic,
 	token_steal,
 	steal_turn,
-	master_hand
+	master_hand,
+	gain_favor_with_builder,
+	favor_steal
+	
 };
 
 
@@ -185,9 +190,12 @@ int steal_turn(int current_player, struct player players[NB_PLAYERS], void* ress
 
 
 
-void favor_steal(struct player players[NB_PLAYERS], int current_player) {
+int favor_steal(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market_t *market,struct guild_t *guild){
     int random= rand()%NB_PLAYERS;
     int counter=0;
+	UNUSED(ressource);
+	UNUSED(market);
+	UNUSED(guild);
     while((players[NB_PLAYERS].favor_nbr=0) || ((random==current_player) && (counter<NB_PLAYERS))){
         random=rand()%NB_PLAYERS;
         ++counter;
@@ -196,10 +204,15 @@ void favor_steal(struct player players[NB_PLAYERS], int current_player) {
         ++players[current_player].favor_nbr;
         --players[random].favor_nbr;
     }
+	return 0;
 }
 
-void gain_favor_with_builder(struct player players[NB_PLAYERS], int current_player) {
+int gain_favor_with_builder(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market_t *market,struct guild_t *guild){
     ++players[current_player].favor_nbr;
+	UNUSED(ressource);
+	UNUSED(market);
+	UNUSED(guild);
+	return 0;
 }
 
 int master_hand(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market_t *market,struct guild_t *guild){

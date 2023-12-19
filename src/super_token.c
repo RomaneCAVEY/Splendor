@@ -17,6 +17,10 @@ void init_power_tokens(){
 			token_power[i].powers[2]=give_the_power(2);
 		}
 		token_power[i].token= make_token(i);
+		random=rand()%2;
+		if (random){
+			token_power[i].powers[6]=give_the_power(6);
+		}
 	}
 }
 

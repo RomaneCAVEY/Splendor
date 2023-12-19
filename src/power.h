@@ -15,7 +15,7 @@
 #include <time.h>
 #include <string.h>
 
-#define NUM_POWER 5
+#define NUM_POWER 7
 #define UNUSED(x) (void)(x)
 
 enum power_id{
@@ -24,6 +24,9 @@ enum power_id{
     TOKEN_STEAL,
     TURN_STOLEN,
     MASTER_HAND,
+	GAIN_FAVOR_WITH_BUILDER,
+	FAVOR_STEAL,
+
 };
 
 
@@ -53,7 +56,6 @@ Current player can steal a token to the other player
 */
 int token_steal(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market_t *market,struct guild_t *guild);
 
-void gain_favor_with_builder(struct player players [NB_PLAYERS], int current_player);
 
 /**
 
@@ -83,9 +85,11 @@ return the power of the index index
 */
 skill give_the_power(enum power_id power_id);
 
-void gain_favor_with_builder(struct player players[NB_PLAYERS], int current_player);
+int gain_favor_with_builder(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market_t *market,struct guild_t *guild);
 
-void favor_steal(struct player players[NB_PLAYERS], int current_player);
+
+
+int favor_steal(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market_t *market,struct guild_t *guild);
 
 
 

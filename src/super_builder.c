@@ -30,6 +30,11 @@ void init_power_builders(){
 		if (random<(level+1)){
 			builder_power[i].powers[4]=give_the_power(4);;
 		}
+		random=rand()%2;
+		if (random){
+			builder_power[i].powers[5]=give_the_power(5);;
+		}
+		
 	}
 	}
 }

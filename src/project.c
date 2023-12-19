@@ -14,7 +14,7 @@
 #include "super_builder.h"
 #include "market.h"
 #include "super_token.h"
-
+#include "favor.h"
 #define NB_PLAYERS 2
 
 struct guild_t guild={};
@@ -65,6 +65,7 @@ int main(int argc, char *argv[]){
         players[i].index = i;
     }
     int current_player = (get_random_player(NB_PLAYERS));
+	players[(current_player+1)%NB_PLAYERS].favor_nbr+=1;
     //Init market and guild    
     init_permutation();
     // Init all_tokens
@@ -87,7 +88,10 @@ int main(int argc, char *argv[]){
     while (!(has_won(players) && (nb_turns_not_played < 2)) && nb_turns < max_turn) {
         printf(UGRN"This is the turn %d \n" COLOR_RESET, nb_turns);
         printf(UGRN"this is the points %d of the current player, player %d\n" COLOR_RESET, players[current_player].points,current_player);
-        int index;
+		srand(0);
+		int level_choosen=rand()%NUM_LEVELS;
+        execute_favors(current_player, players, &market,&guild,level_choosen);
+		int index;
         int possibility_to_pay=0;
 		struct builder_t *builder=NULL;
         printf("guild_nbr_builder %d \n", guild_nbr_builder(&guild));
