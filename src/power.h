@@ -5,8 +5,10 @@
 #include "guild.h"
 #include "market.h"
 #include "player.h"
+#include "color.h"
 #include "second_token.h"
 #include "token.h"
+#include "second_color.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>

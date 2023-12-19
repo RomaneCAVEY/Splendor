@@ -51,10 +51,10 @@ int token_equals(const struct token_t t1, const struct token_t t2) {
     - Token(B=1,W=5)
 */
 void token_display(struct token_t t, const char * prefix) {
-    printf("%s Token (", prefix);
+    printf( "%s %s Token (" COLOR_RESET,prefix_color(i), prefix);
     for (int i = 0; i < NUM_COLORS; ++i) {
             if (t.s.ressource[i]) {
-                printf(" ( %s = %d) ,", color_to_short_string(i), t.s.ressource[i]);
+                printf( "%s ( %s = %d) ," COLOR_RESET,prefix_color(i), color_to_short_string(i), t.s.ressource[i]);
                 //printf(" with the following address: %p", &t);
             }
     }
