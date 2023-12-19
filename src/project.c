@@ -85,8 +85,8 @@ int main(int argc, char *argv[]){
     printf(" ********************************** \n");
     //int c=0;
     while (!(has_won(players) && (nb_turns_not_played < 2)) && nb_turns < max_turn) {
-        printf("This is the turn %d \n", nb_turns);
-        printf("this is the points %d of the current player, player %d\n", players[current_player].points,current_player);
+        printf(UGRN"This is the turn %d \n" COLOR_RESET, nb_turns);
+        printf(UGRN"this is the points %d of the current player, player %d\n" COLOR_RESET, players[current_player].points,current_player);
         int index;
         int possibility_to_pay=0;
 		struct builder_t *builder=NULL;

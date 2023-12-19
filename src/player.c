@@ -69,20 +69,20 @@ Give the winner of the game if he exists
 */
 int winner(struct player players[NB_PLAYERS]){
     if (players[0].points >= VICTORY_POINTS) {
-        printf("Victory of player 0 with %d points \n", players[0].points);
+        printf(UWHT"Victory of player 0 with %d points \n" COLOR_RESET, players[0].points);
         return 0;
     }
     if (players[1].points >= VICTORY_POINTS) {
-        printf("Victory of player 1 with %d points \n", players[1].points);
+        printf(UWHT"Victory of player 1 with %d points \n"COLOR_RESET, players[1].points);
         return 0;
     }
     else{
         if (players[1].points>players[0].points){
-            printf("Victory of player 1 with %d points \n", players[1].points);
+            printf(UWHT"Victory of player 1 with %d points \n"COLOR_RESET, players[1].points);
             return 0;
         }
         else{
-            printf("Victory of player 0 with %d points \n", players[0].points);
+            printf(UWHT"Victory of player 0 with %d points \n"COLOR_RESET, players[0].points);
             return 0;
         }
     }
