@@ -5,9 +5,9 @@
 #include <string.h>
 
 #include "token.h"
-
+#include "ansi_color.h"
 #include "builder.h"
-
+#include "second_color.h"
 #include "second_token.h"
 
 
@@ -51,7 +51,7 @@ int token_equals(const struct token_t t1, const struct token_t t2) {
     - Token(B=1,W=5)
 */
 void token_display(struct token_t t, const char * prefix) {
-    printf( "%s %s Token (" COLOR_RESET,prefix_color(i), prefix);
+    printf( "%s Token (" COLOR_RESET, prefix);
     for (int i = 0; i < NUM_COLORS; ++i) {
             if (t.s.ressource[i]) {
                 printf( "%s ( %s = %d) ," COLOR_RESET,prefix_color(i), color_to_short_string(i), t.s.ressource[i]);

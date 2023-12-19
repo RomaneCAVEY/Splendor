@@ -8,6 +8,7 @@
 #include "color.h"
 #include "second_token.h"
 #include "token.h"
+#include "ansi_color.h"
 #include "second_color.h"
 #include <stdio.h>
 #include <stdlib.h>
