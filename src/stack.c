@@ -16,6 +16,7 @@ struct builder_t* stack_pop( struct stack_t *stack)
     }
     stack->nb--;
     struct builder_t* out= stack->values[stack->head];
+	stack->values[(stack->nb)+1]=NULL;
     stack->head--;
     return out;
 }
@@ -34,7 +35,7 @@ void stack_push(struct stack_t *stack, void* elem)
 }
 
 void stack_display(struct stack_t stack){
-    for (int i=0; i<stack.nb; i++){
+    for (int i=0; i<MAX_BUILDERS; i++){
         builder_display(stack.values[i], "this builder belong to the stack");
     }
 }

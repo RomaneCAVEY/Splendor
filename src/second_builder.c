@@ -14,7 +14,6 @@
 #include <time.h>
 #include "second_builder.h"
 
-#define  NUM_POWER 5
 
 const char * builders_powers[MAX_BUILDERS][NUM_POWER] ={};
 

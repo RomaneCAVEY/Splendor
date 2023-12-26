@@ -91,7 +91,7 @@ int main(int argc, char *argv[]){
 		srand(0);
 		int level_choosen=rand()%NUM_LEVELS;
         execute_favors(current_player, players, &market,&guild,level_choosen);
-		int index;
+		int index=0;
         int possibility_to_pay=0;
 		struct builder_t *builder=NULL;
         printf("guild_nbr_builder %d \n", guild_nbr_builder(&guild));
@@ -117,8 +117,7 @@ int main(int argc, char *argv[]){
 		
 			market_display(&market);
 			guild_display(&guild);
-
-			//printf("this is the possibility %d\n", possibility_to_pay);
+			printf("this is the possibility to pay a builder is %d\n", possibility_to_pay);
 			
 		}
        
@@ -130,12 +129,12 @@ int main(int argc, char *argv[]){
 			builder_display(guild_available_builder(index, &guild), "THIS IS THE BUILDER WE WANT TO BUY");
             pay(players,index, current_player,&guild,&market);
             printf("this is the points  %d of player %d\n", players[current_player].points,current_player);
-             }
+            }
              
         //Else we pick some tokens if it's possible;
         else {
                 //nb = number between 1 and 3 of tokens the player will pick from the market
-                int nb = rand() % 3 +1;
+                int nb = rand() % 3+1;
                 ///add = number of tokens we have already picked from the market amoung the nb tokens
                 // int add=0;
                 int random = rand() % NUM_TOKENS;
@@ -172,7 +171,7 @@ int main(int argc, char *argv[]){
 
    
     if (nb_turns_not_played >= 2){
-        printf("both loose");
+        printf(UGRN"\n\n BOTH LOOSE \n\n" COLOR_RESET);
         return 0;
 
     }

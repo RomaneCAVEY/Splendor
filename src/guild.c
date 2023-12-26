@@ -95,6 +95,7 @@ void guild_display(struct guild_t* guild){
 			//printf("%p \n", &guild->builder_available[i] );
 			if(guild->builder_available[i]){
 				builder_display(guild->builder_available[i], "this builder belongs to the guild \n");
+				//printf("	%d \n",i);
 			}
 		}
 	}

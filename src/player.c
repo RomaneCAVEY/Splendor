@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <threads.h>
 #include "guild.h"
+#include "token.h"
 
 /**
 Init the player and all his parameter
@@ -50,16 +51,17 @@ void player_display(struct player players[NB_PLAYERS],int current){
 	printf(HYEL"\n\n PLAYER DISPLAY OF PLAYER %d \n"COLOR_RESET, current);
     printf(HYEL "This is what the player owns \n" );
     printf("=======================================\n" COLOR_RESET);
-    for (int i=0; i< player.nbr_token; ++i){
+    for (int i=0; i< NUM_TOKENS; ++i){
         if(player.player_token[i]){
             token_display(*player.player_token[i], "\n -");
         }
     }
-    for (int i=0; i< player.nbr_builder; ++i){
+    for (int i=0; i< MAX_BUILDERS; ++i){
 		if(player.player_builder[i]){
         	builder_display(player.player_builder[i], "\n -");
 		}
     }
+	printf("The player owns: %d favors", player.favor_nbr);
     printf(HYEL"\n=======================================\n"COLOR_RESET);
 }
 
@@ -69,20 +71,20 @@ Give the winner of the game if he exists
 */
 int winner(struct player players[NB_PLAYERS]){
     if (players[0].points >= VICTORY_POINTS) {
-        printf(UWHT"Victory of player 0 with %d points!!!! \n\n\n\n" COLOR_RESET, players[0].points);
+        printf(UGRN"\n\n\n Victory of player 0 with %d points!!!! \n\n\n\n" COLOR_RESET, players[0].points);
         return 0;
     }
     if (players[1].points >= VICTORY_POINTS) {
-        printf(UWHT"Victory of player 1 with %d points !!!\n\n\n\n"COLOR_RESET, players[1].points);
+        printf(UGRN"\n\n\n Victory of player 1 with %d points !!!\n\n\n\n"COLOR_RESET, players[1].points);
         return 0;
     }
     else{
         if (players[1].points>players[0].points){
-            printf(UWHT"Victory of player 1 with %d points!!!! \n\n\n\n"COLOR_RESET, players[1].points);
+            printf(UGRN"\n\n\n Victory of player 1 with %d points!!!! \n\n\n\n"COLOR_RESET, players[1].points);
             return 0;
         }
         else{
-            printf(UWHT"Victory of player 0 with %d points !!!!\n\n\n\n"COLOR_RESET, players[0].points);
+            printf(UGRN"\n\n\n Victory of player 0 with %d points !!!!\n\n\n\n"COLOR_RESET, players[0].points);
             return 0;
         }
 
