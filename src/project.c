@@ -87,6 +87,7 @@ int main(int argc, char *argv[]){
     printf(" ********************************** \n");
     //int c=0;
     while (!(has_won(players) && (nb_turns_not_played < 2)) && nb_turns < max_turn) {
+		printf(UGRN"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" COLOR_RESET);
         printf(UGRN"This is the turn %d \n" COLOR_RESET, nb_turns);
         printf(UGRN"this is the points %d of the current player, player %d\n" COLOR_RESET, players[current_player].points,current_player);
 		srand(0);
@@ -97,14 +98,17 @@ int main(int argc, char *argv[]){
 		struct builder_t *builder=NULL;
         //printf("\n guild_nbr_builder %d \n", guild_nbr_builder(&guild));
         //guild_display(&guild);
-        for ( int i = (num_builders()-1); i>(-1) ; i--) {
+        for ( int i = (num_builders()); i>(-1) ; i--) {
         //fprintf(stderr,"c:%d\n",c);
         // c+=1;
+			//printf("\n num_builder is %d: \n", num_builders());
+			//printf("\n This is player %d \n" , current_player);
             if (guild_available_builder(i, &guild)) {
+				//builder_display(guild_available_builder(i, &guild), "\n Builder to check \n");
+				//printf("This is the possibility to pay a builder of the player %d \n", possibility_token_pay(players[current_player], guild_available_builder(i, &guild)));
                 if (possibility_token_pay(players[current_player], guild_available_builder(i, &guild))) {
-                    
+                  
                     possibility_to_pay = possibility_token_pay(players[current_player], guild_available_builder(i, &guild));
-                    printf("This is the possibility to pay a builder of the player %d \n", possibility_to_pay);
                     index = i;
 					builder=guild_available_builder(i, &guild);
 
@@ -134,7 +138,7 @@ int main(int argc, char *argv[]){
              
         //Else we pick some tokens if it's possible;
         else {
-			printf("PIOCHER DES TOKENS");
+			//printf("PIOCHER DES TOKENS");
             //nb = number between 1 and 3 of tokens the player will pick from the market
             int nb = rand() % 3+1;
             //add = number of tokens we have already picked from the market amoung the nb tokens

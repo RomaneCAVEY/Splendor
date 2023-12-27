@@ -51,7 +51,6 @@ int possibility_token_pay(struct player player, struct builder_t * b) {
     if(b){
 
         struct set_t cost_color= builder_requires(b);
-
         //tmp variable used in the loop to know the cost of the builder
         struct set_t count_color={};
         unsigned int count=0;
