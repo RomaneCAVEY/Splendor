@@ -11,9 +11,9 @@
 void builder_guild_renew(unsigned int level_choosen, struct guild_t* guild ) {
 	printf(BHRED"The player have the following power: builder_guild_renew with the level %d \n" COLOR_RESET,level_choosen);
 	printf("The guild before the favor:");
-	guild_display(guild);
+	//guild_display(guild);
     struct builder_t* tmp[MAX_BUILDERS_AVAILABLE_PER_LVL]={};
-	stack_display(guild->stack[level_choosen]);
+	//stack_display(guild->stack[level_choosen]);
 		if (guild->stack[level_choosen].nb){
 		for (int k=0; k< MAX_BUILDERS_AVAILABLE_PER_LVL; k++){
 			tmp[k]=guild->builder_available[level_choosen*MAX_BUILDERS_AVAILABLE_PER_LVL+k];
