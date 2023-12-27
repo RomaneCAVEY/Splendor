@@ -42,7 +42,7 @@ void builder_guild_renew(unsigned int level_choosen, struct guild_t* guild ) {
 			}
 		}
 		printf("The guild after the favor:");
-		guild_display(guild);
+		//guild_display(guild);
 		}
 		else{
 			printf("Failed of the favor: the builders of the level choosen are already in the guild");
