@@ -26,9 +26,9 @@ void init_builders(unsigned int seed) {
     for (unsigned int i = 0; i < nb_builders; ++i) {
         game_builders[i].level = rand() % NUM_LEVELS;
         game_builders[i].points = rand() % (VICTORY_POINTS/2);
-        game_builders[i].ressource.ressource[rand() % NUM_COLORS]=1;
         game_builders[i].ressource.ressource[rand() % NUM_COLORS]+=1;
-        game_builders[i].production.ressource[rand() % NUM_COLORS]=1;
+        game_builders[i].ressource.ressource[rand() % NUM_COLORS]+=1;
+        game_builders[i].production.ressource[rand() % NUM_COLORS]+=1;
         game_builders[i].production.ressource[rand() % NUM_COLORS]+=1;
 		builder_display(&game_builders[i], "This is a new builder");
     }
@@ -82,13 +82,13 @@ struct set_t builder_provides(const struct builder_t* g){
     - Builder(lvl=1,cost=1W,prod=1B)
 */
 
-void builder_display(const struct builder_t * g, const char * prefix) {
+void builder_display(const struct builder_t * builder, const char * prefix) {
     //printf("%p \n", &g);
-    if (g) {
-        printf("%s Builder(lvl= %d, cost= ( ",prefix, g -> level);
+    if (builder) {
+        printf("%s Builder(lvl= %d, cost= ( ",prefix, builder-> level);
         for (unsigned int i=0; i<NUM_COLORS; ++i){
-            if (g -> ressource.ressource[i]>0){
-                printf("(%d=%s),",  g -> ressource.ressource[i], color_to_short_string(g -> ressource.ressource[i]));
+            if (builder -> ressource.ressource[i]>0){
+                printf("(%s=%d),",color_to_short_string(i),  builder-> ressource.ressource[i]);
 
             }
 
@@ -96,13 +96,13 @@ void builder_display(const struct builder_t * g, const char * prefix) {
         printf(")    ");
         printf(", prod: {");
          for (unsigned int i=0; i<NUM_COLORS; ++i){
-            if (g -> ressource.ressource[i]>0){
-                printf("(%d= %s),",  g -> production.ressource[i], color_to_short_string(g -> production.ressource[i]));
+            if (builder-> production.ressource[i]>0){
+                 printf("(%s=%d),",color_to_short_string(i),  builder -> production.ressource[i]);
             }
 
         }
         printf("}  ");
-        printf(" ,points = %d) \n \n", g->points);
+        printf(" ,points = %d) \n \n", builder->points);
     }
 }
 

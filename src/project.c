@@ -15,6 +15,7 @@
 #include "market.h"
 #include "super_token.h"
 #include "favor.h"
+#include "token.h"
 #define NB_PLAYERS 2
 
 struct guild_t guild={};
@@ -32,7 +33,7 @@ int main(int argc, char *argv[]){
     max_turn = 0;
     seed = 0;
     seed_builder = 0;
-	display=0;
+	display=1;
     while ((opt= getopt(argc, argv, "s:m:c:d:"))!=(-1)) {
         switch (opt) {
             case 's':
@@ -94,7 +95,7 @@ int main(int argc, char *argv[]){
 		int index=0;
         int possibility_to_pay=0;
 		struct builder_t *builder=NULL;
-        printf("guild_nbr_builder %d \n", guild_nbr_builder(&guild));
+        //printf("\n guild_nbr_builder %d \n", guild_nbr_builder(&guild));
         //guild_display(&guild);
         for ( int i = (num_builders()-1); i>(-1) ; i--) {
         //fprintf(stderr,"c:%d\n",c);
@@ -103,7 +104,7 @@ int main(int argc, char *argv[]){
                 if (possibility_token_pay(players[current_player], guild_available_builder(i, &guild))) {
                     
                     possibility_to_pay = possibility_token_pay(players[current_player], guild_available_builder(i, &guild));
-                    printf("this is the possibility of the player %d \n", possibility_to_pay);
+                    printf("This is the possibility to pay a builder of the player %d \n", possibility_to_pay);
                     index = i;
 					builder=guild_available_builder(i, &guild);
 
@@ -126,27 +127,33 @@ int main(int argc, char *argv[]){
         //If we can build a builder then we do it
         if (possibility_to_pay) {
             //put in the market the tokens which were useful to pay the builder, except if they are builders
-			builder_display(guild_available_builder(index, &guild), "THIS IS THE BUILDER WE WANT TO BUY");
+			builder_display(guild_available_builder(index, &guild), "\n THIS IS THE BUILDER WE WANT TO BUY: \n");
             pay(players,index, current_player,&guild,&market);
             printf("this is the points  %d of player %d\n", players[current_player].points,current_player);
             }
              
         //Else we pick some tokens if it's possible;
         else {
-                //nb = number between 1 and 3 of tokens the player will pick from the market
-                int nb = rand() % 3+1;
-                ///add = number of tokens we have already picked from the market amoung the nb tokens
-                // int add=0;
-                int random = rand() % NUM_TOKENS;
-                if (nb <= market_nbr_token(&market) && token_in_market_is_available(random,&market)) {
+			printf("PIOCHER DES TOKENS");
+            //nb = number between 1 and 3 of tokens the player will pick from the market
+            int nb = rand() % 3+1;
+            //add = number of tokens we have already picked from the market amoung the nb tokens
+            // int add=0;
+            int random = rand() % NUM_TOKENS;
+			int count=0;
+			while(!token_in_market_is_available((random+count)%NUM_TOKENS,&market) && count<NUM_TOKENS){
+				count++;
+			}
+				
+			random=(random+count)%NUM_TOKENS;
+            if (nb <= market_nbr_token(&market) && token_in_market_is_available(random,&market)) {
     
-                        
-                       // printf("%d est aléatoire \n", nb);
-                        //printf("there are %d tokens in the market \n",market_nbr_token());
-                            tokens_connex(random, nb, current_player, players,&market,&guild);
+                    //printf("%d est aléatoire \n", nb);
+                    //printf("there are %d tokens in the market \n",market_nbr_token());
+                    tokens_connex(random, nb, current_player, players,&market,&guild);
                     
                 }
-                else {
+            else {
                 nb_turns_not_played = nb_turns_not_played + 1;
                 }
         }

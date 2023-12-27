@@ -4,6 +4,7 @@
 #include "power.h"
 #include "super_token.h"
 #include "super_builder.h"
+#include "token.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -131,7 +132,7 @@ int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int
 
             }
         }
-
+	
     // Pay the rest with the tokens of the player
     for (int i = 0; i <NUM_TOKENS; ++i){
         int verif=1;
@@ -140,7 +141,7 @@ int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int
             int useful=0;
             for (int j=0; j<NUM_COLORS;j++){
                 if (  (count_color[j]<cost_color.ressource[j]) &&  token->s.ressource[j] ){
-                    useful=j;
+                    useful=1;
                 }
 
             }
@@ -149,6 +150,7 @@ int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int
                 for (unsigned int k=0; k<NUM_COLORS;k++){
                     count_color[k]+=token->s.ressource[k];
                 }
+				token_display(*token,  "Has to be removed to pay the builder");
                 add_token_to_market(players[current_player].player_token[i], market);
                 remove_token(players, players[current_player].player_token[i], current_player);
             }
@@ -174,12 +176,11 @@ int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int
 */
 void pay(struct player players[NB_PLAYERS], int index, int current, struct guild_t* guild, struct market_t* market){
     //printf(const char *restrict format, ...)
-	
     token_pay(guild_builder_in_guild(index, guild), players, current, market);
     //printf(" \n payed \n ");
     add_from_guild(index, players, current,guild);
 	struct builder_t *builder= guild_builder_in_guild(index,guild);
-	remove_builders_from_guild(guild_builder_in_guild(index,guild),guild);
+	remove_builders_from_guild(builder,guild);
 	players[current].nbr_builder+=1;
 	execute_builder_power(current, players, builder,guild,market);
     

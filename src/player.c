@@ -61,7 +61,7 @@ void player_display(struct player players[NB_PLAYERS],int current){
         	builder_display(player.player_builder[i], "\n -");
 		}
     }
-	printf("The player owns: %d favors", player.favor_nbr);
+	printf("\n The player owns: %d favors", player.favor_nbr);
     printf(HYEL"\n=======================================\n"COLOR_RESET);
 }
 
