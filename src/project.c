@@ -174,6 +174,7 @@ int main(int argc, char *argv[]){
 		//printf("THE INDEX IS :%d \n",index);
 		skill steal_turn= builder_has_the_power_i(builder, TURN_STOLEN);
 		if (steal_turn){
+			printf("\n ->>>>>>>>>>>>>>The turn has been stolen<<<<<<<<<<<<<<<\n");
 			current_player=steal_turn(current_player,players, NULL,&market,&guild);
 		}
         

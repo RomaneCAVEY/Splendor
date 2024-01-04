@@ -1,8 +1,10 @@
 #include"power.h"
+#include "ansi_color.h"
 #include "builder.h"
 #include "color.h"
 #include "game.h"
 #include "guild.h"
+#include "player.h"
 #include <stdio.h>
 
 
@@ -72,7 +74,7 @@ int guild_panic(int current_player, struct player players[NB_PLAYERS], void* res
 	UNUSED(ressource);
 	UNUSED(market);
 	if (guild_nbr_builder(guild)){
-		printf(BHRED "GUILD_PANIC IS RUNNING!!!!!!! \n" COLOR_RESET);
+		printf(BHRED "\n GUILD_PANIC IS RUNNING!!!!!!! \n" COLOR_RESET);
 		printf("The guild before: \n");
 		guild_display(guild);
 		int random=rand()%MAX_BUILDERS;
@@ -127,7 +129,7 @@ int panic_market(int current_player, struct player players[NB_PLAYERS], void* re
 	UNUSED(guild);
 	UNUSED(current_player);
 	UNUSED(ressource);
-	printf("PANIC_MARKET IS RUNNING!!!!! \n");
+	printf(BRED"PANIC_MARKET IS RUNNING!!!!! \n"COLOR_RESET);
     //pick an available random token
 	if(market->nbr_token){ 
     while (!make_market((random+c)%NUM_TOKENS,market) && c<NUM_TOKENS){
@@ -172,7 +174,7 @@ int token_steal(int current_player, struct player players[NB_PLAYERS], void* res
 		players[current_player].player_token[nb]=players[(current_player+1)%NB_PLAYERS].player_token[rank];
         }
 
-	printf("TOKEN_STEAL IS RUNNING!!!!!!!!! \n");
+	printf(BRED"\n TOKEN_STEAL IS RUNNING!!!!!!!!! \n"COLOR_RESET);
     return 0;
     
 }
@@ -191,18 +193,18 @@ int steal_turn(int current_player, struct player players[NB_PLAYERS], void* ress
 
 
 int favor_steal(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market_t *market,struct guild_t *guild){
+	printf(BRED"\n favor_steal is running \n"COLOR_RESET);
     int random= rand()%NB_PLAYERS;
     int counter=0;
 	UNUSED(ressource);
 	UNUSED(market);
 	UNUSED(guild);
-    while((players[NB_PLAYERS].favor_nbr=0) || ((random==current_player) && (counter<NB_PLAYERS))){
-        random=rand()%NB_PLAYERS;
+    while((((players[(random+counter)%NB_PLAYERS].favor_nbr<1)) || ((random+counter)%NB_PLAYERS)==current_player) && (((random==current_player) && (counter<NB_PLAYERS)))){
         ++counter;
     }
-    if (counter!=NB_PLAYERS){
-        ++players[current_player].favor_nbr;
-        --players[random].favor_nbr;
+    if (players[(random+counter)%NB_PLAYERS].favor_nbr>1){
+        players[current_player].favor_nbr+=1;
+        players[(random+counter)%NB_PLAYERS].favor_nbr-=1;
     }
 	return 0;
 }
@@ -217,7 +219,7 @@ int gain_favor_with_builder(int current_player, struct player players[NB_PLAYERS
 
 int master_hand(int current_player, struct player players[NB_PLAYERS], void* ressource,struct market_t *market,struct guild_t *guild){
     int counter=0;
-	printf("MASTER_HAND IS RUNNING!!!!!!!!! \n");
+	printf(BRED"MASTER_HAND IS RUNNING!!!!!!!!! \n"COLOR_RESET);
 	struct builder_t *b=ressource;
 	UNUSED(guild);
     struct set_t provide=builder_provides(b);

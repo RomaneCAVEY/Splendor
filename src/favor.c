@@ -52,7 +52,6 @@ void builder_guild_renew(unsigned int level_choosen, struct guild_t* guild ) {
 
 
 
-
 //The player can use his favor to take one of the many tokens available on the market
 int pick_any_token_in_market(int current_player, struct player players[NB_PLAYERS], struct market_t* market,struct guild_t *guild) { //(int a) is used in the fonction pick_token in game.c 
     printf(BHRED"The player have the following power: pick_any_token_in_market \n" COLOR_RESET);
