@@ -18,7 +18,7 @@
 struct stack_t{
     int nb;
     int head;
-    struct builder_t* values[MAX_BUILDERS];
+    struct builder_t* values[2*MAX_BUILDERS];
 };
 
 /**

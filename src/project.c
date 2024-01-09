@@ -11,6 +11,7 @@
 #include "guild.h"
 #include "player.h"
 #include "game.h"
+#include "stack.h"
 #include "super_builder.h"
 #include "market.h"
 #include "super_token.h"
@@ -33,7 +34,7 @@ int main(int argc, char *argv[]){
     max_turn = 0;
     seed = 0;
     seed_builder = 0;
-	display=0;
+	display=1;
     while ((opt= getopt(argc, argv, "s:m:c:d:"))!=(-1)) {
         switch (opt) {
             case 's':
@@ -83,6 +84,9 @@ int main(int argc, char *argv[]){
 	init_power_tokens();
     int nb_turns_not_played = 0;
     int nb_turns = 0;
+	for (int i=0; i<(NUM_LEVELS);i++){
+				stack_display(guild.stack[i]);
+			}
     printf("initialisation over \n");
     printf(" ********************************** \n");
     //int c=0;
@@ -103,10 +107,10 @@ int main(int argc, char *argv[]){
         // c+=1;
 			//printf("\n num_builder is %d: \n", num_builders());
 			//printf("\n This is player %d \n" , current_player);
-            if (guild_available_builder(i, &guild)) {
+            if (guild.builder_available[i]) {
 				//builder_display(guild_available_builder(i, &guild), "\n Builder to check \n");
 				//printf("This is the possibility to pay a builder of the player %d \n", possibility_token_pay(players[current_player], guild_available_builder(i, &guild)));
-                if (possibility_token_pay(players[current_player], guild_available_builder(i, &guild))) {
+                if (possibility_token_pay(players[current_player], guild.builder_available[i])) {
                   
                     possibility_to_pay = possibility_token_pay(players[current_player], guild_available_builder(i, &guild));
                     index = i;
@@ -123,6 +127,9 @@ int main(int argc, char *argv[]){
 			market_display(&market);
 			guild_display(&guild);
 			printf("this is the possibility to pay a builder is %d\n", possibility_to_pay);
+			for (int i=0; i<(NUM_LEVELS+1);i++){
+				stack_display(guild.stack[i]);
+			}
 			
 		}
        

@@ -150,6 +150,7 @@ int token_pay(struct builder_t * builder, struct player players[NB_PLAYERS], int
                     count_color[k]+=token->s.ressource[k];
                 }
 				token_display(*token,  "Has to be removed to pay the builder");
+				printf("\n");
                 add_token_to_market(players[current_player].player_token[i], market);
                 remove_token(players, players[current_player].player_token[i], current_player);
             }

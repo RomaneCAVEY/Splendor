@@ -27,19 +27,23 @@ void init_guild(struct guild_t* guild) {
 			if (guild->builders[j]){
 				if (builder_level(guild->builders[j])==i && guild->builders[j]){
 					stack_push(&guild->stack[i],guild->builders[j]);
+					//printf("voici l'adresse :%p \n",guild->builders[j]);
 				}
 			}
 		}
-	printf("nb in the stack %d :  %d \n",i, guild->stack[i].nb);
+	printf("Number in the stack before to pop: %d :  %d \n",i, guild->stack[i].nb);
 	//stack_display(guild->stack[i]);
 	}
 	for (int level = 0; level <NUM_LEVELS; ++level) {
 		for (int k = 0; k < MAX_BUILDERS_AVAILABLE_PER_LVL; ++k) {
 			guild->builder_available[level*MAX_BUILDERS_AVAILABLE_PER_LVL+k]=stack_pop(&guild->stack[level]);
-		// printf("guild.stack[%d].nb = %d !!!!!!!!!!!!!!!!\n",level, guild.stack[level].nb);
+			//printf("guild.stack[%d].nb = %d !!!!!!!!!!!!!!!!\n",level, guild->stack[level].nb);
+			//builder_display(guild->builder_available[level*MAX_BUILDERS_AVAILABLE_PER_LVL+k],"	ARCHITECTE");
 
 
 		}
+	printf("Nombre in the stack %d to begin the game:  %d \n",level, guild->stack[level].nb);
+	stack_display(guild->stack[level]);
 	}
 }
 
@@ -63,7 +67,7 @@ void remove_builders_from_guild(struct builder_t * builder, struct guild_t* guil
 
 		while ((guild->stack[(level+next)%NUM_LEVELS].nb <1) && (next< MAX_BUILDERS)){
 			//stack_display(guild.stack[(level+next)%NUM_LEVELS]);
-			// printf("guild.stack[(level + next) NUM_LEVELS].nb vaut %d \n", guild.stack[(level + next)%NUM_LEVELS].nb);
+			//printf("guild.stack[(level + next) NUM_LEVELS].nb vaut %d \n", guild->stack[(level + next)%NUM_LEVELS].nb);
 			next++;
 		}
 		if (next>=MAX_BUILDERS){
@@ -71,6 +75,7 @@ void remove_builders_from_guild(struct builder_t * builder, struct guild_t* guil
 			guild->builder_available[i]= NULL; 
 		}
 		else{
+			printf("The builder is replace by a builder of level %d \n",(level+ next)%NUM_LEVELS);
 			guild->builder_available[i] = stack_pop(&guild->stack[(level+ next)%NUM_LEVELS]);
 		}
 	
@@ -92,7 +97,7 @@ void guild_display(struct guild_t* guild){
 	printf(BBLU"\n  GUILD DISPLAY \n " COLOR_RESET);
 	if (guild->nb_builder>0){
 		for ( int i=0; i< MAX_BUILDERS; i++){
-			//printf("%p \n", &guild->builder_available[i] );
+			//printf("%d \n", guild->nb_builder );
 			if(guild->builder_available[i]){
 				builder_display(guild->builder_available[i], "this builder belongs to the guild \n");
 				//printf("	%d \n",i);

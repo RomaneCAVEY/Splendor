@@ -9,15 +9,16 @@ struct stack_t stack_empty(){
 
 struct builder_t* stack_pop( struct stack_t *stack)
 {
-    if (stack->nb == 0)
+    if (stack->head == 0)
     {   
         printf("\n WARNING:empty stack! \n");
         return NULL;
     }
     stack->nb--;
+	stack->head--;
     struct builder_t* out= stack->values[stack->head];
 	stack->values[(stack->nb)+1]=NULL;
-    stack->head--;
+    
     return out;
 }
 
@@ -25,9 +26,11 @@ struct builder_t* stack_pop( struct stack_t *stack)
 void stack_push(struct stack_t *stack, void* elem)
 {
     if (stack->nb < (MAX_BUILDERS-1)){
-        stack->head++;
+     
         stack->values[stack->head]=elem;
+		stack->head++;
         stack->nb ++;
+		//printf("ADRESSE: %p",elem);
     }
     else {
         printf("stack mistake in push function");
@@ -35,7 +38,9 @@ void stack_push(struct stack_t *stack, void* elem)
 }
 
 void stack_display(struct stack_t stack){
-    for (int i=0; i<MAX_BUILDERS; i++){
+	printf("This Stack has %d builders \n", stack.nb);
+    for (int i=0; i<(stack.nb); i++){
         builder_display(stack.values[i], "this builder belong to the stack");
+
     }
 }

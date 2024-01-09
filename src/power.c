@@ -92,7 +92,7 @@ int guild_panic(int current_player, struct player players[NB_PLAYERS], void* res
 			int level_b= builder_level(builder);
 			for (int level = 0; level <NUM_LEVELS; ++level) {
 					if(guild->stack[level_b+level].nb){
-						guild->builder_available[random+c]=stack_pop(&guild->stack[level_b+level]);
+						guild->builder_available[(random+c)%MAX_BUILDERS]=stack_pop(&guild->stack[level_b+level]);
 						return 0;
 					}
 			}
@@ -186,7 +186,10 @@ int steal_turn(int current_player, struct player players[NB_PLAYERS], void* ress
 	UNUSED(market);
 	UNUSED(guild);
 	UNUSED(ressource);
-	return ((current_player -1) % NB_PLAYERS);
+	if (!current_player){
+		return (NB_PLAYERS-1);
+	}
+	return ((current_player -1));
 
 }
 
