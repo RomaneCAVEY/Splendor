@@ -34,7 +34,7 @@ int main(int argc, char *argv[]){
     max_turn = 0;
     seed = 0;
     seed_builder = 0;
-	display=1;
+	display=0;
     while ((opt= getopt(argc, argv, "s:m:c:d:"))!=(-1)) {
         switch (opt) {
             case 's':
