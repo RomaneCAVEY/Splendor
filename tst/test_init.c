@@ -8,7 +8,7 @@ struct set_t create_specific_set() {
     if(complexe){
         int c1=0;
         int c2=0;
-        printf("Fisrt color ? K: 0 B:1 G:2 R:3 W:4\n");
+        printf("First color ? K: 0 B:1 G:2 R:3 W:4\n");
         scanf("%d",&c1);
         printf("Second color ? K: 0 B:1 G:2 R:3 W:4\n");
         set.ressource[c1]=1;

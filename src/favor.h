@@ -2,8 +2,6 @@
 #define __FAVOR_H__
 
 
-#include "guild.h"
-#include "market.h"
 #include "game.h"
 
 void builder_guild_renew(unsigned int level_choosen, struct guild_t* guild);

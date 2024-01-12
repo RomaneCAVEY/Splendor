@@ -13,6 +13,7 @@
 
 
 
+
 //Declaration of some variables
 
 struct player{

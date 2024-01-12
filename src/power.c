@@ -85,7 +85,6 @@ int guild_panic(int current_player, struct player players[NB_PLAYERS], void* res
 		}
 		if (c<MAX_BUILDERS){
 			struct builder_t* builder= guild_available_builder((random+c)%MAX_BUILDERS,guild);
-			//builder_display(builder, "celui qui fait foirer les test");
 			//guild_display(guild);
 			remove_builders_from_guild(builder,guild);
 			//guild_display(guild);

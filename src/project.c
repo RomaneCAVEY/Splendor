@@ -6,17 +6,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "builder.h"
-#include "power.h"
-#include "guild.h"
-#include "player.h"
+
 #include "game.h"
-#include "stack.h"
 #include "super_builder.h"
-#include "market.h"
 #include "super_token.h"
 #include "favor.h"
-#include "token.h"
 #define NB_PLAYERS 2
 
 struct guild_t guild={};
