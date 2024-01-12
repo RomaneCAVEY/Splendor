@@ -16,6 +16,7 @@ all: project
 
 project: src/project.o  src/color.o  src/token.o src/game.o src/player.o src/builder.o src/second_builder.o src/second_token.o src/market.o src/guild.o src/stack.o src/permutation.o src/set.o src/super_builder.o src/super_token.o src/power.o src/favor.o
 	$(CC) $(CFLAGS) $^ -o project
+	./project
 
 
 token: $src/token.o

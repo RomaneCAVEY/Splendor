@@ -1,9 +1,16 @@
 # Sujet de projet de programmation du S5
 
-La page du sujet :
+Pour compiler , on utiise la commande suivante:
 
-https://www.labri.fr/perso/renault/working/teaching/projets/2023-24-S5-Munificence.php
+make project
+./project
 
-La page sur thor :
+Si on veut tester uniquement les tests faire:
 
-https://thor.enseirb-matmeca.fr/ruby/projects/pr103
+make test
+
+On peut ajouter des options après le ./project : 
+
+-s 	# and an optional parameter to initialize the RNG (here 156)
+-m	# One optional parameter for MAX_TURNS (here 10),
+-c	 # an optional parameter to pass to init_builders (here 2)
