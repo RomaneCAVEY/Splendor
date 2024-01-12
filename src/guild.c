@@ -110,8 +110,7 @@ void guild_display(struct guild_t* guild){
 printf(BBLU"\n ########################################## \n"COLOR_RESET);
 }
 
-/** Add the builder bought in the guild to the player_builder
-*/
+/** Add the builder bought in the guild to the player_builder */
 void add_from_guild(int index, struct player players[NB_PLAYERS] , int current_player, struct guild_t* guild) {
 	players[current_player].player_builder[players[current_player].nbr_builder] = guild_builder_in_guild(index, guild);
 	players[current_player].points += builder_points(guild->builder_available[index]);
